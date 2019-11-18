@@ -1,4 +1,3 @@
-#include "libft/includes/ft_printf.h"
 //my printf lib
 #include <unistd.h>
 //write read
@@ -11,9 +10,11 @@
 #include "filler.h"
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
+#include "libft/includes/ft_printf.h"
 #include <fcntl.h>
 
 /*
+ 
 ** 1) parser to read:
 ** - board and piece
 ** 2) best pos to know coor
@@ -31,7 +32,7 @@ int			main(void)
 	dprintf(fd_debug, "|X %i||Y %i||Xop %i||Yop %i|", info.init_X, info.init_Y, info.init_op_X, info.init_op_Y);
 	close(fd_debug);
 	ft_printf("8 2\n");
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 /*

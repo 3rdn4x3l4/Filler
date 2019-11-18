@@ -1,40 +1,45 @@
 NAME= alagache.filler
 
-SRCS= main.c\
-	  parsing.c\
-	  tools.c\
-
-
-OBJ= $(SRCS:.c=.o)
-
 LIBDIR= libft
 
 LIBA= $(LIBDIR)/libft.a
 
 CFLAGS= -Wall -Werror -Wextra
 
+CC= clang
+
+SRCS= main.c\
+	  parsing.c\
+	  tools.c\
+
+OBJ= $(SRCS:.c=.o)
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@make -s -C $(LIBDIR)
-	@gcc $(CFLAGS) -o $(NAME) $(OBJ) $(LIBA)
-	@echo "filler build complete"
+$(NAME): $(OBJ) $(LIBA)
+	$(CC) $(CFLAGS) -o $(NAME) $^
+	echo "filler build complete"
+
+$(LIBA): .FORCE
+	$(MAKE) -C libft
+
+.FORCE:
 
 %.o : %.c
-	@gcc -I $(LIBDIR) $(CFLAGS) -o $@ -c $<
+	$(CC) -I $(LIBDIR) $(CFLAGS) -o $@ -c $<
 
 clean:
-		@rm -rf $(OBJ)
-		@echo "filler objects cleaned"
-		@make clean -C $(LIBDIR)
+		$(RM) -rf $(OBJ)
+		echo "filler objects cleaned"
+		$(MAKE) clean -C $(LIBDIR)
 
 fclean:
-		@make fclean -s -C $(LIBDIR)
-		@rm -f $(NAME)
-		@rm -rf $(OBJ)
-		@echo "filler objects cleaned"
-		@echo "filler project cleaned"
+		$(MAKE) fclean -s -C $(LIBDIR)
+		$(RM) -f $(NAME) $(OBJ)
+		echo "filler objects cleaned"
+		echo "filler project cleaned"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re .FORCE
+.SILENT: all clean fclean re .FORCE $(OBJ) $(NAME)
