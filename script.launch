@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm -f output.txt
+mv alagache.filler resources/players/
+./resources/filler_vm -f resources/maps/map00 -p2 resources/players/alagache.filler -p1 resources/players/hcao.filler > game_res
+#
+#read -e -p "player1 should be ?
+#" PLYR1
+#read -e -p "player2 should be ?
+#" PLYR2
+#read -e -p "map to play on is ?
+#" map
+#
+#./filler_vm -f "$map" -p1 "$PLYR1" -p2 "$PLYR2" > game_res
