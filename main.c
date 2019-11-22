@@ -1,25 +1,45 @@
-//my printf lib
-#include <unistd.h>
-//write read
-#include <stdlib.h>
-//malloc
-#include <stdio.h>
-//perror
-#include <string.h>
-//strerror
 #include "filler.h"
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
 #include "libft/includes/ft_printf.h"
 #include <fcntl.h>
 
-/*
- 
-** 1) parser to read:
-** - board and piece
-** 2) best pos to know coor
-** - then write coor
-*/
+void	init_struct(t_filler *info, int fd)
+{
+	char	*ptr;
+	char	*line;
+	int 	ret;
+
+	ret = get_next_line(0, &line);
+	if (ret != -1)
+	{
+		ptr = ft_strchr(line, 'p');
+		if (ptr != NULL)
+			info->piece_id = (ptr[1] == '1') ? "Oo" : "Xx";
+		ft_dprintf(fd, "line:\n%s\nPlayer identifier is %s\n", line, info->piece_id);
+		free(line);
+	}
+}
+
+void	clean_alloc(t_filler *info)
+{
+	int	line_count;
+
+	line_count = 0;
+	while (line_count < info->b_line)
+	{
+		free(info->board[line_count]);
+		line_count++;
+	}
+	free(info->board);
+	line_count = 0;
+	while (line_count < info->p_line)
+	{
+		free(info->piece[line_count]);
+		line_count++;
+	}
+	free(info->piece);
+}
 
 int			main(void)
 {
@@ -27,11 +47,22 @@ int			main(void)
 	t_filler	info;
 
 	fd_debug = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
-	get_infos(fd_debug, &info);
-	get_init_pos(&info);
-	dprintf(fd_debug, "|X %i||Y %i||Xop %i||Yop %i|", info.init_X, info.init_Y, info.init_op_X, info.init_op_Y);
-	close(fd_debug);
-	ft_printf("8 2\n");
+	ft_bzero(&info, sizeof(info));
+	init_struct(&info, fd_debug);
+	if (info.piece_id == '\0')
+		return (EXIT_FAILURE);
+	while (1)
+	{
+		read_board(&info, fd_debug);
+		if (info.board == NULL)
+			return (EXIT_FAILURE);
+		read_piece(&info, fd_debug);
+		if (info.piece == NULL)
+			return (EXIT_FAILURE);
+		close(fd_debug);
+		ft_printf("12 14\n");
+		clean_alloc(&info);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -47,37 +78,32 @@ int			main(void)
 **
 ** 2) Read board and piece
 ** Prog reads the game board like so:
-** Plateau Lne 14  Col 30:
-**     01234567890134567890123456789
-** 000 .............................
-** 001 .............................
-** 002 ..X..........................
-** 003 .............................
-** 004 .............................
-** 005 .............................
-** 006 .............................
-** 007 .............................
-** 008 .............................
-** 009 .............................
-** 010 .............................
-** 011 ..........................O..
-** 012 .............................
-** 013 .............................
-**
-** 
-** Prog reads the pieces like so:
-** Piece Lne 4 Col 7:
-**  ...*...
-**  ...*...
-**  ...*...
-**  ..***..
-**
-** Each turn Prog reads the updated map and the piece to place.
+
+each turn:
+
+Plateau Lne 14  Col 30:
+    01234567890134567890123456789
+000 .............................
+001 .............................
+002 ..X..........................
+003 .............................
+004 .............................
+005 .............................
+006 .............................
+007 .............................
+008 .............................
+009 .............................
+010 .............................
+011 ..........................O..
+012 .............................
+013 .............................
+Piece Lne 4 Col 7:
+...*...
+...*...
+...*...
+..***..
+
 **
 ** Prog places piece by giving where the top left of the piece should be placed in the board coordinates system.
 ** In the example player X can place the piece by printing 2 -1
-**
-** After printing on the output, Prog is stopped until next turn by vm.
 */
-
-

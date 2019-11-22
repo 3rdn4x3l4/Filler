@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 rm -f output.txt
+make
 mv alagache.filler resources/players/
 ./resources/filler_vm -f resources/maps/map00 -p2 resources/players/alagache.filler -p1 resources/players/hcao.filler > game_res
 #

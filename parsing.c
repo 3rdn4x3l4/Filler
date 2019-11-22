@@ -12,107 +12,78 @@
 #include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
 
-void		get_line_col(t_filler *info, char *str)
+void		b_line_col(t_filler *info, char *str)
 {
 	int c;
 
 	c = 7;
 	while (ft_isdigit(str[c]) == 0)
 		c++;
-	info->line = atoi(str + c);
+	info->b_line = atoi(str + c);
 	while (ft_isdigit(str[c]) == 1)
 		c++;
-	info->column = atoi(str + c);
+	info->b_column = atoi(str + c);
+	free(str);
 }
 
-int			get_board(t_filler *info)
+void	read_board(t_filler *info, int fd)
 {
-	char 	*line;
-	int		l;
+	char	*line;
+	int		ret;
+	int		line_count;
 
-	l = 0;
-	if (!(info->board = (char**)malloc(sizeof(char*) * (info->line + 1))))
-		return (-1);
-	info->board[info->line] = NULL;
-	get_next_line(0, &line);
-	free(line);
-	while(l < info->line)
-	{
-		if (!(info->board[l] = (char*)malloc(sizeof(char) * (info->column + 1))))
-			return (-1);
-		info->board[l][info->column] = '\0';
-		get_next_line(0, &line);
-		ft_strcpy(info->board[l], ft_strchr(line, '.'));
+	ret = get_next_line(0, &line);
+	if (ret != -1)
+		b_line_col(info, line);
+	ret = get_next_line(0, &line);
+	if (ret != -1)
 		free(line);
-		l++;
+	line_count = 0;
+	info->board = ft_memalloc(sizeof(char*) * (info->b_line + 1));
+	if (info->board != NULL)
+	{
+		while (line_count < info->b_line && (ret = get_next_line(0, &line) > 0))
+		{
+			info->board[info->b_line] = ft_strsub(line, ft_strlen(line) - info->b_column, info->b_column);
+			free(line);
+			line_count++;
+		}
+		(void)fd;
 	}
-	return (0);
 }
 
-void		get_piece_line_col(t_filler *info, char *str)
+void		p_line_col(t_filler *info, char *str)
 {
 	int c;
 
 	c = 5;
 	while (ft_isdigit(str[c]) == 0)
 		c++;
-	info->piece_line = atoi(str + c);
+	info->p_line = atoi(str + c);
 	while (ft_isdigit(str[c]) == 1)
 		c++;
-	info->piece_column = atoi(str + c);
+	info->p_column = atoi(str + c);
+	free(str);
 }
 
-
-int			get_piece(t_filler *info)
+void	read_piece(t_filler *info, int fd)
 {
-	char 	*line;
-	int		l;
-
-	l = 0;
-	if (!(info->piece = (char**)malloc(sizeof(char*) * (info->piece_line + 1))))
-		return (-1);
-	info->piece[info->piece_line] = NULL;
-	while(l < info->piece_line)
-	{
-		if (!(info->piece[l] = (char*)malloc(sizeof(char) * (info->piece_column + 1))))
-			return (-1);
-		info->piece[l][info->piece_column] = '\0';
-		get_next_line(0, &line);
-		ft_strcpy(info->piece[l], line);
-		free(line);
-		l++;
-	}
-	return (l);
-}
-
-void		get_infos(int fd, t_filler *info)
-{
-	char		*line;
-	int			ret;
+	char	*line;
+	int		ret;
+	int		line_count;
 
 	ret = get_next_line(0, &line);
-	if (ft_strstr(line, "$$$ exec p") != NULL)
-		info->piece_id = (line[10] == '1') ? "O" : "X";
-	free(line);
-	get_next_line(0, &line);
-	if (ft_strstr(line, "Plateau") != NULL)
-		get_line_col(info, line);
-	free(line);
-	ret = get_board(info);
-	while (ret-- > 0)
+	if (ret != -1)
+		p_line_col(info, line);
+	line_count = 0;
+	info->piece = ft_memalloc(sizeof(char*) * (info->p_line + 1));
+	if (info->piece != NULL)
 	{
-		get_next_line(0, &line);
-		free(line);
+		while (line_count < info->p_line && (ret = get_next_line(0, &line) > 0))
+		{
+			info->piece[info->p_line] = line;
+			line_count++;
+		}
+		(void)fd;
 	}
-	get_next_line(0, &line);
-	if (ft_strstr(line, "Piece") != NULL)
-		get_piece_line_col(info, line);
-	ret = get_piece(info);
-	while (ret-- > 0)
-	{
-		get_next_line(0, &line);
-		free(line);
-	}
-	(void)fd;
-//	dprintf(fd, "piece_id :|%s|\nParsing OK\n", info->piece_id);
 }

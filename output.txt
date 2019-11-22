@@ -1,1 +1,3 @@
-|X 12||Y 14||Xop 8||Yop 1|
+line:
+$$$ exec p2 : [resources/players/alagache.filler]
+Player identifier is Xx

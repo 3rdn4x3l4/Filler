@@ -4,13 +4,14 @@ LIBDIR= libft
 
 LIBA= $(LIBDIR)/libft.a
 
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra 
+CFLAGS += -g3
 
 CC= clang
 
 SRCS= main.c\
 	  parsing.c\
-	  tools.c\
+	  #tools.c\
 
 OBJ= $(SRCS:.c=.o)
 
