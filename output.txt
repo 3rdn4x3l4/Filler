@@ -1,3 +1,0 @@
-line:
-$$$ exec p2 : [resources/players/alagache.filler]
-Player identifier is Xx
