@@ -16,9 +16,10 @@ void	init_struct(t_filler *info, int fd)
 		ptr = ft_strchr(line, 'p');
 		if (ptr != NULL)
 			info->piece_id = (ptr[1] == '1') ? "Oo" : "Xx";
-		ft_dprintf(fd, "line:\n%s\nPlayer identifier is %s\n", line, info->piece_id);
 		free(line);
 	}
+	(void)fd;
+	/*ft_dprintf(fd, "line:\n%s\nPlayer identifier is %s\n", line, info->piece_id);*/
 }
 
 void	clean_alloc(t_filler *info)
