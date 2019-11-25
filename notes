@@ -1,0 +1,2 @@
+do not use GNL to read as it create un freeable malloc when line container fails to be malloc;
+read everything into 1 str. and then parse from there

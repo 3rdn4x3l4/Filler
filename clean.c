@@ -9,17 +9,31 @@
 /* -3 == B and P alloc*/
 void	clean_alloc(t_filler *info, int code)
 {
+	if (code <= -2)
+		clean_board(info);
+	if (code == -3)
+		clean_piece(info);
+}
+
+void	clean_board(t_filler *info)
+{
 	int	line_count;
 
 	line_count = 0;
-	while (line_count < info->b_line)
+	while (info->board[line_count])
 	{
 		free(info->board[line_count]);
 		line_count++;
 	}
 	free(info->board);
+}
+
+void	clean_piece(t_filler *info)
+{
+	int	line_count;
+
 	line_count = 0;
-	while (line_count < info->p_line)
+	while (info->piece[line_count])
 	{
 		free(info->piece[line_count]);
 		line_count++;

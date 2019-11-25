@@ -22,6 +22,6 @@ typedef struct		s_filler
 	int		init_op_Y;
 }					t_filler;
 
-void	read_board(t_filler *info, int fd);
-void	read_piece(t_filler *info, int fd);
+int					read_info(t_filler *info, int fd);
+void				clean_alloc(t_filler *info, int code);
 #endif

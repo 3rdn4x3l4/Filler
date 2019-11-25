@@ -37,7 +37,7 @@ int			main(void)
 	{
 		/*read_info (calls read_board/piece) return -1/-2 if alloc fails then calls clean_alloc with code to clean b and p or b*/
 		ret = read_info(&info, fd_debug);
-		if (ret == 0)
+		if (ret != 0)
 		{
 			clean_alloc(&info, ret);
 			return (EXIT_FAILURE);
