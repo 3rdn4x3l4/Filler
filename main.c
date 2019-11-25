@@ -22,29 +22,10 @@ void	init_struct(t_filler *info, int fd)
 	/*ft_dprintf(fd, "line:\n%s\nPlayer identifier is %s\n", line, info->piece_id);*/
 }
 
-void	clean_alloc(t_filler *info)
-{
-	int	line_count;
-
-	line_count = 0;
-	while (line_count < info->b_line)
-	{
-		free(info->board[line_count]);
-		line_count++;
-	}
-	free(info->board);
-	line_count = 0;
-	while (line_count < info->p_line)
-	{
-		free(info->piece[line_count]);
-		line_count++;
-	}
-	free(info->piece);
-}
-
 int			main(void)
 {
 	int			fd_debug;
+	int			ret;
 	t_filler	info;
 
 	fd_debug = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
@@ -54,15 +35,17 @@ int			main(void)
 		return (EXIT_FAILURE);
 	while (1)
 	{
-		read_board(&info, fd_debug);
-		if (info.board == NULL)
+		/*read_info (calls read_board/piece) return -1/-2 if alloc fails then calls clean_alloc with code to clean b and p or b*/
+		ret = read_info(&info, fd_debug);
+		if (ret == 0)
+		{
+			clean_alloc(&info, ret);
 			return (EXIT_FAILURE);
-		read_piece(&info, fd_debug);
-		if (info.piece == NULL)
-			return (EXIT_FAILURE);
+		}
+		play_turn(&info);
+		clean_alloc(&info, -3);
 		close(fd_debug);
 		ft_printf("12 14\n");
-		clean_alloc(&info);
 	}
 	return (EXIT_SUCCESS);
 }
