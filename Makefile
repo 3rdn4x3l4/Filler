@@ -5,12 +5,13 @@ LIBDIR= libft
 LIBA= $(LIBDIR)/libft.a
 
 CFLAGS= -Wall -Werror -Wextra 
-CFLAGS += -g3
+CFLAGS += -g -fsanitize=address -fno-omit-frame-pointer
 
 CC= clang
 
 SRCS= main.c\
 	  parsing.c\
+	  clean.c\
 	  #tools.c\
 
 OBJ= $(SRCS:.c=.o)

@@ -42,8 +42,8 @@ int			main(void)
 			clean_alloc(&info, ret);
 			return (EXIT_FAILURE);
 		}
-		play_turn(&info);
-		clean_alloc(&info, -3);
+		/*play_turn(&info);
+		clean_alloc(&info, -3);*/
 		close(fd_debug);
 		ft_printf("12 14\n");
 	}

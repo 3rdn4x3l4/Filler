@@ -90,12 +90,12 @@ void	read_piece(t_filler *info, int fd)
 
 int			read_info(t_filler *info, int fd)
 {
-	read_board(&info, fd_debug);
-	if (info.board == NULL)
+	read_board(info, fd);
+	if (info->board == NULL)
 		return (-1);
-	read_piece(&info, fd_debug);
-	if (info.piece == NULL)
+	read_piece(info, fd);
+	if (info->piece == NULL)
 		return (-2);
-	check_info();
+	//check_info();
 	return (0);
 }
