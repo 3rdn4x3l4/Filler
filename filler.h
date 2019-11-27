@@ -12,6 +12,7 @@ typedef struct		s_filler
 {
 	char 	**arr_p;
 	char	**arr_b;
+	char	*stock;
 	char	*piece_id;
 	char	*piece_id_op;
 	int		line_p;
@@ -20,6 +21,7 @@ typedef struct		s_filler
 	int		column_b;
 }					t_filler;
 
-int					read_info(t_filler *info, int fd);
+int					read_info(t_filler *info, int fd, int turn);
 void				clean_alloc(t_filler *info, int code);
+void				init_struct(t_filler *info, int fd);
 #endif

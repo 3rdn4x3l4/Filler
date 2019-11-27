@@ -6,6 +6,7 @@
 #include "libft/includes/libft.h"
 #include "libft/includes/ft_printf.h"
 
+/*
 void		b_line_col(t_filler *info, char *str)
 {
 	int c;
@@ -81,8 +82,9 @@ void	read_piece(t_filler *info, int fd)
 		(void)fd;
 	}
 }
+*/
 
-int			read_info(t_filler *info, int fd)
+int		read_info(t_filler *info, int fd, int turn)
 {
 	char	buff[BUFF_SIZE + 1];
 	int		ret;
@@ -90,14 +92,23 @@ int			read_info(t_filler *info, int fd)
 	while ((ret = read(0, buff, BUFF_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
-		ft_strjoinfree();
+		if (info->stock == NULL)
+			info->stock = ft_strdup(buff);
+		else
+			info->stock = ft_strjoinfree(info->stock, buff, 1);
 	}
-	/*read_board(info, fd);
-	if (info->board == NULL)
+	if (ret == -1)
 		return (-1);
-	read_piece(info, fd);
-	if (info->piece == NULL)
-		return (-2);*/
+	ft_dprintf(fd, "%s", info->stock);
+	(void)turn;
+	/*
+	if (turn == 0)
+		parse_player(info);
+	if (parse_board(info) == -1)
+		return ();
+	if (parse_piece(info) == -1)
+		return ();
+	*/
 	//check_info();
 	return (0);
 }

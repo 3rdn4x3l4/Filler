@@ -8,12 +8,12 @@ void	clean_board(t_filler *info)
 	int	line_count;
 
 	line_count = 0;
-	while (info->board[line_count])
+	while (info->arr_b[line_count])
 	{
-		free(info->board[line_count]);
+		free(info->arr_b[line_count]);
 		line_count++;
 	}
-	free(info->board);
+	free(info->arr_b);
 }
 
 void	clean_piece(t_filler *info)
@@ -21,12 +21,12 @@ void	clean_piece(t_filler *info)
 	int	line_count;
 
 	line_count = 0;
-	while (info->piece[line_count])
+	while (info->arr_p[line_count])
 	{
-		free(info->piece[line_count]);
+		free(info->arr_p[line_count]);
 		line_count++;
 	}
-	free(info->piece);
+	free(info->arr_p);
 }
 
 /*use code to determine what to free*/
