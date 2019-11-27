@@ -83,6 +83,59 @@ void	read_piece(t_filler *info, int fd)
 	}
 }
 */
+#define NO_PLAYER 128
+#define NOTHING 127
+#define DONE 126
+#define B_ALLOC_FAIL 125
+#define BOARD_ERROR 124
+#define P_ALLOC_FAIL 123
+#define PIECE_ERROR 122
+
+/*
+ * if first turn and has palyer info
+ * init piece_id with the player charset
+ * else do nothing
+*/
+int		get_player(t_filler *info, int turn)
+{
+	if (turn != 0)
+		return (DONE);
+	if (ft_strnstr(info->stock, "$$$ exec p", 10) == NULL)
+		return (NO_PLAYER);
+	info->piece_id = (info->stock[10] == 1) ? "Oo" : "Xx";
+	info->piece_id_op = (ft_strcmp(info->piece_id, "Oo") == 0) ? "Xx" : "Oo";
+	return (DONE);
+}
+
+/*
+ * check if Board is OK then
+ * Alloc arr of line + 1 elements
+*/
+int		get_board(t_filler *info)
+{
+	info->pos = ft_strchr(info->stock, '\n');
+	if (info->pos == NULL)
+		return (BOARD_ERROR);
+	info->pos = ft_strstr(info->pos, "Plateau ");
+	if (info->pos == NULL)
+		return (BOARD_ERROR);
+	info->line_b = atoi(info->pos + 7);
+	info->column_b = atoi(ft_strchr(info->pos + 8, ' '));
+	while (info->pos != NULL && *(info->pos) != '\n')
+		info->pos++;
+	return (0);
+}
+
+int		get_piece(t_filler *info)
+{
+	info->pos = ft_strstr(info->pos, "Piece ");
+		return (PIECE_ERROR);
+	info->pos = ft_strstr(info->pos, "Plateau ");
+	if (info->pos == NULL)
+		return (PIECE_ERROR);
+	info->line_b = atoi(info->pos + 7);
+	info->column_b = atoi(ft_strchr(info->pos + 8, ' '));
+}
 
 int		read_info(t_filler *info, int fd, int turn)
 {
@@ -99,16 +152,24 @@ int		read_info(t_filler *info, int fd, int turn)
 	}
 	if (ret == -1)
 		return (-1);
-	ft_dprintf(fd, "%s", info->stock);
 	(void)turn;
+	ret = get_player(info, turn);
+	if (ret == NO_PLAYER)
+		return (ret);
+	ret = get_board(info);
+	if (ret == B_ALLOC_FAIL || ret == BOARD_ERROR)
+		return (ret);
+	ret = get_piece(info);
+	if (ret == P_ALLOC_FAIL || ret == PIECE_ERROR)
+		return (ret);
+	ft_dprintf(fd, "%sI am %s\nOp is %s\nline_b = %i\ncolumn_b = %i\n", info->stock,  info->piece_id, info->piece_id_op, info->line_b, info->column_b);
+	ft_dprintf(fd, "|%.1s|\n", info->stock);
+	ft_dprintf(fd, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 	/*
-	if (turn == 0)
-		parse_player(info);
-	if (parse_board(info) == -1)
-		return ();
-	if (parse_piece(info) == -1)
+	if (get_piece(info) == -1)
 		return ();
 	*/
 	//check_info();
+	free(info->stock);
 	return (0);
 }

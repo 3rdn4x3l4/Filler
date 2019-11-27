@@ -10,15 +10,16 @@
 
 typedef struct		s_filler
 {
-	char 	**arr_p;
 	char	**arr_b;
+	char 	**arr_p;
 	char	*stock;
+	char	*pos;
 	char	*piece_id;
 	char	*piece_id_op;
-	int		line_p;
-	int		column_p;
 	int		line_b;
 	int		column_b;
+	int		line_p;
+	int		column_p;
 }					t_filler;
 
 int					read_info(t_filler *info, int fd, int turn);
