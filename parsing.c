@@ -1,16 +1,10 @@
-#include "libft/includes/ft_printf.h"
-//my printf lib
 #include <unistd.h>
-//write read
 #include <stdlib.h>
-//malloc
 #include <stdio.h>
-//perror
 #include <string.h>
-//strerror
 #include "filler.h"
 #include "libft/includes/libft.h"
-#include "libft/includes/get_next_line.h"
+#include "libft/includes/ft_printf.h"
 
 void		b_line_col(t_filler *info, char *str)
 {
@@ -90,12 +84,20 @@ void	read_piece(t_filler *info, int fd)
 
 int			read_info(t_filler *info, int fd)
 {
-	read_board(info, fd);
+	char	buff[BUFF_SIZE + 1];
+	int		ret;
+
+	while ((ret = read(0, buff, BUFF_SIZE)) > 0)
+	{
+		buff[ret] = '\0';
+		ft_strjoinfree();
+	}
+	/*read_board(info, fd);
 	if (info->board == NULL)
 		return (-1);
 	read_piece(info, fd);
 	if (info->piece == NULL)
-		return (-2);
+		return (-2);*/
 	//check_info();
 	return (0);
 }

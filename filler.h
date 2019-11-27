@@ -6,20 +6,18 @@
 #include <stdio.h>
 #include <string.h>
 
+# define BUFF_SIZE 100
+
 typedef struct		s_filler
 {
-	char	**board;
-	char 	**piece;
+	char 	**arr_p;
+	char	**arr_b;
 	char	*piece_id;
 	char	*piece_id_op;
-	int		b_line;
-	int		b_column;
-	int		p_line;
-	int		p_column;
-	int		init_X;
-	int		init_Y;
-	int		init_op_X;
-	int		init_op_Y;
+	int		line_p;
+	int		column_p;
+	int		line_b;
+	int		column_b;
 }					t_filler;
 
 int					read_info(t_filler *info, int fd);

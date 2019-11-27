@@ -2,6 +2,7 @@ Mmain	main.c	/^int			main(void)$/
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)/
+b_line_col	parsing.c	/^void		b_line_col(t_filler *info, char *str)$/
 calc_len_address	libft/srcs/address_tools.c	/^int		calc_len_address(t_conv_id *s_ptr, unsigned l/
 calc_len_double	libft/srcs/double.c	/^int		calc_len_double(t_d_arrs *a_ptr, t_conv_id *s/
 calc_len_hexa	libft/srcs/hexa_tools.c	/^int	calc_len_hexa(t_conv_id *s_ptr, unsigned long /
@@ -16,6 +17,9 @@ check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/
+clean_alloc	clean.c	/^void	clean_alloc(t_filler *info, int code)$/
+clean_board	clean.c	/^void	clean_board(t_filler *info)$/
+clean_piece	clean.c	/^void	clean_piece(t_filler *info)$/
 conv_path	libft/srcs/ft_dprintf.c	/^t_point		conv_path(int fd, const char *fmt, va_lis/
 divide_str_by_two	libft/srcs/float_tools.c	/^void	divide_str_by_two(char *str, int len)$/
 double_exponant	libft/srcs/double_tools.c	/^void	double_exponant(t_s_e_m *dble_ptr, t_d_arrs */
@@ -95,6 +99,7 @@ ft_strequ	libft/srcs/ft_strequ.c	/^int	ft_strequ(char const *s1, char const *s2)
 ft_striter	libft/srcs/ft_striter.c	/^void	ft_striter(char *s, void (*f)(char *))$/
 ft_striteri	libft/srcs/ft_striteri.c	/^void	ft_striteri(char *s, void (*f)(unsigned int, /
 ft_strjoin	libft/srcs/ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/
+ft_strjoinfree	libft/srcs/ft_strjoinfree.c	/^char	*ft_strjoinfree(char *s1, char *s2, char code/
 ft_strlcat	libft/srcs/ft_strlcat.c	/^size_t	ft_strlcat(char *dst, const char *src, size/
 ft_strlen	libft/srcs/ft_strlen.c	/^size_t	ft_strlen(const char *s)$/
 ft_strmap	libft/srcs/ft_strmap.c	/^char	*ft_strmap(char const *s, char (*f)(char))$/
@@ -116,18 +121,11 @@ ft_wordlen	libft/srcs/ft_strsplit.c	/^static int	ft_wordlen(char const *s, char 
 ftoa_double	libft/srcs/double.c	/^int		ftoa_double(t_s_e_m *dble, t_conv_id *s_ptr)$/
 ftoa_ldouble	libft/srcs/ldouble.c	/^int		ftoa_ldouble(t_s_e_m *dble, t_conv_id *s_ptr)/
 get_address_value	libft/srcs/address_tools.c	/^void	get_address_value(unsigned long *val_ptr, va_/
-get_board	parsing.c	/^int			get_board(t_filler *info)$/
 get_double_value	libft/srcs/double_tools.c	/^void	get_double_value(va_list *arg_ptr, t_s_e_m *d/
 get_func	libft/srcs/func_selector.c	/^t_conv_func		get_func(char c)$/
-get_infos	parsing.c	/^void		get_infos(int fd, t_filler *info)$/
-get_init_pos	tools.c	/^void		get_init_pos(t_filler *info)$/
 get_int_value	libft/srcs/int_tools.c	/^void	get_int_value(long long int *val_ptr, va_list/
 get_ldouble_value	libft/srcs/ldouble_tools.c	/^void	get_ldouble_value(va_list *arg_ptr, t_s_e_m */
-get_line_col	parsing.c	/^void		get_line_col(t_filler *info, char *str)$/
 get_next_line	libft/srcs/get_next_line.c	/^int		get_next_line(int fd, char **line)$/
-get_piece	parsing.c	/^int			get_piece(t_filler *info)$/
-get_piece_line_col	parsing.c	/^void		get_piece_line_col(t_filler *info, char *str/
-get_piece_size	tools.c	/^int			get_piece_size(t_filler *info)$/
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_pt/
 init	libft/srcs/get_next_line.c	/^t_data	*init(int fd, t_list **alst)$/
 init_struct	main.c	/^void	init_struct(t_filler *info, int fd)$/
@@ -164,10 +162,13 @@ no_flag_unsigned	libft/srcs/unsigned.c	/^void	no_flag_unsigned(t_conv_id *s_ptr,
 null_ptr	libft/srcs/address.c	/^int		null_ptr(t_conv_id *s_ptr, int len)$/
 null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int len)$/
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/
+p_line_col	parsing.c	/^void		p_line_col(t_filler *info, char *str)$/
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struc/
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *stru/
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct/
-read_board	main.c	/^void	read_board(t_filler *info, int fd)$/
+read_board	parsing.c	/^void	read_board(t_filler *info, int fd)$/
+read_info	parsing.c	/^int			read_info(t_filler *info, int fd)$/
+read_piece	parsing.c	/^void	read_piece(t_filler *info, int fd)$/
 read_until	libft/srcs/get_next_line.c	/^int		read_until(t_data *current)$/
 special_value	libft/srcs/special_tools.c	/^void	special_value(t_s_e_m *dble_ptr, t_conv_id *s/
 str_fill_char	libft/srcs/global_tools.c	/^int	str_fill_char(char *str, char c, int len)$/
