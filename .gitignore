@@ -1,3 +1,5 @@
 *.[oa]
 *.filler
+output.txt
+filler.trace
 tags
