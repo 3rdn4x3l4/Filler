@@ -60,7 +60,7 @@ int			main(void)
 	while (1)
 	{
 		/*read_info (calls read_board/piece) return -1/-2 if alloc fails then calls clean_alloc with code to clean b and p or b*/
-		ret = read_info(&info, fd_debug, turn);
+		ret = read_to_str(&info, fd_debug, turn);
 		turn = 1;
 		if (ret != 0)
 		{

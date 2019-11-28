@@ -8,6 +8,16 @@
 
 # define BUFF_SIZE 100
 
+#define NO_PLAYER 128
+#define PLAYER_OK 127
+#define BOARD_ERROR 126
+#define BOARD_OK 125
+#define PIECE_ERROR 124
+#define PIECE_OK 123
+#define STR_OK 122
+#define READ_ERROR 121
+#define INVALID_INFO 120
+
 typedef struct		s_filler
 {
 	char	**arr_b;
@@ -22,7 +32,7 @@ typedef struct		s_filler
 	int		column_p;
 }					t_filler;
 
-int					read_info(t_filler *info, int fd, int turn);
+int					read_to_str(t_filler *info, int fd, int turn);
 void				clean_alloc(t_filler *info, int code);
 void				init_struct(t_filler *info, int fd);
 #endif
