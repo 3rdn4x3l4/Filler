@@ -13,7 +13,7 @@ CC= clang
 SRCS= main.c\
 	  parsing.c\
 	  clean.c\
-	  #tools.c\
+	  tools.c\
 
 OBJ= $(SRCS:.c=.o)
 

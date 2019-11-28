@@ -49,25 +49,24 @@ Piece Lne 4 Col 7:
 
 int			main(void)
 {
-	int			fd_debug;
 	int			ret;
 	char		turn;
 	t_filler	info;
 
-	fd_debug = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
 	ft_bzero(&info, sizeof(info));
+	info.fd_debug = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
 	turn = 0;
 	while (1)
 	{
 		/*read_info (calls read_board/piece) return -1/-2 if alloc fails then calls clean_alloc with code to clean b and p or b*/
-		ret = read_to_str(&info, fd_debug, turn);
+		ret = read_to_str(&info, turn);
 		turn = 1;
 		if (ret != 0)
 		{
 			clean_alloc(&info, ret);
 			return (EXIT_FAILURE);
 		}
-		close(fd_debug);
+		close(info.fd_debug);
 		ft_printf("12 14\n");
 		return (EXIT_SUCCESS);
 	}

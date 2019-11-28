@@ -1,13 +1,8 @@
-do not use GNL to read as it create un freeable malloc when line container fails to be malloc;
-read everything into 1 str. and then parse from there
 
-#MAIN LOOP
-while (1)
-{
-	if (1st turn ?)
-		init info();
-	if (ret_code = read_info() ok?) /*read_b && read_p*/
-		pos = play_turn();
-	clean_alloc(ret_code); /* B || P || B&P */
-}
-#
+CONTENT check to be finnished:
+- NL OK
+- .OoXx TBD
+- ?
+
+##############
+- use t_filler *const info instead of t_filler *info

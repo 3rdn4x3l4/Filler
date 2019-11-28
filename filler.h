@@ -17,6 +17,8 @@
 #define STR_OK 122
 #define READ_ERROR 121
 #define INVALID_INFO 120
+#define NL_ERROR 119
+#define NL_OK 118
 
 typedef struct		s_filler
 {
@@ -30,9 +32,12 @@ typedef struct		s_filler
 	int		column_b;
 	int		line_p;
 	int		column_p;
+	int		fd_debug;
 }					t_filler;
 
-int					read_to_str(t_filler *info, int fd, int turn);
+int					read_to_str(t_filler *info, int turn);
 void				clean_alloc(t_filler *info, int code);
-void				init_struct(t_filler *info, int fd);
+int					can_fetch_nbr(char const * const str);
+int					board_content(t_filler *info);
+int 				piece_content(t_filler *info);
 #endif
