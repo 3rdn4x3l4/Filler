@@ -42,6 +42,9 @@ int	check_newlines(char const *const str, int line, int column, int fd, int offs
 	return (NL_ERROR);
 }
 
+/*
+** Given a str on the \n preceding the map check is map content has no illegal values
+*/
 int	map_part(char const *str, t_filler *info)
 {
 	int	i;
@@ -76,8 +79,6 @@ int	first_line_offset(char const *str, t_filler *info)
 				return (BOARD_ERROR);
 			i++;
 		}
-		if (map_part(str + i - 1, info) == BOARD_ERROR)
-			return (BOARD_ERROR);
 		line++;
 	}
 	return (BOARD_OK);
@@ -93,6 +94,9 @@ int	board_content(t_filler *info)
 	if (ret == NL_ERROR)
 		return (BOARD_ERROR);
 	ret = first_line_offset(str, info);
+	if (ret == BOARD_ERROR)
+		return (BOARD_ERROR);
+	ret = map_part(str, info);
 	if (ret == BOARD_ERROR)
 		return (BOARD_ERROR);
 	return (BOARD_OK);
