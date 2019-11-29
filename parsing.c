@@ -22,9 +22,6 @@ int		player_info(t_filler *info, int turn)
 	return (PLAYER_OK);
 }
 
-/*
- * check if Board is OK
-*/
 int		board_info(t_filler *info)
 {
 	if (info->pos == NULL)
@@ -62,7 +59,6 @@ int		get_str_info(t_filler *info, int turn)
 	ret = board_info(info);
 	if (ret == BOARD_ERROR)
 		return (ret);
-	ft_dprintf(info->fd_debug, "|||||||||||\n");
 	info->pos = ft_strstr(info->pos, "Piece ");
 	ret = piece_info(info);
 	if (ret == PIECE_ERROR)
@@ -88,7 +84,7 @@ int		read_to_str(t_filler *info, int turn)
 	ret = get_str_info(info, turn);
 	//ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
 	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
-	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
+	//ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 	free(info->stock);
 	if (ret != STR_OK)
 		return (INVALID_INFO);

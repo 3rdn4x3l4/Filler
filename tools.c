@@ -31,30 +31,69 @@ int	check_newlines(char const *const str, int line, int column, int fd, int offs
 	int	pos;
 
 	i = 0;
-
-	while (i < line + 1)
+	pos = 0;
+	while (str[pos] && str[pos] == '\n')
 	{
-		pos = i * (column + 1 + offset);
-		if (str[pos] && str[pos] != '\n')
-			return (NL_ERROR);
+		pos = ++i * (column + 1 + offset);
+	}
+	ft_dprintf(fd, "final i = |%i| && line = |%i|\n", i - 1, line);
+	if (line == i - 1)
+		return (NL_OK);
+	return (NL_ERROR);
+}
+
+int	map_part(char const *str, t_filler *info)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+	{
 		i++;
 	}
-	ft_dprintf(fd, "(i = %i |%.1s|)", i - 1, str + pos);
-	return (NL_OK);
+	ft_dprintf(info->fd_debug, "i = %i\n");
+	return (BOARD_OK);
+}
+
+int	first_line_offset(char const *str, t_filler *info)
+{
+	int	i;
+	int	line;
+
+	i = 1;
+	while (str[i] && (ft_isdigit(str[i]) == TRUE || str[i] == ' '))
+		i++;
+	if (str[i] != '\n')
+		return (BOARD_ERROR);
+	str += i;
+	line = 1;
+	while (line < info->line_b + 1)
+	{
+		i = 1;
+		while (i < 5)
+		{
+			if (str[i] && ft_isdigit(str[i]) == FALSE && str[i] != ' ')
+				return (BOARD_ERROR);
+			i++;
+		}
+		if (map_part(str + i - 1, info) == BOARD_ERROR)
+			return (BOARD_ERROR);
+		line++;
+	}
+	return (BOARD_OK);
 }
 
 int	board_content(t_filler *info)
 {
 	char	*str;
 	int		ret;
-	int		offset;
 
 	str = ft_strchr(info->pos, '\n');
-	offset = 0;
-	while (str[offset + 1] && str[offset + 1] == ' ')
-		offset++;
-	ret = check_newlines(str, info->line_b, info->column_b, info->fd_debug, offset);
+	ret = check_newlines(str, info->line_b + 1, info->column_b, info->fd_debug, 4);
 	if (ret == NL_ERROR)
+		return (BOARD_ERROR);
+	ret = first_line_offset(str, info);
+	if (ret == BOARD_ERROR)
 		return (BOARD_ERROR);
 	return (BOARD_OK);
 }
