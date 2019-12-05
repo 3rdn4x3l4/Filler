@@ -37,7 +37,12 @@ typedef struct		s_filler
 
 int					read_to_str(t_filler *info, int turn);
 void				clean_alloc(t_filler *info, int code);
+/*
+** tools
+*/
 int					can_fetch_nbr(char const * const str);
+int					is_map(char c);
+int					is_piece(char c);
 int					board_content(t_filler *info);
 int 				piece_content(t_filler *info);
 #endif

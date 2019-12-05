@@ -24,13 +24,16 @@ int		player_info(t_filler *info, int turn)
 
 int		board_info(t_filler *info)
 {
+	int ret;
+
 	if (info->pos == NULL)
 		return (BOARD_ERROR);
 	if (can_fetch_nbr(info->pos) == FALSE)
 		return (BOARD_ERROR);
 	info->line_b = atoi(info->pos + 7);
 	info->column_b = atoi(ft_strchr(info->pos + 8, ' '));
-	if (board_content(info) == BOARD_ERROR)
+	ret = board_content(info);
+	if (ret == BOARD_ERROR)
 		return (BOARD_ERROR);
 	return (BOARD_OK);
 }
@@ -48,20 +51,20 @@ int		piece_info(t_filler *info)
 	return (PIECE_OK);
 }
 
-int		get_str_info(t_filler *info, int turn)
+int		check_str_info(t_filler *info, int turn)
 {
 	int ret;
 
 	ret = player_info(info, turn);
 	if (ret == NO_PLAYER)
 		return (ret);
+	info->pos = ft_strstr(info->stock, "Piece ");
+	ret = piece_info(info);
+	if (ret == PIECE_ERROR)
+		return (ret);
 	info->pos = ft_strstr(info->stock, "Plateau ");
 	ret = board_info(info);
 	if (ret == BOARD_ERROR)
-		return (ret);
-	info->pos = ft_strstr(info->pos, "Piece ");
-	ret = piece_info(info);
-	if (ret == PIECE_ERROR)
 		return (ret);
 	return (STR_OK);
 }
@@ -81,10 +84,10 @@ int		read_to_str(t_filler *info, int turn)
 	}
 	if (ret == -1)
 		return (READ_ERROR);
-	ret = get_str_info(info, turn);
-	//ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
-	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
-	//ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
+	ret = check_str_info(info, turn);
+//	ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
+//	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
+//	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 	free(info->stock);
 	if (ret != STR_OK)
 		return (INVALID_INFO);

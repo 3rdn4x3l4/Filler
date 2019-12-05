@@ -24,92 +24,16 @@ int	can_fetch_nbr(char const *const str)
 	return (FALSE);
 }
 
-//check each NL 
-int	check_newlines(char const *const str, int line, int column, int fd, int offset)
+int	is_map(char c)
 {
-	int	i;
-	int	pos;
-
-	i = 0;
-	pos = 0;
-	while (str[pos] && str[pos] == '\n')
-	{
-		pos = ++i * (column + 1 + offset);
-	}
-	ft_dprintf(fd, "final i = |%i| && line = |%i|\n", i - 1, line);
-	if (line == i - 1)
-		return (NL_OK);
-	return (NL_ERROR);
+	if (ft_strchr(".XxOo", c) == NULL)
+		return (FALSE);
+	return (TRUE);
 }
 
-/*
-** Given a str on the \n preceding the map check is map content has no illegal values
-*/
-int	map_part(char const *str, t_filler *info)
+int	is_piece(char c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		i++;
-	}
-	ft_dprintf(info->fd_debug, "i = %i\n");
-	return (BOARD_OK);
-}
-
-int	first_line_offset(char const *str, t_filler *info)
-{
-	int	i;
-	int	line;
-
-	i = 1;
-	while (str[i] && (ft_isdigit(str[i]) == TRUE || str[i] == ' '))
-		i++;
-	if (str[i] != '\n')
-		return (BOARD_ERROR);
-	str += i;
-	line = 1;
-	while (line < info->line_b + 1)
-	{
-		i = 1;
-		while (i < 5)
-		{
-			if (str[i] && ft_isdigit(str[i]) == FALSE && str[i] != ' ')
-				return (BOARD_ERROR);
-			i++;
-		}
-		line++;
-	}
-	return (BOARD_OK);
-}
-
-int	board_content(t_filler *info)
-{
-	char	*str;
-	int		ret;
-
-	str = ft_strchr(info->pos, '\n');
-	ret = check_newlines(str, info->line_b + 1, info->column_b, info->fd_debug, 4);
-	if (ret == NL_ERROR)
-		return (BOARD_ERROR);
-	ret = first_line_offset(str, info);
-	if (ret == BOARD_ERROR)
-		return (BOARD_ERROR);
-	ret = map_part(str, info);
-	if (ret == BOARD_ERROR)
-		return (BOARD_ERROR);
-	return (BOARD_OK);
-}
-
-int piece_content(t_filler *info)
-{
-	char	*str;
-	int		ret;
-
-	str = ft_strchr(info->pos, '\n');
-	ret = check_newlines(str, info->line_p, info->column_p, info->fd_debug, 0);
-	if (ret == NL_ERROR)
-		return (PIECE_ERROR);
-	return (PIECE_OK);
+	if (ft_strchr(".*", c) == NULL)
+		return (FALSE);
+	return (TRUE);
 }

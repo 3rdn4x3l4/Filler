@@ -14,6 +14,7 @@ SRCS= main.c\
 	  parsing.c\
 	  clean.c\
 	  tools.c\
+	  content.c\
 
 OBJ= $(SRCS:.c=.o)
 

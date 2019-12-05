@@ -30,7 +30,8 @@ apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_pt
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
 arr_b	filler.h	/^	char	**arr_b;$/;"	m	struct:s_filler
 arr_p	filler.h	/^	char 	**arr_p;$/;"	m	struct:s_filler
-board_content	tools.c	/^int	board_content(t_filler *info)$/;"	f
+board_content	content.c	/^int board_content(t_filler *info)$/;"	f
+board_exist	content.c	/^int	board_exist(t_filler *info, char *ptr)$/;"	f
 board_info	parsing.c	/^int		board_info(t_filler *info)$/;"	f
 buffer	libft/includes/get_next_line.h	/^	char		*buffer;$/;"	m	struct:s_data
 calc_len_address	libft/srcs/address_tools.c	/^int		calc_len_address(t_conv_id *s_ptr, unsigned long value)$/;"	f
@@ -45,9 +46,9 @@ calc_len_unsigned	libft/srcs/unsigned_tools.c	/^int		calc_len_unsigned(t_conv_id
 can_fetch_nbr	tools.c	/^int	can_fetch_nbr(char const *const str)$/;"	f
 check_conversion	libft/srcs/ft_dprintf.c	/^int			check_conversion(const char *str)$/;"	f
 check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$/;"	f
-check_newlines	tools.c	/^int	check_newlines(char const *const str, int line, int column, int fd, int offset)$/;"	f
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/;"	f
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
+check_str_info	parsing.c	/^int		check_str_info(t_filler *info, int turn)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
 clean_alloc	clean.c	/^void	clean_alloc(t_filler *info, int code)$/;"	f
 clean_board	clean.c	/^void	clean_board(t_filler *info)$/;"	f
@@ -71,7 +72,6 @@ fill_arr	libft/srcs/func_selector.c	/^void			fill_arr(t_conv_func *arr)$/;"	f
 fill_d_tabs	libft/srcs/double_tools.c	/^void	fill_d_tabs(t_d_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_ld_tabs	libft/srcs/ldouble_tools.c	/^void	fill_ld_tabs(t_ld_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **line, int old_chars)$/;"	f
-first_line_offset	tools.c	/^int	first_line_offset(char const *str, t_filler *info)$/;"	f
 flag	libft/srcs/pflags.c	/^int		flag(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 flags	libft/includes/arg.h	/^	char	flags;$/;"	m	struct:s_conv_info
 flags_in_struct	libft/srcs/pflags.c	/^void	flags_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
@@ -170,10 +170,12 @@ get_func	libft/srcs/func_selector.c	/^t_conv_func		get_func(char c)$/;"	f
 get_int_value	libft/srcs/int_tools.c	/^void	get_int_value(long long int *val_ptr, va_list *arg_ptr,$/;"	f
 get_ldouble_value	libft/srcs/ldouble_tools.c	/^void	get_ldouble_value(va_list *arg_ptr, t_s_e_m *dble_ptr)$/;"	f
 get_next_line	libft/srcs/get_next_line.c	/^int		get_next_line(int fd, char **line)$/;"	f
-get_str_info	parsing.c	/^int		get_str_info(t_filler *info, int turn)$/;"	f
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_ptr, va_list *arg_ptr,$/;"	f
 init	libft/srcs/get_next_line.c	/^t_data	*init(int fd, t_list **alst)$/;"	f
 int_len	libft/srcs/int_tools.c	/^int		int_len(long long int val)$/;"	f
+is_map	tools.c	/^int	is_map(char c)$/;"	f
+is_piece	piece.c	/^int	is_piece(char c)$/;"	f
+is_piece	tools.c	/^int	is_piece(char c)$/;"	f
 ldouble_exponant	libft/srcs/ldouble_tools.c	/^void	ldouble_exponant(t_s_e_m *dble_ptr, t_ld_arrs *a_ptr)$/;"	f
 ldouble_mantissa	libft/srcs/ldouble_tools.c	/^void	ldouble_mantissa(unsigned long long mant, t_ld_arrs *a_ptr)$/;"	f
 ldouble_rounding	libft/srcs/ldouble_tools.c	/^void	ldouble_rounding(t_ld_arrs *a_ptr, t_conv_id *s_ptr)$/;"	f
@@ -191,7 +193,6 @@ longd_special_value	libft/srcs/special.c	/^int		longd_special_value(t_s_e_m *dbl
 loop	libft/srcs/ft_dprintf.c	/^int			loop(int fd, const char *fmt, va_list *arg_ptr, int written)$/;"	f
 m	libft/includes/arg.h	/^	unsigned long long	m;$/;"	m	struct:s_double
 main	main.c	/^int			main(void)$/;"	f
-map_part	tools.c	/^int	map_part(char const *str, t_filler *info)$/;"	f
 minus_flag_address	libft/srcs/address.c	/^void	minus_flag_address(t_conv_id *s_ptr, int len, unsigned long nb)$/;"	f
 minus_flag_double	libft/srcs/double.c	/^void	minus_flag_double(t_d_arrs *a_ptr, t_conv_id *s_ptr, t_s_e_m *dble_ptr,$/;"	f
 minus_flag_hexa	libft/srcs/hexa.c	/^void	minus_flag_hexa(t_conv_id *s_ptr, int len, unsigned long long nb)$/;"	f
@@ -221,10 +222,12 @@ null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int le
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/;"	f
 output	libft/includes/arg.h	/^	char	*output;$/;"	m	struct:s_conv_info
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
-piece_content	tools.c	/^int piece_content(t_filler *info)$/;"	f
+piece_content	content.c	/^int piece_content(t_filler *info)$/;"	f
+piece_content	piece.c	/^int piece_content(t_filler *info)$/;"	f
 piece_id	filler.h	/^	char	*piece_id;$/;"	m	struct:s_filler
 piece_id_op	filler.h	/^	char	*piece_id_op;$/;"	m	struct:s_filler
 piece_info	parsing.c	/^int		piece_info(t_filler *info)$/;"	f
+piece_info	piece.c	/^int		piece_info(t_filler *info)$/;"	f
 player_info	parsing.c	/^int		player_info(t_filler *info, int turn)$/;"	f
 pos	filler.h	/^	char	*pos;$/;"	m	struct:s_filler
 precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
