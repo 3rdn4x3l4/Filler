@@ -51,7 +51,7 @@ int		piece_info(t_filler *info)
 	return (PIECE_OK);
 }
 
-int		check_str_info(t_filler *info, int turn)
+int		check_str(t_filler *info, int turn)
 {
 	int ret;
 
@@ -69,7 +69,7 @@ int		check_str_info(t_filler *info, int turn)
 	return (STR_OK);
 }
 
-int		read_to_str(t_filler *info, int turn)
+int		read_to_str(t_filler *info)
 {
 	char	buff[BUFF_SIZE + 1];
 	int		ret;
@@ -84,12 +84,61 @@ int		read_to_str(t_filler *info, int turn)
 	}
 	if (ret == -1)
 		return (READ_ERROR);
-	ret = check_str_info(info, turn);
+	return(0);
+}
+
+void	fill_arrays(t_filler *info)
+{
+	char *ptr;
+	int  lne;
+
+	ptr = ft_strstr(info->stock, "\n000 ");
+	ptr++;
+	lne = 0;
+	while (lne < info->line_b)
+	{
+		info->arr_b[lne] = ptr + 4;
+		ptr += (info->column_b + 5);
+		lne++;
+	}
+	lne = 0;
+	ptr = ft_strstr(ptr, ":\n");
+	ptr += 2;
+	while (lne < info->line_p)
+	{
+		info->arr_p[lne] = ptr;
+		ptr += (info->column_p + 5);
+		lne++;
+	}
+}
+
+int		alloc_arrays(t_filler *info)
+{
+	info->arr_b = ft_memalloc(info->line_b * sizeof(char *) + 1);
+	if (info->arr_b == NULL)
+		return (BOARD_ALLOC_FAIL);
+	info->arr_p = ft_memalloc(info->line_p * sizeof(char *) + 1);
+	if (info->arr_p == NULL)
+		return (PIECE_ALLOC_FAIL);
+	fill_arrays(info);
+	return (MALLOC_OK);
+}
+
+int		parse(t_filler *info, int turn)
+{
+	int		ret;
+
+	ret = read_to_str(info);
+	if (ret == READ_ERROR)
+		return (READ_ERROR);
+	ret = check_str(info, turn);
 //	ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
-//	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
-//	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
-	free(info->stock);
+	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
+	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 	if (ret != STR_OK)
 		return (INVALID_INFO);
-	return (ret);
+	ret = alloc_arrays(info);
+	if (ret != MALLOC_OK)
+		return (ret);
+	return (0);
 }

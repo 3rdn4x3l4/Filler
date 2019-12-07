@@ -19,6 +19,9 @@
 #define INVALID_INFO 120
 #define NL_ERROR 119
 #define NL_OK 118
+#define BOARD_ALLOC_FAIL 117
+#define PIECE_ALLOC_FAIL 116
+#define MALLOC_OK 115
 
 typedef struct		s_filler
 {
@@ -35,7 +38,7 @@ typedef struct		s_filler
 	int		fd_debug;
 }					t_filler;
 
-int					read_to_str(t_filler *info, int turn);
+int					parse(t_filler *info, int turn);
 void				clean_alloc(t_filler *info, int code);
 /*
 ** tools

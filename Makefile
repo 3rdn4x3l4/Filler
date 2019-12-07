@@ -11,7 +11,7 @@ CFLAGS += -g
 CC= clang
 
 SRCS= main.c\
-	  parsing.c\
+	  read.c\
 	  clean.c\
 	  tools.c\
 	  content.c\

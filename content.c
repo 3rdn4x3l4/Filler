@@ -31,18 +31,22 @@ int board_content(t_filler *info)
 	ptr = str + 1;
 	if (board_exist(info, ptr) == FALSE)
 		return (BOARD_ERROR);
+	ptr += (5 + info->column_b);
 	lne = 0;
 	while (lne < info->line_b)
 	{
 		col = 4;
-		while (col < info->column_b)
+		while (col - 4 < info->column_b)
 		{
 			if (is_map(ptr[lne * (info->column_b + 1) + col]) == FALSE)
 				return (BOARD_ERROR);
 			col++;
 		}
+		ft_dprintf(info->fd_debug, "||BC line %i OK||\n", lne);
+		//ft_dprintf(info->fd_debug, "|%c|\n", ptr[lne * (info->column_b + 1) + col]);
 		if ('\n' != ptr[lne * (info->column_b + 1) + col])
 			return (BOARD_ERROR);
+		ft_dprintf(info->fd_debug, "||NL line %i OK||\n", lne);
 		lne++;
 	}
 	return (BOARD_OK);

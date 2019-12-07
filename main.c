@@ -41,11 +41,49 @@ Piece Lne 4 Col 7:
 ...*...
 ..***..
 
+map02 is 100x99:
+(info->column_b + 5) * (info->line_b + 1)
+board_len = (99 + 5) * (100 + 1) = 104 * 101 = 10504
+piece_len = (99 + 1) * (100) = 100 * 100 =  10000
+player_len = 60
+max read = brd + plyr + pce = 20504;
+
 **
 ** Prog places piece by giving where the top left of the piece should be placed in the board coordinates system.
 ** In the example player X can place the piece by printing 2 -1
 */
 
+void		print_boards(t_filler *info)
+{
+	int lne = 0;
+	while (lne < info->line_b)
+	{
+		ft_dprintf(info->fd_debug, "|%.100s|\n", info->column_b);
+		lne++;
+	}
+	lne = 0;
+	while (lne < info->line_p)
+	{
+		ft_dprintf(info->fd_debug, "|%.100s|\n", info->column_p);
+		lne++;
+	}
+}
+
+void free_alloc(int ret, t_filler *info)
+{
+	int lne = 0;
+	(void)ret;
+	while (lne < info->line_b)
+	{
+		free(info->arr_b[lne]);
+		lne++;
+	}
+	while (lne < info->line_p)
+	{
+		free(info->arr_p[lne]);
+		lne++;
+	}
+}
 
 int			main(void)
 {
@@ -58,15 +96,15 @@ int			main(void)
 	turn = 0;
 	while (1)
 	{
-		ret = read_to_str(&info, turn);
-		turn = 1;
+		ret = parse(&info, turn);
+		turn++;
 		if (ret != 0)
-		{
-			clean_alloc(&info, ret);
 			return (EXIT_FAILURE);
-		}
+		print_boards(&info);
+		//find_move(info);
+		//play_move(info);
+		free_alloc(ret, &info);
 		close(info.fd_debug);
-		ft_printf("12 14\n");
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);

@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ARG_H	libft/includes/arg.h	14;"	d
+BOARD_ALLOC_FAIL	filler.h	22;"	d
 BOARD_ERROR	filler.h	13;"	d
 BOARD_OK	filler.h	14;"	d
 BUFF_SIZE	filler.h	9;"	d
@@ -16,9 +17,11 @@ FT_PRINTF_H	libft/includes/ft_printf.h	14;"	d
 GET_NEXT_LINE_H	libft/includes/get_next_line.h	14;"	d
 INVALID_INFO	filler.h	19;"	d
 LIBFT_H	libft/includes/libft.h	14;"	d
+MALLOC_OK	filler.h	24;"	d
 NL_ERROR	filler.h	20;"	d
 NL_OK	filler.h	21;"	d
 NO_PLAYER	filler.h	11;"	d
+PIECE_ALLOC_FAIL	filler.h	23;"	d
 PIECE_ERROR	filler.h	15;"	d
 PIECE_OK	filler.h	16;"	d
 PLAYER_OK	filler.h	12;"	d
@@ -26,13 +29,14 @@ READ_ERROR	filler.h	18;"	d
 STR_OK	filler.h	17;"	d
 TRUE	libft/includes/libft.h	19;"	d
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
+alloc_arrays	read.c	/^int		alloc_arrays(t_filler *info)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
 arr_b	filler.h	/^	char	**arr_b;$/;"	m	struct:s_filler
 arr_p	filler.h	/^	char 	**arr_p;$/;"	m	struct:s_filler
 board_content	content.c	/^int board_content(t_filler *info)$/;"	f
 board_exist	content.c	/^int	board_exist(t_filler *info, char *ptr)$/;"	f
-board_info	parsing.c	/^int		board_info(t_filler *info)$/;"	f
+board_info	read.c	/^int		board_info(t_filler *info)$/;"	f
 buffer	libft/includes/get_next_line.h	/^	char		*buffer;$/;"	m	struct:s_data
 calc_len_address	libft/srcs/address_tools.c	/^int		calc_len_address(t_conv_id *s_ptr, unsigned long value)$/;"	f
 calc_len_double	libft/srcs/double.c	/^int		calc_len_double(t_d_arrs *a_ptr, t_conv_id *s_ptr, t_s_e_m *dble_ptr)$/;"	f
@@ -48,11 +52,8 @@ check_conversion	libft/srcs/ft_dprintf.c	/^int			check_conversion(const char *st
 check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$/;"	f
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/;"	f
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
-check_str_info	parsing.c	/^int		check_str_info(t_filler *info, int turn)$/;"	f
+check_str	read.c	/^int		check_str(t_filler *info, int turn)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
-clean_alloc	clean.c	/^void	clean_alloc(t_filler *info, int code)$/;"	f
-clean_board	clean.c	/^void	clean_board(t_filler *info)$/;"	f
-clean_piece	clean.c	/^void	clean_piece(t_filler *info)$/;"	f
 cntent	libft/includes/libft.h	/^	void						*cntent;$/;"	m	struct:s_double_linked_list
 column_b	filler.h	/^	int		column_b;$/;"	m	struct:s_filler
 column_p	filler.h	/^	int		column_p;$/;"	m	struct:s_filler
@@ -69,12 +70,14 @@ fd	libft/includes/arg.h	/^	int		fd;$/;"	m	struct:s_conv_info
 fd	libft/includes/get_next_line.h	/^	int			fd;$/;"	m	struct:s_data
 fd_debug	filler.h	/^	int		fd_debug;$/;"	m	struct:s_filler
 fill_arr	libft/srcs/func_selector.c	/^void			fill_arr(t_conv_func *arr)$/;"	f
+fill_arrays	read.c	/^void	fill_arrays(t_filler *info)$/;"	f
 fill_d_tabs	libft/srcs/double_tools.c	/^void	fill_d_tabs(t_d_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_ld_tabs	libft/srcs/ldouble_tools.c	/^void	fill_ld_tabs(t_ld_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **line, int old_chars)$/;"	f
 flag	libft/srcs/pflags.c	/^int		flag(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 flags	libft/includes/arg.h	/^	char	flags;$/;"	m	struct:s_conv_info
 flags_in_struct	libft/srcs/pflags.c	/^void	flags_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
+free_alloc	main.c	/^void free_alloc(int ret, t_filler *info)$/;"	f
 free_exit	libft/srcs/get_next_line.c	/^void	free_exit(t_list **head, t_data *current)$/;"	f
 ft_2lstadd_first	libft/srcs/ft_2lstadd_first.c	/^void	ft_2lstadd_first(t_2list **alst, t_2list *new)$/;"	f
 ft_2lstadd_last	libft/srcs/ft_2lstadd_last.c	/^void	ft_2lstadd_last(t_2list **alst, t_2list *new)$/;"	f
@@ -221,21 +224,23 @@ null_ptr	libft/srcs/address.c	/^int		null_ptr(t_conv_id *s_ptr, int len)$/;"	f
 null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int len)$/;"	f
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/;"	f
 output	libft/includes/arg.h	/^	char	*output;$/;"	m	struct:s_conv_info
+parse	read.c	/^int		parse(t_filler *info, int turn)$/;"	f
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 piece_content	content.c	/^int piece_content(t_filler *info)$/;"	f
 piece_content	piece.c	/^int piece_content(t_filler *info)$/;"	f
 piece_id	filler.h	/^	char	*piece_id;$/;"	m	struct:s_filler
 piece_id_op	filler.h	/^	char	*piece_id_op;$/;"	m	struct:s_filler
-piece_info	parsing.c	/^int		piece_info(t_filler *info)$/;"	f
 piece_info	piece.c	/^int		piece_info(t_filler *info)$/;"	f
-player_info	parsing.c	/^int		player_info(t_filler *info, int turn)$/;"	f
+piece_info	read.c	/^int		piece_info(t_filler *info)$/;"	f
+player_info	read.c	/^int		player_info(t_filler *info, int turn)$/;"	f
 pos	filler.h	/^	char	*pos;$/;"	m	struct:s_filler
 precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
 previous	libft/includes/libft.h	/^	struct s_double_linked_list *previous;$/;"	m	struct:s_double_linked_list	typeref:struct:s_double_linked_list::s_double_linked_list
+print_boards	main.c	/^void		print_boards(t_filler *info)$/;"	f
 read	libft/includes/arg.h	/^	int	read;$/;"	m	struct:s_point
-read_to_str	parsing.c	/^int		read_to_str(t_filler *info, int turn)$/;"	f
+read_to_str	read.c	/^int		read_to_str(t_filler *info)$/;"	f
 read_until	libft/srcs/get_next_line.c	/^int		read_until(t_data *current)$/;"	f
 s	libft/includes/arg.h	/^	char				s;$/;"	m	struct:s_double
 s_conv_info	libft/includes/arg.h	/^typedef struct	s_conv_info$/;"	s

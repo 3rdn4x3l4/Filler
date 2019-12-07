@@ -1,8 +1,13 @@
+read:
+1- read FULL block of maxsize 20k chars
+or
+2- read and join strs
 
-CONTENT check to be finnished:
-- NL OK
-- .OoXx TBD
-- ?
+(optional check info)
+verif struct
+use ptrs(start, end,) see if ptrs order and distance, and contents is OK
 
-##############
-- use t_filler *const info instead of t_filler *info
+allocs to fill struct:
+strtrim main str;
+and alloc two char ** (B and P)
+then move ptrs to B and P
