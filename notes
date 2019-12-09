@@ -1,13 +1,28 @@
 read:
-1- read FULL block of maxsize 20k chars
-or
-2- read and join strs
+read (while(ret > 0) || (len += ret) <= 20k)
 
 (optional check info)
 verif struct
-use ptrs(start, end,) see if ptrs order and distance, and contents is OK
+use ptrs(start, end,) see if ptrs order and distance
+
+contents is OK
 
 allocs to fill struct:
-strtrim main str;
+strsplit main str;
 and alloc two char ** (B and P)
-then move ptrs to B and P
+then copy str to B and P
+
+
+stock ==> arr_stock[str][chr]
+arr_b = arr_stock[lne1][4];
+arr_p = arr_stock[lne2][0];
+	[PLAYER.......]
+	[Plateau......]
+	[000 ...xxxooo]
+	[001 ...xxxooo]
+	[002 ...xxxooo]
+	[003 ...xxxooo]
+	[Piece........]
+	[....*****....]
+	[....*****....]
+	[....*****....]

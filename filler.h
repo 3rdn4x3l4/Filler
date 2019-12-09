@@ -8,6 +8,7 @@
 
 # define BUFF_SIZE 100
 
+#define MAX_LEN 20504
 #define NO_PLAYER 128
 #define PLAYER_OK 127
 #define BOARD_ERROR 126
@@ -19,14 +20,14 @@
 #define INVALID_INFO 120
 #define NL_ERROR 119
 #define NL_OK 118
-#define BOARD_ALLOC_FAIL 117
-#define PIECE_ALLOC_FAIL 116
-#define MALLOC_OK 115
+#define MALLOC_OK 117
+#define MALLOC_FAIL 116
 
 typedef struct		s_filler
 {
 	char	**arr_b;
 	char 	**arr_p;
+	char	**arr_stock;
 	char	*stock;
 	char	*pos;
 	char	*piece_id;

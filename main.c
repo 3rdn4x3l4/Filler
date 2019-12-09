@@ -18,7 +18,7 @@
 ** Prog reads the game board like so:
 
 each turn:
-
+ft_memmove
 Plateau Lne 14  Col 30:
     01234567890134567890123456789
 000 .............................
@@ -53,36 +53,18 @@ max read = brd + plyr + pce = 20504;
 ** In the example player X can place the piece by printing 2 -1
 */
 
-void		print_boards(t_filler *info)
+void free_alloc(t_filler *info)
 {
-	int lne = 0;
-	while (lne < info->line_b)
-	{
-		ft_dprintf(info->fd_debug, "|%.100s|\n", info->column_b);
-		lne++;
-	}
-	lne = 0;
-	while (lne < info->line_p)
-	{
-		ft_dprintf(info->fd_debug, "|%.100s|\n", info->column_p);
-		lne++;
-	}
-}
+	size_t	i;
 
-void free_alloc(int ret, t_filler *info)
-{
-	int lne = 0;
-	(void)ret;
-	while (lne < info->line_b)
+	i = 0;
+	free(info->stock);
+	while (info->arr_stock[i])
 	{
-		free(info->arr_b[lne]);
-		lne++;
+		free(info->arr_stock[i]);
+		i++;
 	}
-	while (lne < info->line_p)
-	{
-		free(info->arr_p[lne]);
-		lne++;
-	}
+	free(info->arr_stock);
 }
 
 int			main(void)
@@ -99,11 +81,13 @@ int			main(void)
 		ret = parse(&info, turn);
 		turn++;
 		if (ret != 0)
+		{
+			free_alloc(&info);
 			return (EXIT_FAILURE);
-		print_boards(&info);
+		}
 		//find_move(info);
 		//play_move(info);
-		free_alloc(ret, &info);
+		free_alloc(&info);
 		close(info.fd_debug);
 		return (EXIT_SUCCESS);
 	}
