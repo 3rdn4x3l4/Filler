@@ -1,21 +1,8 @@
 read:
-read (while(ret > 0) || (len += ret) <= 20k)
-
-(optional check info)
-verif struct
-use ptrs(start, end,) see if ptrs order and distance
-
-contents is OK
-
 allocs to fill struct:
 strsplit main str;
-and alloc two char ** (B and P)
-then copy str to B and P
 
-
-stock ==> arr_stock[str][chr]
-arr_b = arr_stock[lne1][4];
-arr_p = arr_stock[lne2][0];
+THIS IS THE STRING AS AN ARRAY
 	[PLAYER.......]
 	[Plateau......]
 	[000 ...xxxooo]
@@ -26,3 +13,12 @@ arr_p = arr_stock[lne2][0];
 	[....*****....]
 	[....*****....]
 	[....*****....]
+arr_b = arr_stock[lne1][4];
+arr_p = arr_stock[lne2][0];
+
+(optional) check content before HEATMAP
+
+HEATMAP
+each line containing  piece_id_op start to put 0 for low caps and 1 for BIG caps
+then each dot will be filled with numbers
+sum of piece score to be lowest possible
