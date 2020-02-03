@@ -22,3 +22,30 @@ HEATMAP
 each line containing  piece_id_op start to put 0 for low caps and 1 for BIG caps
 then each dot will be filled with numbers
 sum of piece score to be lowest possible
+read to str
+
+#################################################################################
+#################################################################################
+
+
+(1st turn only)
+get player
+
+get player relative pos
+
+
+(may check vaillidity but could argue it is useless)
+
+strsplit \n into an arr
+
+init line ptr of map and piece
+
+get piece real size
+
+get piece offset
+
+fill heatmap
+
+get best pos
+
+print best pos (piece_line - offset_h piece_col - offset_v)
