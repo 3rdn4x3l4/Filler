@@ -76,7 +76,7 @@ fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **l
 flag	libft/srcs/pflags.c	/^int		flag(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 flags	libft/includes/arg.h	/^	char	flags;$/;"	m	struct:s_conv_info
 flags_in_struct	libft/srcs/pflags.c	/^void	flags_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
-free_alloc	main.c	/^void free_alloc(int ret, t_filler *info)$/;"	f
+free_alloc	main.c	/^void free_alloc(t_filler *info)$/;"	f
 free_exit	libft/srcs/get_next_line.c	/^void	free_exit(t_list **head, t_data *current)$/;"	f
 ft_2lstadd_first	libft/srcs/ft_2lstadd_first.c	/^void	ft_2lstadd_first(t_2list **alst, t_2list *new)$/;"	f
 ft_2lstadd_last	libft/srcs/ft_2lstadd_last.c	/^void	ft_2lstadd_last(t_2list **alst, t_2list *new)$/;"	f
@@ -237,8 +237,6 @@ precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
 previous	libft/includes/libft.h	/^	struct s_double_linked_list *previous;$/;"	m	struct:s_double_linked_list	typeref:struct:s_double_linked_list::s_double_linked_list
-print_alloc	read.c	/^void	print_alloc(t_filler *info)$/;"	f
-print_boards	main.c	/^void		print_boards(t_filler *info)$/;"	f
 read	libft/includes/arg.h	/^	int	read;$/;"	m	struct:s_point
 read_to_str	read.c	/^int		read_to_str(t_filler *info)$/;"	f
 read_until	libft/srcs/get_next_line.c	/^int		read_until(t_data *current)$/;"	f

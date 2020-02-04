@@ -25,17 +25,16 @@
 
 typedef struct		s_filler
 {
-	char	**arr_b;
-	char 	**arr_p;
-	char	**arr_stock;
+	char	**board;
+	char 	**piece;
+	char	**arr;
 	char	*stock;
-	char	*pos;
-	char	*piece_id;
-	char	*piece_id_op;
-	int		line_b;
-	int		column_b;
-	int		line_p;
-	int		column_p;
+	char	piece_id[2];
+	char	piece_id_op[2];
+	int		b_line;
+	int		b_column;
+	int		p_line;
+	int		p_column;
 	int		fd_debug;
 }					t_filler;
 

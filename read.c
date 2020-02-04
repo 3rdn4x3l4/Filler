@@ -107,25 +107,16 @@ void		reallign_board(t_filler *info)
 //		ft_dprintf(info->fd_debug, "%s\n", info->arr_p[i]);
 //		i++;
 //	}
+//	ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
+//	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
+//	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 //}
 
 int		str_to_arr(t_filler *info)
 {
-	size_t	pos;
-
 	info->arr_stock = ft_strsplit(info->stock, '\n');
 	if (info->arr_stock == NULL)
 		return (ARR_MALLOC);
-	reallign_board(info);
-	pos = 0;
-	while (info->arr_stock[pos] != NULL && ft_strstr(info->arr_stock[pos], "Plateau ") == NULL)
-		pos++;
-	if (info->arr_stock[pos + 2] != NULL)
-		info->arr_b = &(info->arr_stock[pos + 2]);
-	while (info->arr_stock[pos] != NULL && ft_strstr(info->arr_stock[pos], "Piece ") == NULL)
-		pos++;
-	if (info->arr_stock[pos + 1] != NULL)
-		info->arr_p = &(info->arr_stock[pos + 1]);
 	return (0);
 }
 
@@ -165,12 +156,6 @@ int		parse(t_filler *info, int turn)
 	ret = str_to_arr(info);
 	if (ret == ARR_MALLOC)
 		return (ERROR);
-	ret = check_arr(info, turn);
-	if (ret != STR_OK)
-		return (READ_ERROR);
-	//ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
-	//ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
-	//ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 	print_alloc(info);
 	return (0);
 }
