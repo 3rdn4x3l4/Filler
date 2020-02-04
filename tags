@@ -31,9 +31,11 @@ TRUE	libft/includes/libft.h	19;"	d
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
-arr_b	filler.h	/^	char	**arr_b;$/;"	m	struct:s_filler
-arr_p	filler.h	/^	char 	**arr_p;$/;"	m	struct:s_filler
-arr_stock	filler.h	/^	char	**arr_stock;$/;"	m	struct:s_filler
+arr	filler.h	/^	char	**arr;$/;"	m	struct:s_filler
+arr_b	notes	/^arr_b = arr_stock[lne1][4];$/;"	v
+b_column	filler.h	/^	int		b_column;$/;"	m	struct:s_filler
+b_line	filler.h	/^	int		b_line;$/;"	m	struct:s_filler
+board	filler.h	/^	char	**board;$/;"	m	struct:s_filler
 board_content	content.c	/^int board_content(t_filler *info)$/;"	f
 board_exist	content.c	/^int	board_exist(t_filler *info, char *ptr)$/;"	f
 board_info	read.c	/^int		board_info(t_filler *info)$/;"	f
@@ -48,6 +50,7 @@ calc_len_percent	libft/srcs/percent.c	/^int		calc_len_percent(t_conv_id *s_ptr)$
 calc_len_string	libft/srcs/string.c	/^int			calc_len_string(t_conv_id *s_ptr, char *str)$/;"	f
 calc_len_unsigned	libft/srcs/unsigned_tools.c	/^int		calc_len_unsigned(t_conv_id *s_ptr, unsigned long long value)$/;"	f
 can_fetch_nbr	tools.c	/^int	can_fetch_nbr(char const *const str)$/;"	f
+challenger	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 check_arr	read.c	/^int		check_arr(t_filler *info, int turn)$/;"	f
 check_conversion	libft/srcs/ft_dprintf.c	/^int			check_conversion(const char *str)$/;"	f
 check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$/;"	f
@@ -55,8 +58,6 @@ check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
 cntent	libft/includes/libft.h	/^	void						*cntent;$/;"	m	struct:s_double_linked_list
-column_b	filler.h	/^	int		column_b;$/;"	m	struct:s_filler
-column_p	filler.h	/^	int		column_p;$/;"	m	struct:s_filler
 content	libft/includes/libft.h	/^	void			*content;$/;"	m	struct:s_list
 content_size	libft/includes/libft.h	/^	size_t			content_size;$/;"	m	struct:s_list
 conv	libft/includes/arg.h	/^	char	conv;$/;"	m	struct:s_conv_info
@@ -76,6 +77,8 @@ fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **l
 flag	libft/srcs/pflags.c	/^int		flag(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 flags	libft/includes/arg.h	/^	char	flags;$/;"	m	struct:s_conv_info
 flags_in_struct	libft/srcs/pflags.c	/^void	flags_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
+format	libft/tags	/^!_TAG_FILE_FORMAT	2	\/extended format; --format=1 will not append ;" to lines\/$/;"	v
+format	tags	/^!_TAG_FILE_FORMAT	2	\/extended format; --format=1 will not append ;" to lines\/$/;"	v
 free_alloc	main.c	/^void free_alloc(t_filler *info)$/;"	f
 free_exit	libft/srcs/get_next_line.c	/^void	free_exit(t_list **head, t_data *current)$/;"	f
 ft_2lstadd_first	libft/srcs/ft_2lstadd_first.c	/^void	ft_2lstadd_first(t_2list **alst, t_2list *new)$/;"	f
@@ -175,6 +178,7 @@ get_next_line	libft/srcs/get_next_line.c	/^int		get_next_line(int fd, char **lin
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_ptr, va_list *arg_ptr,$/;"	f
 init	libft/srcs/get_next_line.c	/^t_data	*init(int fd, t_list **alst)$/;"	f
 int_len	libft/srcs/int_tools.c	/^int		int_len(long long int val)$/;"	f
+interactif	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 is_map	tools.c	/^int	is_map(char c)$/;"	f
 is_piece	piece.c	/^int	is_piece(char c)$/;"	f
 is_piece	tools.c	/^int	is_piece(char c)$/;"	f
@@ -189,8 +193,7 @@ len_modif1	libft/includes/arg.h	/^	char	len_modif1;$/;"	m	struct:s_conv_info
 len_modif2	libft/includes/arg.h	/^	char	len_modif2;$/;"	m	struct:s_conv_info
 len_modifier	libft/srcs/plenmodifier.c	/^int	len_modifier(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 len_modifier_in_struct	libft/srcs/plenmodifier.c	/^int	len_modifier_in_struct(char *ptr, int len, t_conv_id *struct_ptr)$/;"	f
-line_b	filler.h	/^	int		line_b;$/;"	m	struct:s_filler
-line_p	filler.h	/^	int		line_p;$/;"	m	struct:s_filler
+live	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
 longd_special_value	libft/srcs/special.c	/^int		longd_special_value(t_s_e_m *dble_ptr)$/;"	f
 loop	libft/srcs/ft_dprintf.c	/^int			loop(int fd, const char *fmt, va_list *arg_ptr, int written)$/;"	f
 m	libft/includes/arg.h	/^	unsigned long long	m;$/;"	m	struct:s_double
@@ -223,16 +226,20 @@ null_ptr	libft/srcs/address.c	/^int		null_ptr(t_conv_id *s_ptr, int len)$/;"	f
 null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int len)$/;"	f
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/;"	f
 output	libft/includes/arg.h	/^	char	*output;$/;"	m	struct:s_conv_info
+p_column	filler.h	/^	int		p_column;$/;"	m	struct:s_filler
+p_line	filler.h	/^	int		p_line;$/;"	m	struct:s_filler
 parse	read.c	/^int		parse(t_filler *info, int turn)$/;"	f
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
+piece	filler.h	/^	char 	**piece;$/;"	m	struct:s_filler
+piece_char	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
 piece_content	content.c	/^int piece_content(t_filler *info)$/;"	f
 piece_content	piece.c	/^int piece_content(t_filler *info)$/;"	f
-piece_id	filler.h	/^	char	*piece_id;$/;"	m	struct:s_filler
-piece_id_op	filler.h	/^	char	*piece_id_op;$/;"	m	struct:s_filler
+piece_id	filler.h	/^	char	piece_id[2];$/;"	m	struct:s_filler
+piece_id_op	filler.h	/^	char	piece_id_op[2];$/;"	m	struct:s_filler
 piece_info	piece.c	/^int		piece_info(t_filler *info)$/;"	f
 piece_info	read.c	/^int		piece_info(t_filler *info)$/;"	f
+player	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 player_info	read.c	/^int		player_info(t_filler *info, int turn)$/;"	f
-pos	filler.h	/^	char	*pos;$/;"	m	struct:s_filler
 precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
@@ -251,9 +258,14 @@ s_filler	filler.h	/^typedef struct		s_filler$/;"	s
 s_list	libft/includes/libft.h	/^typedef struct	s_list$/;"	s
 s_long_double_arrs	libft/includes/arg.h	/^typedef struct	s_long_double_arrs$/;"	s
 s_point	libft/includes/arg.h	/^typedef struct	s_point$/;"	s
+score	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
+sid	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 special_value	libft/srcs/special_tools.c	/^void	special_value(t_s_e_m *dble_ptr, t_conv_id *s_ptr, int len)$/;"	f
+stdin	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
+stdout	resources/filler_vm	/^			self.stdin, @stdout, @wait_thr = Open3.popen2(@file_name)$/;"	v
 stock	filler.h	/^	char	*stock;$/;"	m	struct:s_filler
 str	libft/includes/arg.h	/^	char				*str;$/;"	m	struct:s_double
+str	notes	/^strsplit main str;$/;"	v	typeref:struct:main
 str_fill_char	libft/srcs/global_tools.c	/^int	str_fill_char(char *str, char c, int len)$/;"	f
 str_to_arr	read.c	/^int		str_to_arr(t_filler *info)$/;"	f
 t_2list	libft/includes/libft.h	/^}				t_2list;$/;"	t	typeref:struct:s_double_linked_list
@@ -268,11 +280,14 @@ t_point	libft/includes/arg.h	/^}				t_point;$/;"	t	typeref:struct:s_point
 t_s_e_m	libft/includes/arg.h	/^}				t_s_e_m;$/;"	t	typeref:struct:s_double
 tab	libft/includes/arg.h	/^	char	tab[1500];$/;"	m	struct:s_double_arrs
 tab	libft/includes/arg.h	/^	char	tab[21500];$/;"	m	struct:s_long_double_arrs
+time	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 tmp	libft/includes/arg.h	/^	char	tmp[1500];$/;"	m	struct:s_double_arrs
 tmp	libft/includes/arg.h	/^	char	tmp[21500];$/;"	m	struct:s_long_double_arrs
 total	libft/includes/arg.h	/^	char	*total;$/;"	m	struct:s_double_arrs
 total	libft/includes/arg.h	/^	char	*total;$/;"	m	struct:s_long_double_arrs
 unsigned_len_base	libft/srcs/global_tools.c	/^int	unsigned_len_base(unsigned long long val, unsigned base)$/;"	f
+verbose	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
+wait_thr	resources/filler_vm	/^			self.stdin, @stdout, @wait_thr = Open3.popen2(@file_name)$/;"	v
 width	libft/includes/arg.h	/^	int		width;$/;"	m	struct:s_conv_info
 width	libft/srcs/pwidth.c	/^int		width(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 width_in_struct	libft/srcs/pwidth.c	/^void	width_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
