@@ -67,6 +67,7 @@ void free_alloc(t_filler *info)
 	free(info->arr_stock);
 }
 
+/*
 int			main(void)
 {
 	int			ret;
@@ -89,6 +90,31 @@ int			main(void)
 		//play_move(info);
 		free_alloc(&info);
 		close(info.fd_debug);
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_SUCCESS);
+}
+*/
+
+
+int			main(void)
+{
+	int			ret;
+	char		turn;
+	t_filler	info;
+
+	ft_bzero(&info, sizeof(info));
+	turn = 0;
+	while (1)
+	{
+		ret = parse(&info, turn);
+		turn++;
+		if (ret != 0)
+		{
+			free_alloc(&info);
+			return (EXIT_FAILURE);
+		}
+		free_alloc(&info);
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);

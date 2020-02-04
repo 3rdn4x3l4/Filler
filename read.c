@@ -69,31 +69,6 @@ int		check_arr(t_filler *info, int turn)
 	return (STR_OK);
 }
 
-int		read_to_str(t_filler *info)
-{
-	char	buff[BUFF_SIZE + 1];
-	int		ret;
-	size_t	len;
-
-	len = 0;
-	while ((ret = read(0, buff, BUFF_SIZE)) > 0 && (len += ret) <= MAX_LEN)
-	{
-		buff[ret] = '\0';
-		if (info->stock == NULL)
-			info->stock = ft_strdup(buff);
-		else
-			info->stock = ft_strjoinfree(info->stock, buff, 1);
-	}
-	if (len > MAX_LEN)
-	{
-		free(info->stock);
-		return (READ_ERROR);
-	}
-	if (ret == -1)
-		return (READ_ERROR);
-	return(0);
-}
-
 void		reallign_board(t_filler *info)
 {
 	char	**str_add;
@@ -108,13 +83,39 @@ void		reallign_board(t_filler *info)
 	}
 }
 
+//void	print_alloc(t_filler *info)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (info->arr_stock[i] != NULL)
+//	{
+//		ft_dprintf(info->fd_debug, "%s\n", info->arr_stock[i]);
+//		i++;
+//	}
+//	i = 0;
+//	ft_dprintf(info->fd_debug, "|||||||||\n");
+//	while (i < info->line_b)
+//	{
+//		ft_dprintf(info->fd_debug, "%s\n", info->arr_b[i]);
+//		i++;
+//	}
+//	i = 0;
+//	ft_dprintf(info->fd_debug, "|||||||||\n");
+//	while (i < info->line_p)
+//	{
+//		ft_dprintf(info->fd_debug, "%s\n", info->arr_p[i]);
+//		i++;
+//	}
+//}
+
 int		str_to_arr(t_filler *info)
 {
 	size_t	pos;
 
 	info->arr_stock = ft_strsplit(info->stock, '\n');
 	if (info->arr_stock == NULL)
-		return (MALLOC_FAIL);
+		return (ARR_MALLOC);
 	reallign_board(info);
 	pos = 0;
 	while (info->arr_stock[pos] != NULL && ft_strstr(info->arr_stock[pos], "Plateau ") == NULL)
@@ -128,30 +129,30 @@ int		str_to_arr(t_filler *info)
 	return (0);
 }
 
-void	print_alloc(t_filler *info)
+int		read_to_str(t_filler *info)
 {
-	int	i;
+	char	*str;
+	char	buff[BUFF_SIZE + 1];
+	int		ret;
+	size_t	len;
 
-	i = 0;
-	while (info->arr_stock[i] != NULL)
+	len = 0;
+	str = ft_strnew(0);
+	if (str == NULL)
+		return (STR_ERROR);
+	while ((ret = read(0, buff, BUFF_SIZE)) > 0 && (len += ret) <= MAX_LEN)
 	{
-		ft_dprintf(info->fd_debug, "%s\n", info->arr_stock[i]);
-		i++;
+		buff[ret] = '\0';
+		str = ft_strjoinfree(str, buff, 1);
 	}
-	i = 0;
-	ft_dprintf(info->fd_debug, "|||||||||\n");
-	while (i < info->line_b)
+	if (len > MAX_LEN || ret == -1)
 	{
-		ft_dprintf(info->fd_debug, "%s\n", info->arr_b[i]);
-		i++;
+		if (str != NULL)
+			free(str);
+		return (READ_ERROR);
 	}
-	i = 0;
-	ft_dprintf(info->fd_debug, "|||||||||\n");
-	while (i < info->line_p)
-	{
-		ft_dprintf(info->fd_debug, "%s\n", info->arr_p[i]);
-		i++;
-	}
+	info->stock = str;
+	return(0);
 }
 
 int		parse(t_filler *info, int turn)
@@ -159,9 +160,11 @@ int		parse(t_filler *info, int turn)
 	int		ret;
 
 	ret = read_to_str(info);
-	if (ret == READ_ERROR)
-		return (READ_ERROR);
+	if (ret == STR_ERROR || ret == READ_ERROR)
+		return (ERROR);
 	ret = str_to_arr(info);
+	if (ret == ARR_MALLOC)
+		return (ERROR);
 	ret = check_arr(info, turn);
 	if (ret != STR_OK)
 		return (READ_ERROR);
