@@ -1,5 +1,5 @@
 #include "filler.h"
-;#include "libft/includes/libft.h"
+#include "libft/includes/libft.h"
 #include "libft/includes/get_next_line.h"
 #include "libft/includes/ft_printf.h"
 #include <fcntl.h>
@@ -49,7 +49,7 @@ player_len = 60
 max read = brd + plyr + pce = 20504;
 
 **
-** Prog places piece by giving where the top left of the piece should be placed in the board coordinates system.
+** Prog places piece by giving where the top left of the piece should be placed in the board coordinates system (Lne Col order)
 ** In the example player X can place the piece by printing 2 -1
 */
 
@@ -100,7 +100,7 @@ int			main(void)
 int			main(void)
 {
 	int			ret;
-	char		turn;
+	int			turn;
 	t_filler	info;
 
 	ft_bzero(&info, sizeof(info));
@@ -108,14 +108,11 @@ int			main(void)
 	while (1)
 	{
 		ret = parse(&info, turn);
-		turn++;
 		if (ret != 0)
-		{
-			free_alloc(&info);
 			return (EXIT_FAILURE);
-		}
+		play_move(&info);
 		free_alloc(&info);
-		return (EXIT_SUCCESS);
+		turn++;
 	}
 	return (EXIT_SUCCESS);
 }
