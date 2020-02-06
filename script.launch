@@ -1,6 +1,5 @@
 #!/bin/bash
 
-rm result
 make clean all
 if [ $? -eq 0 ];then
 	./alagache.filler < test > result
