@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "filler.h"
-#include "libft/includes/libft.h"
-#include "libft/includes/ft_printf.h"
+#include "libft.h"
+#include "ft_printf.h"
 
 //int		player_info(t_filler *info, int turn)
 //{
@@ -46,35 +46,6 @@
 //	return (PIECE_OK);
 //}
 
-//void	print_alloc(t_filler *info)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (info->arr_stock[i] != NULL)
-//	{
-//		ft_dprintf(info->fd_debug, "%s\n", info->arr_stock[i]);
-//		i++;
-//	}
-//	i = 0;
-//	ft_dprintf(info->fd_debug, "|||||||||\n");
-//	while (i < info->line_b)
-//	{
-//		ft_dprintf(info->fd_debug, "%s\n", info->arr_b[i]);
-//		i++;
-//	}
-//	i = 0;
-//	ft_dprintf(info->fd_debug, "|||||||||\n");
-//	while (i < info->line_p)
-//	{
-//		ft_dprintf(info->fd_debug, "%s\n", info->arr_p[i]);
-//		i++;
-//	}
-//	ft_dprintf(info->fd_debug, "%sI am %s\nOp is %s\n",info->stock,  info->piece_id, info->piece_id_op);
-//	ft_dprintf(info->fd_debug, "lne_b = %i\ncol_b = %i\n", info->line_b, info->column_b);
-//	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
-//}
-
 int		read_to_str(t_filler *info)
 {
 	char	*str;
@@ -103,41 +74,45 @@ int		read_to_str(t_filler *info)
 
 int		str_to_arr(t_filler *info)
 {
-	info->arr_stock = ft_strsplit(info->stock, '\n');
-	if (info->arr_stock == NULL)
+	info->arr = ft_strsplit(info->stock, '\n');
+	if (info->arr == NULL)
 		return (ARR_MALLOC);
+	free(info->stock);
 	return (0);
 }
 
+/* use real indices instead of moving ptr and use the arr board
 void		reallign_board(t_filler *info)
 {
-	char	**str_add;
+	char	**arr;
 	int		len;
 
-	str_add = info->arr_stock;
-	while (*str_add != NULL && ft_strcmp(*str_add, "000 ") != 0)
-		str_add++;
-	len = ft_strlen(*str_add);
-	while (ft_strcmp(*str_add, "Piece ") != 0)
+	arr = info->arr;
+	while (*arr != NULL && ft_strcmp(*arr, "000 ") != 0)
+		arr++;
+	len = ft_strlen(*arr);
+	while (ft_strcmp(*arr, "Piece ") != 0)
 	{
-		ft_memmove(*str_add, (*str_add) + 4, len - 4);
-		str_add++;
+		ft_memmove(*arr, (*arr) + 4, len - 4);
+		arr++;
 	}
 }
 
+*/
 void	init_ptrs(t_filler *info)
 {
-	char	**arr;
+	int	i;
 
-	arr = info->arr_stock;
-	while (*str_add != NULL && ft_strcmp(*str_add, "000 ") != 0)
-		str_add++;
-	info->board = str_add;
-	while (*str_add != NULL && ft_strcmp(*str_add, "Piece ") != 0)
-		str_add++;
-	info->piece = str_add + 1;
+	i = 0;
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "000 ", 4) != 0)
+		i++;
+	info->board = info->arr + i;
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
+		i++;
+	info->piece = info->arr + 1 + i;
 }
 
+/*
 int		get_board_size()
 {
 }
@@ -161,6 +136,33 @@ int		get_best_pos()
 int		print_best_pos()
 {
 }
+*/
+
+void	print_alloc(t_filler *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->arr[i] != NULL)
+	{
+		printf("%s\n", info->arr[i]);
+		i++;
+	}
+	i = 0;
+	printf("|||||||||\n");
+	while (ft_strstr(info->board[i], "Piece") == NULL)
+	{
+		printf("%s\n", info->board[i]);
+		i++;
+	}
+	i = 0;
+	printf("|||||||||\n");
+	while (info->piece[i] != NULL)
+	{
+		printf("%s\n", info->piece[i]);
+		i++;
+	}
+}
 
 int		parse(t_filler *info, int turn)
 {
@@ -172,6 +174,15 @@ int		parse(t_filler *info, int turn)
 	ret = str_to_arr(info);
 	if (ret == ARR_ERROR)
 		return (ERROR);
+	init_ptrs(info);
+	//reallign_board(info);
 	print_alloc(info);
+	turn++;
+	//get_board_size();
+	//get_piece_rsize();
+	//get_piece_offset();
+	//fill_heatmap();
+	//get_best_pos();
+	//print_best_pos();
 	return (0);
 }

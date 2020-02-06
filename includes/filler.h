@@ -22,6 +22,10 @@
 #define NL_OK 118
 #define MALLOC_OK 117
 #define MALLOC_FAIL 116
+#define STR_ERROR 115
+#define ARR_MALLOC 114
+#define ARR_ERROR 113
+#define ERROR 112
 
 typedef struct		s_filler
 {

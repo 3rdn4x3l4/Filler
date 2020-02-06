@@ -1,19 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
-rm -f output.txt
-make
-mv alagache.filler resources/players/
-echo "GAME IN PROGRESS"
-./resources/filler_vm -f resources/maps/map01 -p1 resources/players/alagache.filler -p2 resources/players/alagache.filler > game_res
-echo "GAME DONE"
-chmod +r output.txt
-cat -e output.txt
-#
-#read -e -p "player1 should be ?
-#" PLYR1
-#read -e -p "player2 should be ?
-#" PLYR2
-#read -e -p "map to play on is ?
-#" map
-#
-#./filler_vm -f "$map" -p1 "$PLYR1" -p2 "$PLYR2" > game_res
+rm result
+make clean all
+if [ $? -eq 0 ];then
+	./alagache.filler < test > result
+	cat result | less
+fi
+
+##rm -f output.txt
+##make
+##mv alagache.filler resources/players/
+##echo "GAME IN PROGRESS"
+##./resources/filler_vm -f resources/maps/map01 -p1 resources/players/alagache.filler -p2 resources/players/alagache.filler > game_res
+##echo "GAME DONE"
+##chmod +r output.txt
+##cat -e output.txt
+###
+###read -e -p "player1 should be ?
+###" PLYR1
+###read -e -p "player2 should be ?
+###" PLYR2
+###read -e -p "map to play on is ?
+###" map
+###
+###./filler_vm -f "$map" -p1 "$PLYR1" -p2 "$PLYR2" > game_res
