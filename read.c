@@ -46,38 +46,6 @@
 //	return (PIECE_OK);
 //}
 
-//int		check_arr(t_filler *info, int turn)
-//{
-//	int ret;
-//
-//	ret = player_info(info, turn);
-//	if (ret == NO_PLAYER)
-//		return (ret);
-//	info->pos = ft_strstr(info->stock, "Piece ");
-//	ret = piece_info(info);
-//	if (ret == PIECE_ERROR)
-//		return (ret);
-//	info->pos = ft_strstr(info->stock, "Plateau ");
-//	ret = board_info(info);
-//	if (ret == BOARD_ERROR)
-//		return (ret);
-//	return (STR_OK);
-//}
-
-//void		reallign_board(t_filler *info)
-//{
-//	char	**str_add;
-//
-//	str_add = info->arr_stock;
-//	while (*str_add != NULL && ft_strstr(*str_add, "000 ") == NULL)
-//		str_add++;
-//	while ((*str_add)[3] == ' ')
-//	{
-//		ft_memmove(*str_add, (*str_add) + 4, ft_strlen(*str_add) - 4);
-//		str_add++;
-//	}
-//}
-
 //void	print_alloc(t_filler *info)
 //{
 //	int	i;
@@ -107,14 +75,6 @@
 //	ft_dprintf(info->fd_debug, "line_p = %i\ncolumn_p = %i\n", info->line_p, info->column_p);
 //}
 
-int		str_to_arr(t_filler *info)
-{
-	info->arr_stock = ft_strsplit(info->stock, '\n');
-	if (info->arr_stock == NULL)
-		return (ARR_MALLOC);
-	return (0);
-}
-
 int		read_to_str(t_filler *info)
 {
 	char	*str;
@@ -139,6 +99,67 @@ int		read_to_str(t_filler *info)
 	}
 	info->stock = str;
 	return(0);
+}
+
+int		str_to_arr(t_filler *info)
+{
+	info->arr_stock = ft_strsplit(info->stock, '\n');
+	if (info->arr_stock == NULL)
+		return (ARR_MALLOC);
+	return (0);
+}
+
+void		reallign_board(t_filler *info)
+{
+	char	**str_add;
+	int		len;
+
+	str_add = info->arr_stock;
+	while (*str_add != NULL && ft_strcmp(*str_add, "000 ") != 0)
+		str_add++;
+	len = ft_strlen(*str_add);
+	while (ft_strcmp(*str_add, "Piece ") != 0)
+	{
+		ft_memmove(*str_add, (*str_add) + 4, len - 4);
+		str_add++;
+	}
+}
+
+void	init_ptrs(t_filler *info)
+{
+	char	**arr;
+
+	arr = info->arr_stock;
+	while (*str_add != NULL && ft_strcmp(*str_add, "000 ") != 0)
+		str_add++;
+	info->board = str_add;
+	while (*str_add != NULL && ft_strcmp(*str_add, "Piece ") != 0)
+		str_add++;
+	info->piece = str_add + 1;
+}
+
+int		get_board_size()
+{
+}
+
+int		get_piece_rsize()
+{
+}
+
+int		get_piece_offset()
+{
+}
+
+void	fill_heatmap()
+{
+}
+
+int		get_best_pos()
+{
+}
+
+int		print_best_pos()
+{
 }
 
 int		parse(t_filler *info, int turn)
