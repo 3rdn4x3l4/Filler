@@ -13,10 +13,10 @@ LIBHEADER= $(LIBDIR)/includes
 
 CC= clang
 
-SRCS= main.c\
-	  read.c\
-	  #tools.c\
-	  #clean.c\
+SRCS=	main.c\
+		read.c\
+		tools.c\
+		#clean.c\
 
 OBJDIR= obj
 
@@ -33,7 +33,7 @@ obj/%.o : srcs/%.c
 	$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBHEADER) -o $@ -c $<
 
 $(LIBA): .FORCE
-	$(MAKE) -C libft
+	$(MAKE) -s -C libft
 
 .FORCE:
 
@@ -54,4 +54,4 @@ fclean:
 re: fclean all
 
 .PHONY: all clean fclean re .FORCE
-.SILENT: all clean fclean re .FORCE $(NAME) $(OBJ)
+.SILENT: all clean fclean re .FORCE $(NAME) $(OBJ) $(LIBA)

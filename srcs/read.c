@@ -6,46 +6,6 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-//int		player_info(t_filler *info, int turn)
-//{
-//	if (turn != 0)
-//		return (PLAYER_OK);
-//	if (ft_strnstr(info->stock, "$$$ exec p", 10) == NULL)
-//		return (NO_PLAYER);
-//	info->piece_id = (info->stock[10] == 1) ? "Oo" : "Xx";
-//	info->piece_id_op = (ft_strcmp(info->piece_id, "Oo") == 0) ? "Xx" : "Oo";
-//	return (PLAYER_OK);
-//}
-
-//int		board_info(t_filler *info)
-//{
-//	//int ret;
-//
-//	if (info->pos == NULL)
-//		return (BOARD_ERROR);
-//	if (can_fetch_nbr(info->pos) == FALSE)
-//		return (BOARD_ERROR);
-//	info->line_b = atoi(info->pos + 7);
-//	info->column_b = atoi(ft_strchr(info->pos + 8, ' '));
-//	//ret = board_content(info);
-//	//if (ret == BOARD_ERROR)
-//	//	return (BOARD_ERROR);
-//	return (BOARD_OK);
-//}
-
-//int		piece_info(t_filler *info)
-//{
-//	if (info->pos == NULL)
-//		return (PIECE_ERROR);
-//	if (can_fetch_nbr(info->pos) == FALSE)
-//		return (PIECE_ERROR);
-//	info->line_p = atoi(info->pos + 6);
-//	info->column_p = atoi(ft_strchr(info->pos + 7, ' '));
-//	//if (piece_content(info) == PIECE_ERROR)
-//	//	return (PIECE_ERROR);
-//	return (PIECE_OK);
-//}
-
 int		read_to_str(t_filler *info)
 {
 	char	*str;
@@ -81,50 +41,255 @@ int		str_to_arr(t_filler *info)
 	return (0);
 }
 
-/* use real indices instead of moving ptr and use the arr board
-void		reallign_board(t_filler *info)
+void	get_player_id(t_filler *info)
 {
-	char	**arr;
-	int		len;
-
-	arr = info->arr;
-	while (*arr != NULL && ft_strcmp(*arr, "000 ") != 0)
-		arr++;
-	len = ft_strlen(*arr);
-	while (ft_strcmp(*arr, "Piece ") != 0)
+	if (info->arr[0][10] == '1')
 	{
-		ft_memmove(*arr, (*arr) + 4, len - 4);
-		arr++;
+		info->id[0] = 'O';
+		info->id[1] = 'o';
+		info->id_op[0] = 'X';
+		info->id_op[1] = 'x';
+	}
+	else
+	{
+		info->id_op[0] = 'O';
+		info->id_op[1] = 'o';
+		info->id[0] = 'X';
+		info->id[1] = 'x';
 	}
 }
 
-*/
-void	init_ptrs(t_filler *info)
+int		init_arrs(t_filler *info)
 {
 	int	i;
 
 	i = 0;
 	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
 		i++;
-	info->board = ft_strsplit();
+	info->board = ft_strsplit(info->arr[i], ' ');
+	if (info->board == NULL)
+		return (ARR1);
 	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
 		i++;
-	info->piece = ft_strsplit();
+	info->piece = ft_strsplit(info->arr[i], ' ');
+	if (info->piece == NULL)
+		return (ARR2);
+	return (0);
+}
+
+int		get_arrs(t_filler *info, int turn)
+{
+	int		ret;
+
+	ret = read_to_str(info);
+	if (ret == STR_ERROR || ret == READ_ERROR)
+		return (ERROR);
+	ret = str_to_arr(info);
+	if (ret == ARR_ERROR)
+		return (ERROR);
+	if (turn == 0)
+		get_player_id(info);
+	ret = init_arrs(info);
+	if (ret == ARR1)
+		return (ERROR);
+	else if (ret == ARR2)
+	{
+		free(info->board);
+		return (ERROR);
+	}
+	return (0);
+}
+
+void	get_sizes(char **board, char **piece, t_filler *info)
+{
+	info->b_line = ft_atoi(board[1]);
+	info->b_column = ft_atoi(board[2]);
+	info->p_line = ft_atoi(piece[1]);
+	info->p_column = ft_atoi(piece[2]);
+}
+
+void	get_nbrs(t_filler *info)
+{
+	get_sizes(info->board, info->piece, info);
+	free_arr((void**)info->board);
+	free_arr((void**)info->piece);
+}
+
+void	init_ptrs(t_filler *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "000 ", 4) != 0)
+		i++;
+	info->board = &(info->arr[i]);
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
+		i++;
+	info->piece = &(info->arr[i + 1]);
+	//ft_printf("|init_ptrs|\n%s\n%s\n", *(info->board), *(info->piece));
+}
+
+int		create_arrs(t_filler *info)
+{
+	info->map = (short**)malloc(sizeof(short*) * (info->b_line + 1));
+	if (info->map == NULL)
+		return (ERR_MAP);
+	info->shape = (short**)malloc(sizeof(short*) * (info->p_line + 1));
+	if (info->shape == NULL)
+	{
+		free(info->map);
+		return (ERR_SHAPE);
+	}
+	ft_memset(info->map, '\0', sizeof(short*) * (info->b_line + 1));
+	ft_memset(info->shape, '\0', sizeof(short*) * (info->p_line + 1));
+	return (0);
+}
+
+void	print_map(t_filler *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < info->b_line)
+	{
+		j = 0;
+		while (j < info->b_column)
+		{
+			printf("|%hi|", info->map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+void	fill_map(char *str, short *line, const int size, t_filler *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (ft_strchr(info->id_op, str[i]) != NULL)
+			line[i] = -2;
+		else if (ft_strchr(info->id, str[i]) != NULL)
+			line[i] = -1;
+		i++;
+	}
+}
+
+int		fill_map_arr(t_filler *info)
+{
+	int		i;
+	int		size;
+
+	i = 0;
+	size = sizeof(short) * (info->b_column + 1);
+	while (i < info->b_line)
+	{
+		info->map[i] = (short*)malloc(size);
+		if (info->map[i] == NULL)
+			return (ERROR);
+		ft_memset(info->map[i], '\0', size);
+		fill_map(info->board[i] + 4, info->map[i], info->b_column, info);
+		i++;
+	}
+	print_map(info);
+	return (0);
+}
+//shape
+void	print_shape(t_filler *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < info->p_line)
+	{
+		j = 0;
+		while (j < info->p_column)
+		{
+			printf("|%hi|", info->shape[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+void	fill_shape(char *str, short *line, const int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (str[i] == '.')
+			line[i] = 0;
+		else
+			line[i] = -3;
+		i++;
+	}
+}
+
+int		fill_shape_arr(t_filler *info)
+{
+	int		i;
+	int		size;
+		
+	i = 0;
+	size = sizeof(short) * (info->p_column + 1);
+	while (i < info->p_line)
+	{
+		info->shape[i] = (short*)malloc(size);
+		if (info->shape[i] == NULL)
+			return (ERROR);
+		ft_memset(info->shape[i], '\0', size);
+		fill_shape(info->piece[i], info->shape[i], info->p_column);
+		i++;
+	}
+	print_shape(info);
+	return (0);
+}
+void	print_alloc(t_filler *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->arr[i] != NULL)
+	{
+		//printf("%s\n", info->arr[i]);
+		i++;
+	}
+	//printf("|||||\n");
+	//printf("lne = %i\nCol = %i\n", info->b_line, info->b_column);
+	//printf("lne = %i\nCol = %i\n", info->p_line, info->p_column);
+}
+
+int		parse(t_filler *info, int turn)
+{
+	int		ret;
+
+	ret = get_arrs(info, turn);
+	if (ret == ERROR)
+		return (ERROR);
+	get_nbrs(info);
+	init_ptrs(info);
+	create_arrs(info);
+	fill_map_arr(info);
+	fill_shape_arr(info);
+	print_alloc(info);
+	free_arr((void**)info->map);
+	free_arr((void**)info->shape);
+	turn++;
+	//fill_heatmap();
+	//get_best_pos();
+	//print_best_pos();
+	return (0);
 }
 
 /*
-int		get_board_size()
-{
-}
-
-int		get_piece_rsize()
-{
-}
-
-int		get_piece_offset()
-{
-}
-
 void	fill_heatmap()
 {
 }
@@ -138,51 +303,3 @@ int		print_best_pos()
 }
 */
 
-void	print_alloc(t_filler *info)
-{
-	int	i;
-
-	i = 0;
-	while (info->arr[i] != NULL)
-	{
-		printf("%s\n", info->arr[i]);
-		i++;
-	}
-	i = 0;
-	printf("|||||||||\n");
-	while (ft_strstr(info->board[i], "Piece") == NULL)
-	{
-		printf("%s\n", info->board[i]);
-		i++;
-	}
-	i = 0;
-	printf("|||||||||\n");
-	while (info->piece[i] != NULL)
-	{
-		printf("%s\n", info->piece[i]);
-		i++;
-	}
-}
-
-int		parse(t_filler *info, int turn)
-{
-	int		ret;
-
-	ret = read_to_str(info);
-	if (ret == STR_ERROR || ret == READ_ERROR)
-		return (ERROR);
-	ret = str_to_arr(info);
-	if (ret == ARR_ERROR)
-		return (ERROR);
-	init_ptrs(info);
-	//reallign_board(info);
-	print_alloc(info);
-	turn++;
-	//get_board_size();
-	//get_piece_rsize();
-	//get_piece_offset();
-	//fill_heatmap();
-	//get_best_pos();
-	//print_best_pos();
-	return (0);
-}

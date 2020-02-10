@@ -4,50 +4,6 @@
 #include "ft_printf.h"
 #include <fcntl.h>
 
-
-void free_alloc(t_filler *info)
-{
-	size_t	i;
-
-	i = 0;
-	while (info->arr[i])
-	{
-		free(info->arr[i]);
-		i++;
-	}
-	free(info->arr);
-}
-
-/*
-int			main(void)
-{
-	int			ret;
-	char		turn;
-	t_filler	info;
-
-	ft_bzero(&info, sizeof(info));
-	info.fd_debug = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
-	turn = 0;
-	while (1)
-	{
-		ret = parse(&info, turn);
-		turn++;
-		if (ret != 0)
-		{
-			free_alloc(&info);
-			return (EXIT_FAILURE);
-		}
-		//find_move(info);
-		//play_move(info);
-		free_alloc(&info);
-		close(info.fd_debug);
-		return (EXIT_SUCCESS);
-	}
-	return (EXIT_SUCCESS);
-}
-*/
-
-
 int			main(void)
 {
 	int			ret;
@@ -62,7 +18,7 @@ int			main(void)
 		if (ret != 0)
 			return (EXIT_FAILURE);
 		//play_move(&info);
-		free_alloc(&info);
+		free_arr((void**)info.arr);
 		turn++;
 		return (EXIT_SUCCESS);
 	}

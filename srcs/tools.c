@@ -6,34 +6,17 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-int	can_fetch_nbr(char const *const str)
+
+// type 1 is char type 2 is short
+void	free_arr(void **arr)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (str[i] && (ft_isalpha(str[i]) == TRUE || str[i] == ' '))
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
 		i++;
-	while (str[i] && ft_isdigit(str[i]) == TRUE)
-		i++;
-	if (str[i] && str[i] == ' ')
-		i++;
-	while (str[i] && ft_isdigit(str[i]) == TRUE)
-		i++;
-	if (str[i] && str + i == ft_strchr(str, ':'))
-		return (TRUE);
-	return (FALSE);
-}
-
-int	is_map(char c)
-{
-	if (ft_strchr(".XxOo", c) == NULL)
-		return (FALSE);
-	return (TRUE);
-}
-
-int	is_piece(char c)
-{
-	if (ft_strchr(".*", c) == NULL)
-		return (FALSE);
-	return (TRUE);
+	}
+	free(arr);
 }
