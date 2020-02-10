@@ -104,12 +104,12 @@ void	init_ptrs(t_filler *info)
 	int	i;
 
 	i = 0;
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "000 ", 4) != 0)
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
 		i++;
-	info->board = info->arr + i;
+	info->board = ft_strsplit();
 	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
 		i++;
-	info->piece = info->arr + 1 + i;
+	info->piece = ft_strsplit();
 }
 
 /*

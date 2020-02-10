@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "filler.h"
-#include "libft/includes/libft.h"
-#include "libft/includes/ft_printf.h"
+#include "libft.h"
+#include "ft_printf.h"
 
 int	can_fetch_nbr(char const *const str)
 {

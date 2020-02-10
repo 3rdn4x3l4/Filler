@@ -49,3 +49,10 @@ fill heatmap
 get best pos
 
 print best pos (piece_line - offset_h piece_col - offset_v)
+
+
+################################################################################
+every . becomes a 0
+opponent is -2
+player is -1
+needs at least short** arr(); because 100x100 map means 10000 heat score on diagonals
