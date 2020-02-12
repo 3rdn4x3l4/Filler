@@ -6,7 +6,6 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-
 // type 1 is char type 2 is short
 void	free_arr(void **arr)
 {

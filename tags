@@ -3,27 +3,29 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ARG_H	libft/includes/arg.h	14;"	d
-ARR1	includes/filler.h	16;"	d
-ARR2	includes/filler.h	17;"	d
-ARR_ERROR	includes/filler.h	13;"	d
-ARR_MALLOC	includes/filler.h	12;"	d
-BUFF_SIZE	includes/filler.h	9;"	d
-BUFF_SIZE	libft/includes/get_next_line.h	16;"	d
-ERROR	includes/filler.h	15;"	d
-ERR_MAP	includes/filler.h	18;"	d
-ERR_SHAPE	includes/filler.h	19;"	d
-FALSE	libft/includes/libft.h	20;"	d
-FILLER_H	includes/filler.h	2;"	d
-FLAGSMAX	libft/includes/arg.h	16;"	d
-FT_PRINTF_H	libft/includes/ft_printf.h	14;"	d
-GET_NEXT_LINE_H	libft/includes/get_next_line.h	14;"	d
-LIBFT_H	libft/includes/libft.h	14;"	d
-MAX_LEN	includes/filler.h	10;"	d
-READ_ERROR	includes/filler.h	11;"	d
-STR_ERROR	includes/filler.h	14;"	d
-TRUE	libft/includes/libft.h	19;"	d
+!_TAG_PROGRAM_VERSION	5.8	//
+ARG_H	libft/includes/arg.h	/^# define ARG_H$/;"	d
+ARR1	includes/filler.h	/^# define ARR1 /;"	d
+ARR2	includes/filler.h	/^# define ARR2 /;"	d
+ARR_ERROR	includes/filler.h	/^# define ARR_ERROR /;"	d
+ARR_MALLOC	includes/filler.h	/^# define ARR_MALLOC /;"	d
+BUFF_SIZE	includes/filler.h	/^# define BUFF_SIZE /;"	d
+BUFF_SIZE	libft/includes/get_next_line.h	/^# define BUFF_SIZE /;"	d
+ERROR	includes/filler.h	/^# define ERROR /;"	d
+ERR_MAP	includes/filler.h	/^# define ERR_MAP /;"	d
+ERR_SHAPE	includes/filler.h	/^# define ERR_SHAPE /;"	d
+FALSE	libft/includes/libft.h	/^# define FALSE /;"	d
+FILLER_H	includes/filler.h	/^# define FILLER_H$/;"	d
+FLAGSMAX	libft/includes/arg.h	/^# define FLAGSMAX /;"	d
+FT_PRINTF_H	libft/includes/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
+GET_NEXT_LINE_H	libft/includes/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
+LIBFT_H	libft/includes/libft.h	/^# define LIBFT_H$/;"	d
+MAX_LEN	includes/filler.h	/^# define MAX_LEN /;"	d
+MY_VALUE	includes/filler.h	/^# define MY_VALUE /;"	d
+OP_VALUE	includes/filler.h	/^# define OP_VALUE /;"	d
+READ_ERROR	includes/filler.h	/^# define READ_ERROR /;"	d
+STR_ERROR	includes/filler.h	/^# define STR_ERROR /;"	d
+TRUE	libft/includes/libft.h	/^# define TRUE /;"	d
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
@@ -62,8 +64,10 @@ fd	libft/includes/arg.h	/^	int		fd;$/;"	m	struct:s_conv_info
 fd	libft/includes/get_next_line.h	/^	int			fd;$/;"	m	struct:s_data
 fill_arr	libft/srcs/func_selector.c	/^void			fill_arr(t_conv_func *arr)$/;"	f
 fill_d_tabs	libft/srcs/double_tools.c	/^void	fill_d_tabs(t_d_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
+fill_heatmap	srcs/read.c	/^void	fill_heatmap(t_filler *info)$/;"	f
 fill_ld_tabs	libft/srcs/ldouble_tools.c	/^void	fill_ld_tabs(t_ld_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **line, int old_chars)$/;"	f
+fill_line	srcs/read.c	/^void	fill_line(short *line, int start, int end, int direction)$/;"	f
 fill_map	srcs/read.c	/^void	fill_map(char *str, short *line, const int size, t_filler *info)$/;"	f
 fill_map_arr	srcs/read.c	/^int		fill_map_arr(t_filler *info)$/;"	f
 fill_shape	srcs/read.c	/^void	fill_shape(char *str, short *line, const int size)$/;"	f

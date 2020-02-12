@@ -1,3 +1,8 @@
 #!/bin/sh
 
-ctags -R --language-force=C
+if [ 'ps | grep iTerm | grep -v grep' != "" ];
+then
+	~/.brew/Cellar/ctags/5.8_1/bin/ctags -R --language-force=C
+else
+	ctags -R --language-force=C
+fi

@@ -108,6 +108,7 @@ void	get_sizes(char **board, char **piece, t_filler *info)
 	info->p_column = ft_atoi(piece[2]);
 }
 
+/* get the sizes of the board and piece using board and piece arrays and free the arrays afterward*/
 void	get_nbrs(t_filler *info)
 {
 	get_sizes(info->board, info->piece, info);
@@ -172,9 +173,9 @@ void	fill_map(char *str, short *line, const int size, t_filler *info)
 	while (i < size)
 	{
 		if (ft_strchr(info->id_op, str[i]) != NULL)
-			line[i] = -2;
+			line[i] = OP_VALUE;
 		else if (ft_strchr(info->id, str[i]) != NULL)
-			line[i] = -1;
+			line[i] = MY_VALUE;
 		i++;
 	}
 }
@@ -267,6 +268,39 @@ void	print_alloc(t_filler *info)
 	//printf("lne = %i\nCol = %i\n", info->p_line, info->p_column);
 }
 
+void	fill_line(short *line, int start, int end, int direction)
+{
+	int	i;
+	int	value;
+
+	i = start;
+	value = 1;
+	while (i != end)
+	{
+		//if line[i] == MY_VALUE 
+			//value++;
+		//else if line[i] == OP_VALUE
+			//value = 1;
+		//else
+		{
+			//if line[i] == 0
+			{
+				//line[i] = value
+				//value++
+			}
+			//else if value < line[i]
+				//line[i] = value;
+		}
+		i += direction;
+	}
+}
+
+/* fill_heatmap calls fill_line/fill_column to add increasing value from the positions of a char c*/
+void	fill_heatmap(t_filler *info)
+{
+
+}
+
 int		parse(t_filler *info, int turn)
 {
 	int		ret;
@@ -290,10 +324,6 @@ int		parse(t_filler *info, int turn)
 }
 
 /*
-void	fill_heatmap()
-{
-}
-
 int		get_best_pos()
 {
 }

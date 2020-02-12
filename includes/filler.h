@@ -8,6 +8,8 @@
 
 # define BUFF_SIZE 100
 # define MAX_LEN 20504
+# define OP_VALUE -2
+# define MY_VALUE -1
 # define READ_ERROR 128
 # define ARR_MALLOC 128
 # define ARR_ERROR 128
