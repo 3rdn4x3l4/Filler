@@ -168,10 +168,15 @@ void	print_map(t_filler *info)
 void	fill_map(char *str, short *line, const int size, t_filler *info)
 {
 	int	i;
+	char	*op;
 
+	op = info->id_op;
 	i = 0;
 	while (i < size)
 	{
+		/* pl_charset*/
+		/* line[i] = (str[i] == op[0] || str[i] == op[1] ? OP_VALUE : MY_VALUE) */
+		/* instead of if else if use this ternary operator */
 		if (ft_strchr(info->id_op, str[i]) != NULL)
 			line[i] = OP_VALUE;
 		else if (ft_strchr(info->id, str[i]) != NULL)
@@ -268,6 +273,7 @@ void	print_alloc(t_filler *info)
 	//printf("lne = %i\nCol = %i\n", info->p_line, info->p_column);
 }
 
+/* fill the line of with values(incremental from the Opponent  from start to end,  */
 void	fill_line(short *line, int start, int end, int direction)
 {
 	int	i;
@@ -298,6 +304,7 @@ void	fill_line(short *line, int start, int end, int direction)
 /* fill_heatmap calls fill_line/fill_column to add increasing value from the positions of a char c*/
 void	fill_heatmap(t_filler *info)
 {
+	circle_op();
 
 }
 
