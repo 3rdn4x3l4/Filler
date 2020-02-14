@@ -157,9 +157,10 @@ void	print_map(t_filler *info)
 		j = 0;
 		while (j < info->b_column)
 		{
-			printf("|%hi|", info->map[i][j]);
+			printf("%6hi", info->map[i][j]);
 			j++;
 		}
+		printf("\n");
 		printf("\n");
 		i++;
 	}
@@ -341,7 +342,7 @@ void	fill_heatmap(t_filler *info)
 		to_find = new_value;
 		new_value++;
 	}
-	//print_map(info);
+	print_map(info);
 }
 
 
