@@ -174,9 +174,6 @@ void	fill_map(char *str, short *line, const int size, t_filler *info)
 	i = 0;
 	while (i < size)
 	{
-		/* pl_charset*/
-		/* line[i] = (str[i] == op[0] || str[i] == op[1] ? OP_VALUE : MY_VALUE) */
-		/* instead of if else if use this ternary operator */
 		if (ft_strchr(info->id_op, str[i]) != NULL)
 			line[i] = OP_VALUE;
 		else if (ft_strchr(info->id, str[i]) != NULL)
@@ -201,9 +198,10 @@ int		fill_map_arr(t_filler *info)
 		fill_map(info->board[i] + 4, info->map[i], info->b_column, info);
 		i++;
 	}
-	print_map(info);
+	//print_map(info);
 	return (0);
 }
+
 //shape
 void	print_shape(t_filler *info)
 {
@@ -255,58 +253,97 @@ int		fill_shape_arr(t_filler *info)
 		fill_shape(info->piece[i], info->shape[i], info->p_column);
 		i++;
 	}
-	print_shape(info);
+	//print_shape(info);
 	return (0);
 }
-void	print_alloc(t_filler *info)
+
+int		has_zero(t_filler *info)
 {
-	int	i;
+	int lne;
+	int col;
+	int	lne_max;
+	int	col_max;
 
-	i = 0;
-	while (info->arr[i] != NULL)
+	lne_max = info->b_line;
+	col_max = info->b_column;
+	lne = 0;
+	while (lne < lne_max)
 	{
-		//printf("%s\n", info->arr[i]);
-		i++;
-	}
-	//printf("|||||\n");
-	//printf("lne = %i\nCol = %i\n", info->b_line, info->b_column);
-	//printf("lne = %i\nCol = %i\n", info->p_line, info->p_column);
-}
-
-/* fill the line of with values(incremental from the Opponent  from start to end,  */
-void	fill_line(short *line, int start, int end, int direction)
-{
-	int	i;
-	int	value;
-
-	i = start;
-	value = 1;
-	while (i != end)
-	{
-		//if line[i] == MY_VALUE 
-			//value++;
-		//else if line[i] == OP_VALUE
-			//value = 1;
-		//else
+		col = 0;
+		while (col < col_max)
 		{
-			//if line[i] == 0
-			{
-				//line[i] = value
-				//value++
-			}
-			//else if value < line[i]
-				//line[i] = value;
+			if (info->map[lne][col] == 0)
+				return (TRUE);
+			col++;
 		}
-		i += direction;
+		lne++;
+	}
+	return (FALSE);
+}
+/*
+** take short in an arr and test it's neighbours 
+*/
+void	fill_around(const short new_value, t_filler *info, int lne, int col)
+{
+	short	**arr;
+
+	arr = info->map;
+	if (lne - 1 >= 0 && arr[lne - 1][col] == 0)
+		arr[lne - 1][col] = new_value;
+	if (col + 1 < info->b_column && arr[lne][col + 1] == 0)
+		arr[lne][col + 1] = new_value;
+	if (lne + 1 < info->b_line && arr[lne + 1][col] == 0)
+		arr[lne + 1][col] = new_value;
+	if (col - 1 >= 0 && arr[lne][col - 1] == 0)
+		arr[lne][col - 1] = new_value;
+}
+
+/* 
+** it take as input a short** and assumes it is populated by 0/-1/-2
+** finds any to_find value next to a 0 (N_E_S_W)
+** and assign to this 0 the new value
+** to_find is at first OP_value and then is the new_value from previous call
+** new_value is 1 at first (> 0 obviously) then is new_value + 1;
+*/
+void	one_pass_arr(t_filler *info, const short to_find, const short new_value)
+{
+	int lne;
+	int col;
+	int	lne_max;
+	int	col_max;
+
+	lne_max = info->b_line;
+	col_max = info->b_column;
+	lne = 0;
+	while (lne < lne_max)
+	{
+		col = 0;
+		while (col < col_max)
+		{
+			if (info->map[lne][col] == to_find)
+				fill_around(new_value, info, lne, col);
+			col++;
+		}
+		lne++;
 	}
 }
 
-/* fill_heatmap calls fill_line/fill_column to add increasing value from the positions of a char c*/
 void	fill_heatmap(t_filler *info)
 {
-	circle_op();
+	short	new_value;
+	short	to_find;
 
+	new_value = 1;
+	to_find = OP_VALUE;
+	while (has_zero(info) == TRUE)
+	{
+		one_pass_arr(info, to_find, new_value);
+		to_find = new_value;
+		new_value++;
+	}
+	//print_map(info);
 }
+
 
 int		parse(t_filler *info, int turn)
 {
@@ -320,11 +357,10 @@ int		parse(t_filler *info, int turn)
 	create_arrs(info);
 	fill_map_arr(info);
 	fill_shape_arr(info);
-	print_alloc(info);
+	fill_heatmap(info);
 	free_arr((void**)info->map);
 	free_arr((void**)info->shape);
 	turn++;
-	//fill_heatmap();
 	//get_best_pos();
 	//print_best_pos();
 	return (0);

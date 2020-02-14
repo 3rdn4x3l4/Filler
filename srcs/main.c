@@ -20,6 +20,9 @@ int			main(void)
 		//play_move(&info);
 		free_arr((void**)info.arr);
 		turn++;
+		while (1)
+		{
+		}
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);

@@ -26,6 +26,7 @@ OP_VALUE	includes/filler.h	/^# define OP_VALUE /;"	d
 READ_ERROR	includes/filler.h	/^# define READ_ERROR /;"	d
 STR_ERROR	includes/filler.h	/^# define STR_ERROR /;"	d
 TRUE	libft/includes/libft.h	/^# define TRUE /;"	d
+__apple_names__DWARF	obj/main.o	/^/;"	v
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
@@ -62,12 +63,12 @@ double_rounding	libft/srcs/double_tools.c	/^void	double_rounding(t_d_arrs *a_ptr
 e	libft/includes/arg.h	/^	unsigned short		e;$/;"	m	struct:s_double
 fd	libft/includes/arg.h	/^	int		fd;$/;"	m	struct:s_conv_info
 fd	libft/includes/get_next_line.h	/^	int			fd;$/;"	m	struct:s_data
+fill_around	srcs/read.c	/^void	fill_around(const short new_value, t_filler *info, int lne, int col)$/;"	f
 fill_arr	libft/srcs/func_selector.c	/^void			fill_arr(t_conv_func *arr)$/;"	f
 fill_d_tabs	libft/srcs/double_tools.c	/^void	fill_d_tabs(t_d_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_heatmap	srcs/read.c	/^void	fill_heatmap(t_filler *info)$/;"	f
 fill_ld_tabs	libft/srcs/ldouble_tools.c	/^void	fill_ld_tabs(t_ld_arrs *a_ptr, t_s_e_m *dble_ptr, t_conv_id *s_ptr)$/;"	f
 fill_line	libft/srcs/get_next_line.c	/^char	*fill_line(t_data *current, char **line, int old_chars)$/;"	f
-fill_line	srcs/read.c	/^void	fill_line(short *line, int start, int end, int direction)$/;"	f
 fill_map	srcs/read.c	/^void	fill_map(char *str, short *line, const int size, t_filler *info)$/;"	f
 fill_map_arr	srcs/read.c	/^int		fill_map_arr(t_filler *info)$/;"	f
 fill_shape	srcs/read.c	/^void	fill_shape(char *str, short *line, const int size)$/;"	f
@@ -178,6 +179,7 @@ get_next_line	libft/srcs/get_next_line.c	/^int		get_next_line(int fd, char **lin
 get_player_id	srcs/read.c	/^void	get_player_id(t_filler *info)$/;"	f
 get_sizes	srcs/read.c	/^void	get_sizes(char **board, char **piece, t_filler *info)$/;"	f
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_ptr, va_list *arg_ptr,$/;"	f
+has_zero	srcs/read.c	/^int		has_zero(t_filler *info)$/;"	f
 id	includes/filler.h	/^	char	id[2];$/;"	m	struct:s_filler
 id_op	includes/filler.h	/^	char	id_op[2];$/;"	m	struct:s_filler
 init	libft/srcs/get_next_line.c	/^t_data	*init(int fd, t_list **alst)$/;"	f
@@ -229,6 +231,7 @@ no_flag_unsigned	libft/srcs/unsigned.c	/^void	no_flag_unsigned(t_conv_id *s_ptr,
 null_ptr	libft/srcs/address.c	/^int		null_ptr(t_conv_id *s_ptr, int len)$/;"	f
 null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int len)$/;"	f
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/;"	f
+one_pass_arr	srcs/read.c	/^void	one_pass_arr(t_filler *info, const short to_find, const short new_value)$/;"	f
 output	libft/includes/arg.h	/^	char	*output;$/;"	m	struct:s_conv_info
 p_column	includes/filler.h	/^	int		p_column;$/;"	m	struct:s_filler
 p_line	includes/filler.h	/^	int		p_line;$/;"	m	struct:s_filler
@@ -241,7 +244,6 @@ precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
 previous	libft/includes/libft.h	/^	struct s_double_linked_list *previous;$/;"	m	struct:s_double_linked_list	typeref:struct:s_double_linked_list::s_double_linked_list
-print_alloc	srcs/read.c	/^void	print_alloc(t_filler *info)$/;"	f
 print_map	srcs/read.c	/^void	print_map(t_filler *info)$/;"	f
 print_shape	srcs/read.c	/^void	print_shape(t_filler *info)$/;"	f
 read	libft/includes/arg.h	/^	int	read;$/;"	m	struct:s_point

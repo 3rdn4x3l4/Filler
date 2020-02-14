@@ -1,11 +1,10 @@
 #!/bin/sh
 
-rm mouli.out;
-make clean all
+make
 if [ $? -eq 0 ];then
-	#./alagache.filler < test > result
-	valgrind --log-file=mouli.out --track-origins=yes --leak-check=full -s ./alagache.filler < test > result;
-	cat -e result mouli.out | less;
+	#./alagache.filler < test_start > result
+	valgrind --log-file=mouli.out --track-origins=yes --leak-check=full -s ./alagache.filler < test_start > result;
+	cat -e result | less;
 fi
 
 ##rm -f output.txt
