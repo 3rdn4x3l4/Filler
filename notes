@@ -1,8 +1,18 @@
 ##TODO##
-HEATMAP
-propagate heatmap in arr:
-1) for each line containing OPnegative value
-	init heatmap value
 PIECE_POS
-find piece coord with least heatmap score
+||find piece coord with least heatmap score||
+
+try to put piece on map:
+find piece offset upper left hand side corner of piece.
+
+check various positions that verifiy:
+
+1 colision with SELF;
+0 colision with OPPO;
+MEANS placable
+
+
+add score on heatmap;
+and use lowest score
+
 PRINT_PIECE_POS
