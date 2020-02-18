@@ -6,6 +6,17 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+void	calc_collide(t_filler *info, int p_lne, int p_col, int m_lne, int m_col)
+{
+	int	map_line;
+	int	map_column;
+
+	map_line = p_lne + m_lne + info->lne_offset;
+	map_column = p_col + m_col + info->col_offset;
+	info->self += (info->map[map_line][map_column] == MY_VALUE ? 1 : 0);
+	info->oppo += (info->map[map_line][map_column] == OP_VALUE ? 1 : 0);
+}
+
 /*
 ** take a pointer to the main struct and a pair of coord
 ** assumes the pair of coord is OK
@@ -30,13 +41,17 @@ int		is_placable(t_filler *info, int lne, int col)
 			if (info->shape[l + info->lne_offset][c + info->col_offset]
 				== PIECE_VALUE)
 			{
-				info->self += (info->map[l + lne][c + col] == MY_VALUE ? 1 : 0);
-				info->oppo += (info->map[l + lne][c + col] == OP_VALUE ? 1 : 0);
+				calc_collide(info, l, c, lne, col);
+				//info->self += (info->map[l + lne][c + col] == MY_VALUE ? 1 : 0);
+				//info->oppo += (info->map[l + lne][c + col] == OP_VALUE ? 1 : 0);
 			}
+			printf("l = %i  c = %i   ", l, c);
+			printf("l + off = %i  c + off = %i\n", l + info->lne_offset, c + info->col_offset);
 			c++;
 		}
 		l++;
 	}
+	printf("Self = %i||Oppo = %i\n", info->self, info->oppo);
 	if (info->self == 1 && info->oppo == 0)
 		return (TRUE);
 	return (FALSE);

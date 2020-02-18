@@ -132,7 +132,7 @@ void	print_shape(t_filler *info)
 		j = 0;
 		while (j < info->p_column)
 		{
-			printf("|%hi|", info->shape[i][j]);
+			printf("%6hi", info->shape[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -330,14 +330,16 @@ int		parse(t_filler *info, int turn)
 	fill_shape_arr(info);
 	fill_heatmap(info);
 	get_piece_offset(info);
+	printf("\n");
+	print_shape(info);
 	//parsing done
 
-	ret = is_placable(info, 7, 0);
+	ret = is_placable(info, 7, 2);
 	if (ret == TRUE)
 		printf("TRUE\n");
 	else
 		printf("FALSE\n");
-	ret = get_heat_score(info, 7, 0);
+	ret = get_heat_score(info, 7, 2);
 	printf("HEATSCORE=|%i|\n", ret);
 	//get_best_pos();
 	//print_best_pos();
