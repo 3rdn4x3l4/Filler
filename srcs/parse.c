@@ -332,12 +332,12 @@ int		parse(t_filler *info, int turn)
 	get_piece_offset(info);
 	//parsing done
 
-	ret = is_placable(info, 8, 2);
+	ret = is_placable(info, 7, 0);
 	if (ret == TRUE)
 		printf("TRUE\n");
 	else
 		printf("FALSE\n");
-	ret = get_heat_score(info, 8, 2);
+	ret = get_heat_score(info, 7, 0);
 	printf("HEATSCORE=|%i|\n", ret);
 	//get_best_pos();
 	//print_best_pos();

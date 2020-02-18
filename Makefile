@@ -25,7 +25,7 @@ OBJ= $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(LIBA) $(OBJ)
+$(NAME): $(OBJ) $(LIBA)
 	$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBHEADER) -o $(NAME) $^
 	echo "filler build complete"
 
