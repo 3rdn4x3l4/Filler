@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:04:07 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/18 15:33:22 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:04:20 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		fill_map_arr(t_filler *info)
 	int		size;
 
 	i = 0;
-	size = sizeof(short) * (info->b_column + 1);
+	size = sizeof(short) * info->b_column;
 	while (i < info->b_line)
 	{
 		info->map[i] = (short*)malloc(size);
@@ -159,7 +159,7 @@ int		fill_shape_arr(t_filler *info)
 	int		size;
 		
 	i = 0;
-	size = sizeof(short) * (info->p_column + 1);
+	size = sizeof(short) * info->p_column;
 	while (i < info->p_line)
 	{
 		info->shape[i] = (short*)malloc(size);
@@ -219,7 +219,7 @@ void	fill_around(const short new_value, t_filler *info, const int lne,
 ** it take as input a short** and assumes it is populated by 0/-1/-2
 ** finds any to_find value next to a 0 (N_E_S_W)
 ** and assign to this 0 the new value
-** to_find is at first OP_value and then is the new_value from previous call
+** to_find is at first OP_VALUE and then is the new_value from previous call
 ** new_value is 1 at first (> 0 obviously) then is new_value + 1;
 */
 void	one_pass_arr(t_filler *info, const short to_find, const short new_value)
@@ -331,8 +331,17 @@ int		parse(t_filler *info, int turn)
 	fill_heatmap(info);
 	get_piece_offset(info);
 	//parsing done
+
+	ret = is_placable(info, 8, 2);
+	if (ret == TRUE)
+		printf("TRUE\n");
+	else
+		printf("FALSE\n");
+	ret = get_heat_score(info, 8, 2);
+	printf("HEATSCORE=|%i|\n", ret);
 	//get_best_pos();
 	//print_best_pos();
+
 	free_allocs(info);
 	return (0);
 }

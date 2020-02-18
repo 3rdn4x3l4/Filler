@@ -37,10 +37,14 @@ typedef struct		s_filler
 	int		p_column;
 	int		lne_offset;
 	int		col_offset;
+	int		self;
+	int		oppo;
 }					t_filler;
 
 int					parse(t_filler *info, int turn);
 void				free_arr(void **arr);
 int					get_arrs(t_filler *info, int turn);
+int					is_placable(t_filler *info, int lne, int col);
+int					get_heat_score(t_filler *info, int lne, int col);
 
 #endif

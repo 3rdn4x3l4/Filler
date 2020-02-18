@@ -16,3 +16,30 @@ add score on heatmap;
 and use lowest score
 
 PRINT_PIECE_POS
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+Plateau 15 17:
+.................
+.................
+..OOOOOOOO.......
+..OOOOOOOO.......
+..OOOOOOOO.......
+..OOOOOOOO.......
+..OOOOOOOOOXXXX..
+..OOOOOOOOOXXXX.
+..OOOOOOOOOXXXX..
+..OOOOOOOO.XXXX..
+..OOOOOOOO.XXXX..
+...........XXXX..
+...XXXXXXXXXXXX..
+...XXXXXXXXXXXX..
+...XXXXXXXXXXXX..
+Piece 2 3:
+...
+.**
+
+offset = 1||1
+
+shape[l + offset][c + offset] == PIECE_VALUE
+info->map[l + lne][c + col] == MY_VALUE
+info->map[l + lne][c + col] == OP_VALUE

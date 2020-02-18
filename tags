@@ -195,6 +195,7 @@ init_arrs	srcs/init_parse.c	/^void	init_arrs(t_filler *info)$/;"	f
 init_ptrs	srcs/parse.c	/^void	init_ptrs(t_filler *info)$/;"	f
 int_len	libft/srcs/int_tools.c	/^int		int_len(long long int val)$/;"	f
 interactif	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
+is_placable	srcs/tools.c	/^int		is_placable(t_filler *info, int lne, int col)$/;"	f
 ldouble_exponant	libft/srcs/ldouble_tools.c	/^void	ldouble_exponant(t_s_e_m *dble_ptr, t_ld_arrs *a_ptr)$/;"	f
 ldouble_mantissa	libft/srcs/ldouble_tools.c	/^void	ldouble_mantissa(unsigned long long mant, t_ld_arrs *a_ptr)$/;"	f
 ldouble_rounding	libft/srcs/ldouble_tools.c	/^void	ldouble_rounding(t_ld_arrs *a_ptr, t_conv_id *s_ptr)$/;"	f
@@ -242,6 +243,7 @@ null_ptr	libft/srcs/address.c	/^int		null_ptr(t_conv_id *s_ptr, int len)$/;"	f
 null_ptr_zero	libft/srcs/address.c	/^int		null_ptr_zero(t_conv_id *s_ptr, int len)$/;"	f
 null_string	libft/srcs/string.c	/^int			null_string(t_conv_id *s_ptr)$/;"	f
 one_pass_arr	srcs/parse.c	/^void	one_pass_arr(t_filler *info, const short to_find, const short new_value)$/;"	f
+oppo	includes/filler.h	/^	int		oppo;$/;"	m	struct:s_filler
 output	libft/includes/arg.h	/^	char	*output;$/;"	m	struct:s_conv_info
 p_column	includes/filler.h	/^	int		p_column;$/;"	m	struct:s_filler
 p_line	includes/filler.h	/^	int		p_line;$/;"	m	struct:s_filler
@@ -270,6 +272,7 @@ s_list	libft/includes/libft.h	/^typedef struct	s_list$/;"	s
 s_long_double_arrs	libft/includes/arg.h	/^typedef struct	s_long_double_arrs$/;"	s
 s_point	libft/includes/arg.h	/^typedef struct	s_point$/;"	s
 score	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
+self	includes/filler.h	/^	int		self;$/;"	m	struct:s_filler
 shape	includes/filler.h	/^	short	**shape;$/;"	m	struct:s_filler
 sid	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 special_value	libft/srcs/special_tools.c	/^void	special_value(t_s_e_m *dble_ptr, t_conv_id *s_ptr, int len)$/;"	f
