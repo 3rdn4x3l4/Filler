@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:04:07 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/18 15:28:13 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/18 15:33:22 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,7 +333,7 @@ int		parse(t_filler *info, int turn)
 	//parsing done
 	//get_best_pos();
 	//print_best_pos();
-	free_allocs
+	free_allocs(info);
 	return (0);
 }
 
