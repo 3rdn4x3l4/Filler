@@ -5,7 +5,7 @@ LIBDIR= libft
 LIBA= $(LIBDIR)/libft.a
 
 CFLAGS= -Wall -Werror -Wextra 
-CFLAGS += -g 
+CFLAGS += -g
 #CFLAGS += -fsanitize=address -fno-omit-frame-pointer
 
 HEADER= includes/
@@ -26,7 +26,7 @@ OBJ= $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBA) $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $^
+	$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBHEADER) -o $(NAME) $^
 	echo "filler build complete"
 
 obj/%.o : srcs/%.c

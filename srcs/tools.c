@@ -22,10 +22,10 @@ int		is_placable(t_filler *info, int lne, int col)
 	l = 0;
 	info->self = 0;
 	info->oppo = 0;
-	while (l < info->p_line && info->self <= 1 && info->oppo == 0)
+	while (l + info->lne_offset < info->p_line)
 	{
 		c = 0;
-		while (c < info->p_column && info->self <= 1 && info->oppo == 0)
+		while (c + info->col_offset < info->p_column)
 		{
 			if (info->shape[l + info->lne_offset][c + info->col_offset]
 				== PIECE_VALUE)
@@ -54,10 +54,10 @@ int		get_heat_score(t_filler *info, int lne, int col)
 
 	heatscore = 0;
 	l = 0;
-	while (l < info->p_line)
+	while (l + info->lne_offset < info->p_line)
 	{
 		c = 0;
-		while (c < info->p_column)
+		while (c + info->col_offset < info->p_column)
 		{
 			if (info->shape[l + info->lne_offset][c + info->col_offset]
 				== PIECE_VALUE)
