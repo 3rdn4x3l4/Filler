@@ -1,119 +1,31 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/18 14:04:07 by alagache          #+#    #+#             */
+/*   Updated: 2020/02/18 15:28:13 by alagache         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 #include "libft.h"
 #include "ft_printf.h"
 
-int		read_to_str(t_filler *info)
+void	get_sizes(t_filler *info)
 {
-	char	*str;
-	char	buff[BUFF_SIZE + 1];
-	int		ret;
-	size_t	len;
+	char	*board;
+	char	*piece;
 
-	len = 0;
-	str = ft_strnew(0);
-	if (str == NULL)
-		return (STR_ERROR);
-	while ((ret = read(0, buff, BUFF_SIZE)) > 0 && (len += ret) <= MAX_LEN)
-	{
-		buff[ret] = '\0';
-		str = ft_strjoinfree(str, buff, 1);
-	}
-	if (len > MAX_LEN || ret == -1)
-	{
-		if (str != NULL)
-			free(str);
-		return (READ_ERROR);
-	}
-	info->stock = str;
-	return(0);
-}
+	board = *(info->board);
+	piece = *(info->piece);
 
-int		str_to_arr(t_filler *info)
-{
-	info->arr = ft_strsplit(info->stock, '\n');
-	if (info->arr == NULL)
-		return (ARR_MALLOC);
-	free(info->stock);
-	return (0);
-}
-
-void	get_player_id(t_filler *info)
-{
-	if (info->arr[0][10] == '1')
-	{
-		info->id[0] = 'O';
-		info->id[1] = 'o';
-		info->id_op[0] = 'X';
-		info->id_op[1] = 'x';
-	}
-	else
-	{
-		info->id_op[0] = 'O';
-		info->id_op[1] = 'o';
-		info->id[0] = 'X';
-		info->id[1] = 'x';
-	}
-}
-
-int		init_arrs(t_filler *info)
-{
-	int	i;
-
-	i = 0;
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
-		i++;
-	info->board = ft_strsplit(info->arr[i], ' ');
-	if (info->board == NULL)
-		return (ARR1);
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
-		i++;
-	info->piece = ft_strsplit(info->arr[i], ' ');
-	if (info->piece == NULL)
-		return (ARR2);
-	return (0);
-}
-
-int		get_arrs(t_filler *info, int turn)
-{
-	int		ret;
-
-	ret = read_to_str(info);
-	if (ret == STR_ERROR || ret == READ_ERROR)
-		return (ERROR);
-	ret = str_to_arr(info);
-	if (ret == ARR_ERROR)
-		return (ERROR);
-	if (turn == 0)
-		get_player_id(info);
-	ret = init_arrs(info);
-	if (ret == ARR1)
-		return (ERROR);
-	else if (ret == ARR2)
-	{
-		free(info->board);
-		return (ERROR);
-	}
-	return (0);
-}
-
-void	get_sizes(char **board, char **piece, t_filler *info)
-{
-	info->b_line = ft_atoi(board[1]);
-	info->b_column = ft_atoi(board[2]);
-	info->p_line = ft_atoi(piece[1]);
-	info->p_column = ft_atoi(piece[2]);
-}
-
-/* get the sizes of the board and piece using board and piece arrays and free the arrays afterward*/
-void	get_nbrs(t_filler *info)
-{
-	get_sizes(info->board, info->piece, info);
-	free_arr((void**)info->board);
-	free_arr((void**)info->piece);
+	info->b_line = ft_atoi(ft_strchr(board, ' '));
+	info->b_column = ft_atoi(ft_strrchr(board, ' '));
+	info->p_line = ft_atoi(ft_strchr(piece, ' '));
+	info->p_column = ft_atoi(ft_strrchr(piece, ' '));
 }
 
 void	init_ptrs(t_filler *info)
@@ -132,17 +44,22 @@ void	init_ptrs(t_filler *info)
 
 int		create_arrs(t_filler *info)
 {
-	info->map = (short**)malloc(sizeof(short*) * (info->b_line + 1));
+	size_t	map_size;
+	size_t	shape_size;
+
+	map_size = sizeof(short*) * (info->b_line + 1);
+	shape_size = sizeof(short*) * (info->p_line + 1);
+	info->map = (short**)malloc(map_size);
 	if (info->map == NULL)
 		return (ERR_MAP);
-	info->shape = (short**)malloc(sizeof(short*) * (info->p_line + 1));
+	info->shape = (short**)malloc(shape_size);
 	if (info->shape == NULL)
 	{
 		free(info->map);
 		return (ERR_SHAPE);
 	}
-	ft_memset(info->map, '\0', sizeof(short*) * (info->b_line + 1));
-	ft_memset(info->shape, '\0', sizeof(short*) * (info->p_line + 1));
+	ft_memset(info->map, '\0', map_size);
+	ft_memset(info->shape, '\0', shape_size);
 	return (0);
 }
 
@@ -166,7 +83,7 @@ void	print_map(t_filler *info)
 	}
 }
 
-void	fill_map(char *str, short *line, const int size, t_filler *info)
+void	fill_map_line(char *str, short *line, const int size, t_filler *info)
 {
 	int	i;
 	char	*op;
@@ -196,7 +113,7 @@ int		fill_map_arr(t_filler *info)
 		if (info->map[i] == NULL)
 			return (ERROR);
 		ft_memset(info->map[i], '\0', size);
-		fill_map(info->board[i] + 4, info->map[i], info->b_column, info);
+		fill_map_line(info->board[i] + 4, info->map[i], info->b_column, info);
 		i++;
 	}
 	//print_map(info);
@@ -223,17 +140,15 @@ void	print_shape(t_filler *info)
 	}
 }
 
-void	fill_shape(char *str, short *line, const int size)
+void	fill_shape_line(char *str, short *line, const int size)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		if (str[i] == '.')
-			line[i] = 0;
-		else
-			line[i] = -3;
+		if (str[i] == '*')
+			line[i] = PIECE_VALUE;
 		i++;
 	}
 }
@@ -251,7 +166,7 @@ int		fill_shape_arr(t_filler *info)
 		if (info->shape[i] == NULL)
 			return (ERROR);
 		ft_memset(info->shape[i], '\0', size);
-		fill_shape(info->piece[i], info->shape[i], info->p_column);
+		fill_shape_line(info->piece[i], info->shape[i], info->p_column);
 		i++;
 	}
 	//print_shape(info);
@@ -284,7 +199,8 @@ int		has_zero(t_filler *info)
 /*
 ** take short in an arr and test it's neighbours 
 */
-void	fill_around(const short new_value, t_filler *info, int lne, int col)
+void	fill_around(const short new_value, t_filler *info, const int lne,
+					const int col)
 {
 	short	**arr;
 
@@ -345,6 +261,60 @@ void	fill_heatmap(t_filler *info)
 	print_map(info);
 }
 
+void	line_offset(t_filler *info)
+{
+	int	lne;
+	int	col;
+
+	lne = 0;
+	info->lne_offset = -1;
+	while (lne < info->p_line && info->lne_offset == -1)
+	{
+		col = 0;
+		while(col < info->p_column && info->shape[lne][col] == 0)
+			col++;
+		if (col == info->p_column)
+			lne++;
+		else
+			info->lne_offset = lne;
+	}
+}
+
+void	column_offset(t_filler *info)
+{
+	int	lne;
+	int	col;
+
+	col = 0;
+	info->col_offset = -1;
+	while (col < info->p_column && info->col_offset == -1)
+	{
+		lne = 0;
+		while(lne < info->p_line && info->shape[lne][col] == 0)
+			lne++;
+		if (lne == info->p_line)
+			col++;
+		else
+			info->col_offset = col;
+	}
+}
+
+/*
+** takes a pointer to the main struct
+** find the offset of the shape inside the array
+*/
+void	get_piece_offset(t_filler *info)
+{
+	line_offset(info);
+	column_offset(info);
+}
+
+void	free_allocs(t_filler *info)
+{
+	free_arr((void**)info->map);
+	free_arr((void**)info->shape);
+	free_arr((void**)info->arr);
+}
 
 int		parse(t_filler *info, int turn)
 {
@@ -353,17 +323,17 @@ int		parse(t_filler *info, int turn)
 	ret = get_arrs(info, turn);
 	if (ret == ERROR)
 		return (ERROR);
-	get_nbrs(info);
+	get_sizes(info);
 	init_ptrs(info);
 	create_arrs(info);
 	fill_map_arr(info);
 	fill_shape_arr(info);
 	fill_heatmap(info);
-	free_arr((void**)info->map);
-	free_arr((void**)info->shape);
-	turn++;
+	get_piece_offset(info);
+	//parsing done
 	//get_best_pos();
 	//print_best_pos();
+	free_allocs
 	return (0);
 }
 

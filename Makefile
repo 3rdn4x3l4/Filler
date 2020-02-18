@@ -14,9 +14,10 @@ LIBHEADER= $(LIBDIR)/includes
 CC= clang
 
 SRCS=	main.c\
-		read.c\
+		init_parse.c\
 		tools.c\
-		#clean.c\
+		parse.c\
+		#.c\
 
 OBJDIR= obj
 

@@ -3,7 +3,7 @@ PIECE_POS
 ||find piece coord with least heatmap score||
 
 try to put piece on map:
-find piece offset upper left hand side corner of piece.
+find piece offset upper left hand side corner of piece. DONE
 
 check various positions that verifiy:
 

@@ -10,6 +10,7 @@
 # define MAX_LEN 20504
 # define OP_VALUE -2
 # define MY_VALUE -1
+# define PIECE_VALUE -3
 # define READ_ERROR 128
 # define ARR_MALLOC 128
 # define ARR_ERROR 128
@@ -34,8 +35,12 @@ typedef struct		s_filler
 	int		b_column;
 	int		p_line;
 	int		p_column;
+	int		lne_offset;
+	int		col_offset;
 }					t_filler;
 
 int					parse(t_filler *info, int turn);
 void				free_arr(void **arr);
+int					get_arrs(t_filler *info, int turn);
+
 #endif
