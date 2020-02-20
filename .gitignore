@@ -4,4 +4,5 @@ output.txt
 filler.trace
 *.dSYM
 game_res
+*.trace
 tags

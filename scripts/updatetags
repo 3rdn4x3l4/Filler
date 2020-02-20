@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ 'ps | grep iTerm | grep -v grep' != "" ];
+if [ ! -f /etc/debian_version ];
 then
 	~/.brew/Cellar/ctags/5.8_1/bin/ctags -R --language-force=C
 else

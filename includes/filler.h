@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
+# define SUCCESS 0
 # define BUFF_SIZE 100
 # define MAX_LEN 20504
 # define OP_VALUE -2
@@ -37,8 +39,10 @@ typedef struct		s_filler
 	int		p_column;
 	int		lne_offset;
 	int		col_offset;
-	int		self;
-	int		oppo;
+	int		heatscore;
+	int		best_lne;
+	int		best_col;
+	int		fd;
 }					t_filler;
 
 int					parse(t_filler *info, int turn);

@@ -39,7 +39,6 @@ void	init_ptrs(t_filler *info)
 	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
 		i++;
 	info->piece = &(info->arr[i + 1]);
-	//ft_printf("|init_ptrs|\n%s\n%s\n", *(info->board), *(info->piece));
 }
 
 int		create_arrs(t_filler *info)
@@ -60,7 +59,7 @@ int		create_arrs(t_filler *info)
 	}
 	ft_memset(info->map, '\0', map_size);
 	ft_memset(info->shape, '\0', shape_size);
-	return (0);
+	return (SUCCESS);
 }
 
 void	print_map(t_filler *info)
@@ -74,11 +73,11 @@ void	print_map(t_filler *info)
 		j = 0;
 		while (j < info->b_column)
 		{
-			printf("%6hi", info->map[i][j]);
+			dprintf(info->fd, "%6hi", info->map[i][j]);
 			j++;
 		}
-		printf("\n");
-		printf("\n");
+		dprintf(info->fd, "\n");
+		dprintf(info->fd, "\n");
 		i++;
 	}
 }
@@ -116,11 +115,9 @@ int		fill_map_arr(t_filler *info)
 		fill_map_line(info->board[i] + 4, info->map[i], info->b_column, info);
 		i++;
 	}
-	//print_map(info);
-	return (0);
+	return (SUCCESS);
 }
 
-//shape
 void	print_shape(t_filler *info)
 {
 	int	i;
@@ -132,10 +129,10 @@ void	print_shape(t_filler *info)
 		j = 0;
 		while (j < info->p_column)
 		{
-			printf("%6hi", info->shape[i][j]);
+			dprintf(info->fd, "%6hi", info->shape[i][j]);
 			j++;
 		}
-		printf("\n");
+		dprintf(info->fd, "\n");
 		i++;
 	}
 }
@@ -169,8 +166,8 @@ int		fill_shape_arr(t_filler *info)
 		fill_shape_line(info->piece[i], info->shape[i], info->p_column);
 		i++;
 	}
-	//print_shape(info);
-	return (0);
+	print_shape(info);
+	return (SUCCESS);
 }
 
 int		has_zero(t_filler *info)
@@ -309,11 +306,107 @@ void	get_piece_offset(t_filler *info)
 	column_offset(info);
 }
 
+void	line_diff(t_filler *info)
+{
+	int	lne;
+	int	col;
+	int	diff;
+
+	lne = info->p_line - 1;
+	diff = -1;
+	while (lne >= 0 && diff == -1)
+	{
+		col = info->p_column - 1;
+		while(col >= 0 && info->shape[lne][col] == 0)
+			col--;
+		if (col == -1)
+			lne--;
+		else
+			diff = lne;
+	}
+	info->p_line -= diff;
+}
+
+void	column_diff(t_filler *info)
+{
+	int	lne;
+	int	col;
+	int	diff;
+
+	col = info->p_column - 1;
+	diff = -1;
+	while (col >= 0 && diff == -1)
+	{
+		lne = info->p_line - 1;
+		while(lne >= 0 && info->shape[lne][col] == 0)
+			lne--;
+		if (lne == -1)
+			col--;
+		else
+			diff = col;
+	}
+	info->p_column -= diff;
+}
+
+/*
+** recalc the piece size to only test line and column that contains a piece part
+*/
+void	effective_piece_size(t_filler *info)
+{
+	line_diff(info);
+	column_diff(info);
+}
+
 void	free_allocs(t_filler *info)
 {
 	free_arr((void**)info->map);
 	free_arr((void**)info->shape);
 	free_arr((void**)info->arr);
+}
+
+void	update_best_coord(t_filler *info, int lne, int col)
+{
+	info->best_lne = lne ;//+ info->lne_offset;
+	info->best_col = col ;//+ info->col_offset;
+}
+
+/*
+** init search at 0 offset
+** get best heatscore and note the coord
+** might take into account same heatscore and decide which pair of coord to keep
+*/
+void	get_best_move(t_filler *info)
+{
+	int	lne;
+	int	col;
+	int	ret;
+	int	heatscore;
+
+	heatscore = INT_MAX;
+	lne = 0 - info->lne_offset;
+	// lne/col + piece_size < map_size
+	while (lne + info->p_line < info->b_line)
+	{
+		col = 0 - info->col_offset;
+		while (col + info->p_column < info->b_column)
+		{
+			if (is_placable(info, lne, col) == TRUE)
+			{
+				ret = get_heat_score(info, lne, col);
+				if (ret < heatscore)
+				{
+					update_best_coord(info, lne, col);
+				}
+			}
+			col++;
+		}
+		lne++;
+	}
+}
+
+void	play_best_move(t_filler *info)
+{
+	printf("%i %i\n", info->best_lne, info->best_col);
 }
 
 int		parse(t_filler *info, int turn)
@@ -325,36 +418,20 @@ int		parse(t_filler *info, int turn)
 		return (ERROR);
 	get_sizes(info);
 	init_ptrs(info);
-	create_arrs(info);
-	fill_map_arr(info);
-	fill_shape_arr(info);
+	ret = create_arrs(info);
+	if (ret == ERR_MAP || ret == ERR_SHAPE)
+		return (ERROR);
+	ret = fill_map_arr(info);
+	if (ret == ERROR)
+		return (ERROR);
+	ret = fill_shape_arr(info);
+	if (ret == ERROR)
+		return (ERROR);
 	fill_heatmap(info);
 	get_piece_offset(info);
-	printf("\n");
-	print_shape(info);
-	//parsing done
-
-	ret = is_placable(info, 7, 2);
-	if (ret == TRUE)
-		printf("TRUE\n");
-	else
-		printf("FALSE\n");
-	ret = get_heat_score(info, 7, 2);
-	printf("HEATSCORE=|%i|\n", ret);
-	//get_best_pos();
-	//print_best_pos();
-
+	effective_piece_size(info);
+	get_best_move(info);
+	play_best_move(info);
 	free_allocs(info);
 	return (0);
 }
-
-/*
-int		get_best_pos()
-{
-}
-
-int		print_best_pos()
-{
-}
-*/
-
