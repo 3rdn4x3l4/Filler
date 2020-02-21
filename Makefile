@@ -17,6 +17,12 @@ SRCS=	main.c\
 		init_parse.c\
 		tools.c\
 		parse.c\
+		print.c\
+		init_arrs.c\
+		fill_arrs.c\
+		heatmap.c\
+		diff.c\
+		offset.c\
 		#.c\
 
 OBJDIR= obj

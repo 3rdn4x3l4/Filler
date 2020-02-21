@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 15:13:03 by alagache          #+#    #+#             */
+/*   Updated: 2020/02/21 15:13:34 by alagache         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 #include "libft.h"
+#include "ft_printf.h"
 #include <fcntl.h>
 
 int			main(void)
@@ -10,7 +23,7 @@ int			main(void)
 
 	ft_bzero(&info, sizeof(info));
 	turn = 0;
-	info.fd = open("output.txt", O_CREAT|O_RDWR|O_APPEND);
+	info.fd = open("output.txt", O_RDWR | O_APPEND);
 	while (1)
 	{
 		ret = parse(&info, turn);
@@ -18,5 +31,6 @@ int			main(void)
 			return (EXIT_FAILURE);
 		turn++;
 	}
+	close(info.fd);
 	return (EXIT_SUCCESS);
 }

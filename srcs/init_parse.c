@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   init_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/18 13:57:58 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/18 14:16:12 by alagache         ###   ########.fr       */
+/*   Created: 2020/02/21 16:03:17 by alagache          #+#    #+#             */
+/*   Updated: 2020/02/21 16:03:22 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 #include "ft_printf.h"
+
+int		end_of_read(char *str)
+{
+	int		i;
+	int		nbr;
+	char	*ptr;
+
+	if ((ptr = ft_strstr(str, "Piece ")) == NULL)
+		return (FAILURE);
+	if (ft_strrchr(ptr, ':') == NULL)
+		return (FAILURE);
+	nbr = ft_atoi(ptr + 5);
+	i = 0;
+	while (ptr[i])
+	{
+		nbr -= (ptr[i] == '\n' ? 1 : 0);
+		i++;
+	}
+	if (nbr != -1)
+		return (FAILURE);
+	return (SUCCESS);
+}
 
 int		read_to_str(t_filler *info)
 {
@@ -25,27 +47,31 @@ int		read_to_str(t_filler *info)
 	str = ft_strnew(0);
 	if (str == NULL)
 		return (STR_ERROR);
-	while ((ret = read(0, buff, BUFF_SIZE)) > 0 && (len += ret) <= MAX_LEN)
+	while (end_of_read(str) == FAILURE)
 	{
+		ret = read(0, buff, BUFF_SIZE);
 		buff[ret] = '\0';
 		str = ft_strjoinfree(str, buff, 1);
 	}
-	if (len > MAX_LEN || ret == -1)
-	{
-		if (str != NULL)
-			free(str);
-		return (READ_ERROR);
-	}
 	info->stock = str;
-	return(0);
+	return (0);
 }
 
-int		str_to_arr(t_filler *info)
+int		init_arrs(t_filler *info)
 {
+	int	i;
+
 	info->arr = ft_strsplit(info->stock, '\n');
 	if (info->arr == NULL)
 		return (ARR_MALLOC);
 	free(info->stock);
+	i = 0;
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
+		i++;
+	info->board = &(info->arr[i]);
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
+		i++;
+	info->piece = &(info->arr[i]);
 	return (0);
 }
 
@@ -67,19 +93,6 @@ void	get_player_id(t_filler *info)
 	}
 }
 
-void	init_arrs(t_filler *info)
-{
-	int	i;
-
-	i = 0;
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
-		i++;
-	info->board = &(info->arr[i]);
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
-		i++;
-	info->piece = &(info->arr[i]);
-}
-
 int		get_arrs(t_filler *info, int turn)
 {
 	int		ret;
@@ -87,11 +100,10 @@ int		get_arrs(t_filler *info, int turn)
 	ret = read_to_str(info);
 	if (ret == STR_ERROR || ret == READ_ERROR)
 		return (ERROR);
-	ret = str_to_arr(info);
+	ret = init_arrs(info);
 	if (ret == ARR_ERROR)
 		return (ERROR);
 	if (turn == 0)
 		get_player_id(info);
-	init_arrs(info);
 	return (0);
 }

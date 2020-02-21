@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 15:13:40 by alagache          #+#    #+#             */
+/*   Updated: 2020/02/21 15:14:13 by alagache         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,6 +28,7 @@
 ** 1 colision with self
 ** 0 colision with opponent
 */
+
 int		is_placable(t_filler *info, int lne, int col)
 {
 	int	l;
@@ -49,6 +62,7 @@ int		is_placable(t_filler *info, int lne, int col)
 ** take a pointer to the main struct and a pair of coord
 ** calculate the heatscore for the given set of coord
 */
+
 int		get_heat_score(t_filler *info, int lne, int col)
 {
 	int	l;
