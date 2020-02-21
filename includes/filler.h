@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:11:28 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:02:35 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:25:41 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define SUCCESS 0
 # define FAILURE 1
 # define BUFF_SIZE 4096
-# define MAX_LEN 20504
 # define OP_VALUE -2
 # define MY_VALUE -1
 # define PIECE_VALUE -3
@@ -66,6 +65,7 @@ int					get_heat_score(t_filler *info, int lne, int col);
 void				play_best_move(t_filler *info);
 void				print_shape(t_filler *info);
 void				print_map(t_filler *info);
+void				print_info(t_filler *info);
 void				get_sizes(t_filler *info);
 void				init_ptrs(t_filler *info);
 int					create_arrs(t_filler *info);

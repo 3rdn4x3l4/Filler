@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:09:01 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 15:50:32 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:20:39 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,11 @@ void	print_shape(t_filler *info)
 		ft_dprintf(info->fd, "\n");
 		i++;
 	}
+}
+
+void	print_info(t_filler *info)
+{
+	ft_dprintf(info->fd, "lne_off = %i||col_off = %i\n", info->lne_offset, info->col_offset);
+	ft_dprintf(info->fd, "lne_sze = %i||col_sze = %i\n", info->p_line, info->p_column);
+	ft_dprintf(info->fd, "lne_bst = %i||col_bst = %i\n", info->best_lne, info->best_col);
 }

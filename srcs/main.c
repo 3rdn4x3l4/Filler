@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:13:03 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 15:13:34 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:23:41 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			main(void)
 	while (1)
 	{
 		ret = parse(&info, turn);
-		if (ret != 0)
+		if (ret != SUCCESS)
 			return (EXIT_FAILURE);
 		turn++;
 	}

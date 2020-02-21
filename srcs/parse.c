@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:00:24 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:04:51 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:23:52 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void			get_best_move(t_filler *info)
 
 	heatscore = INT_MAX;
 	lne = 0 - info->lne_offset;
-	while (lne + info->p_line < info->b_line)
+	while (lne + info->p_line + 1 < info->b_line)
 	{
 		col = 0 - info->col_offset;
-		while (col + info->p_column < info->b_column)
+		while (col + info->p_column + 1 < info->b_column)
 		{
 			if (is_placable(info, lne, col) == TRUE)
 			{
@@ -83,10 +83,15 @@ int				parse(t_filler *info, int turn)
 	if (ret == ERROR)
 		return (ERROR);
 	fill_heatmap(info);
+	//print
+	//print_map(info);
+	//print_shape(info);
+	//print
 	get_piece_offset(info);
 	effective_piece_size(info);
 	get_best_move(info);
+	//print_info(info);
 	play_best_move(info);
 	free_allocs(info);
-	return (0);
+	return (SUCCESS);
 }

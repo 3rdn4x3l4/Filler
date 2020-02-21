@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+$	obj/diff.o	/^/;"	v
 ARG_H	libft/includes/arg.h	/^# define ARG_H$/;"	d
 ARR1	includes/filler.h	/^# define ARR1 /;"	d
 ARR2	includes/filler.h	/^# define ARR2 /;"	d
@@ -20,8 +21,8 @@ FILLER_H	includes/filler.h	/^# define FILLER_H$/;"	d
 FLAGSMAX	libft/includes/arg.h	/^# define FLAGSMAX /;"	d
 FT_PRINTF_H	libft/includes/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
 GET_NEXT_LINE_H	libft/includes/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
+I	obj/diff.o	/^/;"	v
 LIBFT_H	libft/includes/libft.h	/^# define LIBFT_H$/;"	d
-MAX_LEN	includes/filler.h	/^# define MAX_LEN /;"	d
 MY_VALUE	includes/filler.h	/^# define MY_VALUE /;"	d
 OP_VALUE	includes/filler.h	/^# define OP_VALUE /;"	d
 PIECE_VALUE	includes/filler.h	/^# define PIECE_VALUE /;"	d
@@ -29,6 +30,8 @@ READ_ERROR	includes/filler.h	/^# define READ_ERROR /;"	d
 STR_ERROR	includes/filler.h	/^# define STR_ERROR /;"	d
 SUCCESS	includes/filler.h	/^# define SUCCESS /;"	d
 TRUE	libft/includes/libft.h	/^# define TRUE /;"	d
+__debug_info__DWARF	obj/init_arrs.o	/^Οϊνώ/;"	v
+__debug_info__DWARF	obj/main.o	/^Οϊνώ/;"	v
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
@@ -192,6 +195,7 @@ get_piece_offset	srcs/offset.c	/^void			get_piece_offset(t_filler *info)$/;"	f
 get_player_id	srcs/init_parse.c	/^void	get_player_id(t_filler *info)$/;"	f
 get_sizes	srcs/init_arrs.c	/^void	get_sizes(t_filler *info)$/;"	f
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_ptr, va_list *arg_ptr,$/;"	f
+h2	libft/obj/ft_2lstnew.o	/^Οϊνώ/;"	v
 has_zero	srcs/heatmap.c	/^static	int		has_zero(t_filler *info)$/;"	f	file:
 heatscore	includes/filler.h	/^	int		heatscore;$/;"	m	struct:s_filler
 id	includes/filler.h	/^	char	id[2];$/;"	m	struct:s_filler
@@ -263,6 +267,7 @@ precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 precision_in_struct	libft/srcs/pprecision.c	/^void	precision_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
 previous	libft/includes/libft.h	/^	struct s_double_linked_list *previous;$/;"	m	struct:s_double_linked_list	typeref:struct:s_double_linked_list::s_double_linked_list
+print_info	srcs/print.c	/^void	print_info(t_filler *info)$/;"	f
 print_map	srcs/print.c	/^void	print_map(t_filler *info)$/;"	f
 print_shape	srcs/print.c	/^void	print_shape(t_filler *info)$/;"	f
 read	libft/includes/arg.h	/^	int	read;$/;"	m	struct:s_point

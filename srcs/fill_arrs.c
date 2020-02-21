@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:31:53 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:02:21 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:21:00 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int				fill_shape_arr(t_filler *info)
 		fill_shape_line(info->piece[i], info->shape[i], info->p_column);
 		i++;
 	}
-	print_shape(info);
 	return (SUCCESS);
 }

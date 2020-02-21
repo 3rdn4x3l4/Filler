@@ -6,12 +6,13 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:45:44 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 15:48:27 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:14:11 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
+#include "ft_printf.h"
 
 static	void	line_diff(t_filler *info)
 {
@@ -31,7 +32,7 @@ static	void	line_diff(t_filler *info)
 		else
 			diff = lne;
 	}
-	info->p_line -= diff;
+	info->p_line -= diff - 1;
 }
 
 static	void	column_diff(t_filler *info)
@@ -52,7 +53,7 @@ static	void	column_diff(t_filler *info)
 		else
 			diff = col;
 	}
-	info->p_column -= diff;
+	info->p_column -= diff -  1;
 }
 
 /*

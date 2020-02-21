@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:34:33 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:01:52 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:21:50 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,4 @@ void			fill_heatmap(t_filler *info)
 		to_find = new_value;
 		new_value++;
 	}
-	print_map(info);
 }
