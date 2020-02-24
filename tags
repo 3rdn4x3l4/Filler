@@ -29,7 +29,6 @@ STR_ERROR	includes/filler.h	/^# define STR_ERROR /;"	d
 SUCCESS	includes/filler.h	/^# define SUCCESS /;"	d
 TRUE	libft/includes/libft.h	/^# define TRUE /;"	d
 __debug_info__DWARF	obj/init_arrs.o	/^Οϊνώ/;"	v
-__debug_info__DWARF	obj/main.o	/^Οϊνώ/;"	v
 add_strings	libft/srcs/float_tools.c	/^void	add_strings(char *dst, char *src, int len)$/;"	f
 apply_d_rounding	libft/srcs/float_tools.c	/^void	apply_d_rounding(t_d_arrs *a_ptr, int prec)$/;"	f
 apply_ld_rounding	libft/srcs/float_tools.c	/^void	apply_ld_rounding(t_ld_arrs *a_ptr, int prec)$/;"	f
@@ -71,7 +70,7 @@ double_mantissa	libft/srcs/double_tools.c	/^void	double_mantissa(t_s_e_m *dble_p
 double_rounding	libft/srcs/double_tools.c	/^void	double_rounding(t_d_arrs *a_ptr, t_conv_id *s_ptr)$/;"	f
 e	libft/includes/arg.h	/^	unsigned short		e;$/;"	m	struct:s_double
 effective_piece_size	srcs/diff.c	/^void			effective_piece_size(t_filler *info)$/;"	f
-end_of_read	srcs/init_parse.c	/^int		end_of_read(char *str)$/;"	f
+end_of_read	srcs/init_parse.c	/^int		end_of_read(char *str, t_filler *info)$/;"	f
 fd	includes/filler.h	/^	int		fd;$/;"	m	struct:s_filler
 fd	libft/includes/arg.h	/^	int		fd;$/;"	m	struct:s_conv_info
 fd	libft/includes/get_next_line.h	/^	int			fd;$/;"	m	struct:s_data

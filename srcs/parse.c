@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:00:24 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 16:56:17 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:58:53 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void			get_best_move(t_filler *info)
 				ret = get_heat_score(info, lne, col);
 				info->best_lne = (ret < heatscore ? lne : info->best_lne);
 				info->best_col = (ret < heatscore ? col : info->best_col);
+				heatscore = (ret < heatscore ? ret : heatscore);
 			}
 			col++;
 		}
@@ -44,7 +45,6 @@ void			get_best_move(t_filler *info)
 
 void			play_best_move(t_filler *info, int turn)
 {
-	ft_dprintf(info->fd, "PLAYED %i %i at turn %i\n", info->best_lne, info->best_col, turn);
 	ft_printf("%i %i\n", info->best_lne, info->best_col);
 }
 
@@ -99,15 +99,15 @@ int				parse(t_filler *info, int turn)
 	print_shape(info);
 	ft_dprintf(info->fd, "\n");
 	//print
+	//rework offset diff
 	get_piece_offset(info);
+	ft_dprintf(info->fd, "SEGFA?\n");
 	effective_piece_size(info);
+	ft_dprintf(info->fd, "SEGFA?\n");
 	get_best_move(info);
 	print_info(info);
 	free_allocs(info);
 	play_best_move(info, turn);
-	while (1)
-	{
-	}
 	clean_struct(info);
 	return (SUCCESS);
 }

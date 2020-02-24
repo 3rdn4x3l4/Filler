@@ -40,7 +40,7 @@ obj/%.o : srcs/%.c
 	$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBHEADER) -o $@ -c $<
 
 $(LIBA): .FORCE
-	$(MAKE) -s -C libft
+	$(MAKE) -C libft
 
 .FORCE:
 

@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:13:40 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 16:56:18 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/24 17:32:11 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,25 @@ int		is_placable(t_filler *info, int lne, int col)
 	int	l;
 	int	c;
 	int	self;
-	int	oppo;
 
 	l = info->lne_offset;
 	self = 0;
-	oppo = 0;
 	while (l < info->p_line)
 	{
 		c = info->col_offset;
 		while (c < info->p_column)
 		{
-			if (info->shape[l][c] == PIECE_VALUE)
-			{
-				self += (info->map[l + lne][c + col] == MY_VALUE ? 1 : 0);
-				oppo += (info->map[l + lne][c + col] == OP_VALUE ? 1 : 0);
-			}
+			if (info->shape[l][c] == PIECE_VALUE
+				&& info->map[l + lne][c + col] == OP_VALUE)
+				return (FALSE);
+			if (info->shape[l][c] == PIECE_VALUE
+				&& info->map[l + lne][c + col] == MY_VALUE)
+				self += 1;
 			c++;
 		}
 		l++;
 	}
-	if (self == 1 && oppo == 0)
+	if (self == 1)
 		return (TRUE);
 	return (FALSE);
 }
@@ -76,9 +75,9 @@ int		get_heat_score(t_filler *info, int lne, int col)
 		c = info->col_offset;
 		while (c < info->p_column)
 		{
-			if (info->shape[l][c] == PIECE_VALUE)
-				heatscore += (info->map[l + lne][c + col] > 0 ?
-								info->map[l + lne][c + col] : 0);
+			if (info->shape[l][c] == PIECE_VALUE
+				&& info->map[l + lne][c + col] > 0)
+				heatscore += info->map[l + lne][c + col];
 			c++;
 		}
 		l++;
