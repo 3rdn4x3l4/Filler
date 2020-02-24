@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:03:17 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:03:22 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:27:20 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-int		end_of_read(char *str)
+int		end_of_read(char *str, t_filler *info)
 {
 	int		i;
 	int		nbr;
@@ -27,10 +27,8 @@ int		end_of_read(char *str)
 	nbr = ft_atoi(ptr + 5);
 	i = 0;
 	while (ptr[i])
-	{
-		nbr -= (ptr[i] == '\n' ? 1 : 0);
-		i++;
-	}
+		nbr -= (ptr[i++] == '\n' ? 1 : 0);
+	ft_dprintf(info->fd, "nbr = %i\n", nbr);
 	if (nbr != -1)
 		return (FAILURE);
 	return (SUCCESS);
@@ -47,11 +45,12 @@ int		read_to_str(t_filler *info)
 	str = ft_strnew(0);
 	if (str == NULL)
 		return (STR_ERROR);
-	while (end_of_read(str) == FAILURE)
+	while (end_of_read(str, info) == FAILURE)
 	{
 		ret = read(0, buff, BUFF_SIZE);
 		buff[ret] = '\0';
 		str = ft_strjoinfree(str, buff, 1);
+		ft_dprintf(info->fd, "RET = %i\n", ret);
 	}
 	info->stock = str;
 	return (0);

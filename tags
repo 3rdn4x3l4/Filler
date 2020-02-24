@@ -4,7 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-$	obj/diff.o	/^/;"	v
 ARG_H	libft/includes/arg.h	/^# define ARG_H$/;"	d
 ARR1	includes/filler.h	/^# define ARR1 /;"	d
 ARR2	includes/filler.h	/^# define ARR2 /;"	d
@@ -21,7 +20,6 @@ FILLER_H	includes/filler.h	/^# define FILLER_H$/;"	d
 FLAGSMAX	libft/includes/arg.h	/^# define FLAGSMAX /;"	d
 FT_PRINTF_H	libft/includes/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
 GET_NEXT_LINE_H	libft/includes/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
-I	obj/diff.o	/^/;"	v
 LIBFT_H	libft/includes/libft.h	/^# define LIBFT_H$/;"	d
 MY_VALUE	includes/filler.h	/^# define MY_VALUE /;"	d
 OP_VALUE	includes/filler.h	/^# define OP_VALUE /;"	d
@@ -57,6 +55,7 @@ check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/;"	f
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
+clean_struct	srcs/parse.c	/^void			clean_struct(t_filler *info)$/;"	f
 cntent	libft/includes/libft.h	/^	void						*cntent;$/;"	m	struct:s_double_linked_list
 col_offset	includes/filler.h	/^	int		col_offset;$/;"	m	struct:s_filler
 column_diff	srcs/diff.c	/^static	void	column_diff(t_filler *info)$/;"	f	file:
@@ -261,7 +260,7 @@ parse	srcs/parse.c	/^int				parse(t_filler *info, int turn)$/;"	f
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 piece	includes/filler.h	/^	char	**piece;$/;"	m	struct:s_filler
 piece_char	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
-play_best_move	srcs/parse.c	/^void			play_best_move(t_filler *info)$/;"	f
+play_best_move	srcs/parse.c	/^void			play_best_move(t_filler *info, int turn)$/;"	f
 player	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
@@ -310,7 +309,6 @@ tmp	libft/includes/arg.h	/^	char	tmp[21500];$/;"	m	struct:s_long_double_arrs
 total	libft/includes/arg.h	/^	char	*total;$/;"	m	struct:s_double_arrs
 total	libft/includes/arg.h	/^	char	*total;$/;"	m	struct:s_long_double_arrs
 unsigned_len_base	libft/srcs/global_tools.c	/^int	unsigned_len_base(unsigned long long val, unsigned base)$/;"	f
-update_best_coord	srcs/parse.c	/^static	void	update_best_coord(t_filler *info, int lne, int col)$/;"	f	file:
 verbose	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 wait_thr	resources/filler_vm	/^			self.stdin, @stdout, @wait_thr = Open3.popen2(@file_name)$/;"	v
 width	libft/includes/arg.h	/^	int		width;$/;"	m	struct:s_conv_info

@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:13:03 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 17:23:41 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:15:35 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			main(void)
 
 	ft_bzero(&info, sizeof(info));
 	turn = 0;
-	info.fd = open("output.txt", O_RDWR | O_APPEND);
+	info.fd = open("output.txt", O_RDWR | O_TRUNC);
 	while (1)
 	{
 		ret = parse(&info, turn);

@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:11:28 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 17:25:41 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:13:17 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ typedef struct		s_filler
 	char	**piece;
 	char	**arr;
 	char	*stock;
-	char	id[2];
-	char	id_op[2];
 	int		b_line;
 	int		b_column;
 	int		p_line;
@@ -55,6 +53,8 @@ typedef struct		s_filler
 	int		best_lne;
 	int		best_col;
 	int		fd;
+	char	id[2];
+	char	id_op[2];
 }					t_filler;
 
 int					parse(t_filler *info, int turn);
@@ -62,7 +62,6 @@ void				free_arr(void **arr);
 int					get_arrs(t_filler *info, int turn);
 int					is_placable(t_filler *info, int lne, int col);
 int					get_heat_score(t_filler *info, int lne, int col);
-void				play_best_move(t_filler *info);
 void				print_shape(t_filler *info);
 void				print_map(t_filler *info);
 void				print_info(t_filler *info);
