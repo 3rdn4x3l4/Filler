@@ -17,9 +17,7 @@ static	void	fill_map_line(char *str, short *line, const int size,
 								t_filler *info)
 {
 	int		i;
-	char	*op;
 
-	op = info->id_op;
 	i = 0;
 	while (i < size)
 	{

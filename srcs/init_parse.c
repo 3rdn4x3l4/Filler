@@ -38,13 +38,10 @@ int		read_to_str(t_filler *info)
 	char	*str;
 	char	buff[BUFF_SIZE + 1];
 	int		ret;
-	size_t	len;
 
-	len = 0;
 	str = ft_strnew(0);
 	if (str == NULL)
 		return (STR_ERROR);
-	ft_dprintf(info->fd, "HERE\n");
 	while (end_of_read(str) == FAILURE)
 	{
 		ret = read(0, buff, BUFF_SIZE);
@@ -52,24 +49,6 @@ int		read_to_str(t_filler *info)
 		str = ft_strjoinfree(str, buff, 1);
 	}
 	info->stock = str;
-	return (0);
-}
-
-int		init_arrs(t_filler *info)
-{
-	int	i;
-
-	info->arr = ft_strsplit(info->stock, '\n');
-	if (info->arr == NULL)
-		return (ARR_MALLOC);
-	free(info->stock);
-	i = 0;
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
-		i++;
-	info->board = &(info->arr[i]);
-	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
-		i++;
-	info->piece = &(info->arr[i]);
 	return (0);
 }
 
@@ -91,6 +70,26 @@ void	get_player_id(t_filler *info)
 	}
 }
 
+int		init_arrs(t_filler *info, int turn)
+{
+	int	i;
+
+	info->arr = ft_strsplit(info->stock, '\n');
+	if (info->arr == NULL)
+		return (ARR_MALLOC);
+	free(info->stock);
+	if (turn == 0)
+		get_player_id(info);
+	i = 0;
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Plateau ", 8) != 0)
+		i++;
+	info->board = &(info->arr[i]);
+	while (info->arr[i] != NULL && ft_strncmp(info->arr[i], "Piece ", 6) != 0)
+		i++;
+	info->piece = &(info->arr[i]);
+	return (0);
+}
+
 int		get_arrs(t_filler *info, int turn)
 {
 	int		ret;
@@ -98,10 +97,8 @@ int		get_arrs(t_filler *info, int turn)
 	ret = read_to_str(info);
 	if (ret == STR_ERROR || ret == READ_ERROR)
 		return (ERROR);
-	ret = init_arrs(info);
+	ret = init_arrs(info, turn);
 	if (ret == ARR_ERROR)
 		return (ERROR);
-	if (turn == 0)
-		get_player_id(info);
 	return (0);
 }

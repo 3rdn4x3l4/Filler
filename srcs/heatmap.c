@@ -102,4 +102,5 @@ void			fill_heatmap(t_filler *info)
 		to_find = new_value;
 		new_value++;
 	}
+	get_piece_offset(info);
 }

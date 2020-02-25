@@ -12,43 +12,35 @@
 
 #include "filler.h"
 #include "libft.h"
+#include "ft_printf.h"
 
-static	void	line_offset(t_filler *info)
+/*
+** given 3 int and a pointer to an array of short
+** check if the line or column is empty of any shape
+** mode 0 checks for a whole column
+** mode 1 checks for a whole line
+*/
+
+static	int		is_empty(int fixed, int max, int mode, short **arr)
 {
-	int	lne;
-	int	col;
+	int	c;
+	int	l;
+	int	i;
+	int	nb;
 
-	lne = 0;
-	info->lne_offset = -1;
-	while (lne < info->p_line && info->lne_offset == -1)
+	l = (mode == 0 ? fixed : 0);
+	c = (mode == 0 ? 0 : fixed);
+	i = 0;
+	nb = 0;
+	while (i < max)
 	{
-		col = 0;
-		while (col < info->p_column && info->shape[lne][col] == 0)
-			col++;
-		if (col == info->p_column)
-			lne++;
-		else
-			info->lne_offset = lne;
+		nb += (mode == 0 && arr[l][c + i] == PIECE_VALUE ? 1 : 0);
+		nb += (mode == 1 && arr[l + i][c] == PIECE_VALUE ? 1 : 0);
+		if (nb != 0)
+			return (FAILURE);
+		i++;
 	}
-}
-
-static	void	column_offset(t_filler *info)
-{
-	int	lne;
-	int	col;
-
-	col = 0;
-	info->col_offset = -1;
-	while (col < info->p_column && info->col_offset == -1)
-	{
-		lne = 0;
-		while (lne < info->p_line && info->shape[lne][col] == 0)
-			lne++;
-		if (lne == info->p_line)
-			col++;
-		else
-			info->col_offset = col;
-	}
+	return (SUCCESS);
 }
 
 /*
@@ -58,6 +50,25 @@ static	void	column_offset(t_filler *info)
 
 void			get_piece_offset(t_filler *info)
 {
-	line_offset(info);
-	column_offset(info);
+	int	l;
+	int	c;
+
+	l = 0;
+	c = 0;
+	info->lne_offset = -1;
+	while (l < info->p_line && info->lne_offset == -1)
+	{
+		if (is_empty(l, info->p_column, 0, info->shape) == FAILURE)
+			info->lne_offset = l;
+		l++;
+	}
+	info->col_offset = -1;
+	while (c < info->p_column && info->col_offset == -1)
+	{
+		if (is_empty(c, info->p_line, 1, info->shape) == FAILURE)
+			info->col_offset = c;
+		c++;
+	}
+	effective_piece_size(info);
+	//ft_dprintf(info->fd, "offsetL= %i || offsetC = %i\n", info->lne_offset, info->col_offset);
 }

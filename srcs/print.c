@@ -51,10 +51,3 @@ void	print_shape(t_filler *info)
 		i++;
 	}
 }
-
-void	print_info(t_filler *info)
-{
-	ft_dprintf(info->fd, "lne_off = %i||col_off = %i\n", info->lne_offset, info->col_offset);
-	ft_dprintf(info->fd, "lne_sze = %i||col_sze = %i\n", info->p_line, info->p_column);
-	ft_dprintf(info->fd, "lne_bst = %i||col_bst = %i\n", info->best_lne, info->best_col);
-}

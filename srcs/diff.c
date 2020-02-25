@@ -14,46 +14,33 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-static	void	line_diff(t_filler *info)
+/*
+** given 3 int and a pointer to an array of short
+** check if the line or column is empty of any shape
+** mode 0 checks for a whole column
+** mode 1 checks for a whole line
+*/
+
+static	int		is_empty(int fixed, int max, int mode, short **arr)
 {
-	int	lne;
-	int	col;
-	int	diff;
+	int	c;
+	int	l;
+	int	i;
+	int	nb;
 
-	lne = info->p_line - 1;
-	diff = -1;
-	while (lne >= 0 && diff == -1)
+	l = (mode == 0 ? fixed : 0);
+	c = (mode == 0 ? 0 : fixed);
+	i = max - 1;
+	nb = 0;
+	while (i >= 0)
 	{
-		col = info->p_column - 1;
-		while (col >= 0 && info->shape[lne][col] == 0)
-			col--;
-		if (col == -1)
-			lne--;
-		else
-			diff = lne;
+		nb += (mode == 0 && arr[l][c + i] == PIECE_VALUE ? 1 : 0);
+		nb += (mode == 1 && arr[l + i][c] == PIECE_VALUE ? 1 : 0);
+		if (nb != 0)
+			return (FAILURE);
+		i--;
 	}
-	info->p_line -= diff - 1;
-}
-
-static	void	column_diff(t_filler *info)
-{
-	int	lne;
-	int	col;
-	int	diff;
-
-	col = info->p_column - 1;
-	diff = -1;
-	while (col >= 0 && diff == -1)
-	{
-		lne = info->p_line - 1;
-		while (lne >= 0 && info->shape[lne][col] == 0)
-			lne--;
-		if (lne == -1)
-			col--;
-		else
-			diff = col;
-	}
-	info->p_column -= diff -  1;
+	return (SUCCESS);
 }
 
 /*
@@ -62,6 +49,28 @@ static	void	column_diff(t_filler *info)
 
 void			effective_piece_size(t_filler *info)
 {
-	line_diff(info);
-	column_diff(info);
+	int	l;
+	int	c;
+	int	c_diff;
+	int	l_diff;
+
+	l = info->p_line - 1;
+	c = info->p_column - 1;
+	l_diff = -1;
+	while (l >= 0 && l_diff == -1)
+	{
+		if (is_empty(l, info->p_column, 0, info->shape) == FAILURE)
+			l_diff = l;
+		l--;
+	}
+	c_diff = -1;
+	while (c >= 0 && c_diff == -1)
+	{
+		if (is_empty(c, info->p_line, 1, info->shape) == FAILURE)
+			c_diff = c;
+		c--;
+	}
+	info->p_line = l_diff + 1;
+	info->p_column = c_diff + 1;
+	//ft_dprintf(info->fd, "diffL= %i || diffC = %i\n", l_diff, c_diff);
 }

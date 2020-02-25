@@ -43,7 +43,7 @@ void			get_best_move(t_filler *info)
 	}
 }
 
-void			play_best_move(t_filler *info, int turn)
+void			play_best_move(t_filler *info)
 {
 	ft_printf("%i %i\n", info->best_lne, info->best_col);
 }
@@ -93,21 +93,18 @@ int				parse(t_filler *info, int turn)
 	if (ret == ERROR)
 		return (ERROR);
 	fill_heatmap(info);
-	//print
-	print_map(info);
-	ft_dprintf(info->fd, "\n");
-	print_shape(info);
-	ft_dprintf(info->fd, "\n");
-	//print
-	//rework offset diff
-	get_piece_offset(info);
-	ft_dprintf(info->fd, "SEGFA?\n");
-	effective_piece_size(info);
-	ft_dprintf(info->fd, "SEGFA?\n");
 	get_best_move(info);
-	print_info(info);
 	free_allocs(info);
-	play_best_move(info, turn);
+	play_best_move(info);
 	clean_struct(info);
 	return (SUCCESS);
 }
+	//ft_dprintf(info->fd, "SEGFA?\n");
+	//ft_dprintf(info->fd, "SEGFA?\n");
+	//print
+	//print_map(info);
+	//ft_dprintf(info->fd, "\n");
+	//print_shape(info);
+	//ft_dprintf(info->fd, "\n");
+	//print
+	//rework offset diff
