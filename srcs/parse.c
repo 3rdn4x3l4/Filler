@@ -24,11 +24,11 @@ void			get_best_move(t_filler *info)
 	heatscore = INT_MAX;
 	lne = 0 - info->lne_offset;
 	//piece placable in HEIGHT lne
-	while (lne + info->p_line < info->b_line)
+	while (lne + info->p_line <= info->b_line)
 	{
 		col = 0 - info->col_offset;
 		//piece placable in width col
-		while (col + info->p_column < info->b_column)
+		while (col + info->p_column <= info->b_column)
 		{
 			if (is_placable(info, lne, col) == TRUE)
 			{

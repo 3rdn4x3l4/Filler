@@ -89,6 +89,25 @@ static	void	one_pass_arr(t_filler *info, const short to_find,
 	}
 }
 
+static	void	fill_zeros(t_filler *info, int value)
+{
+	int	l;
+	int	c;
+
+	l = 0;
+	c = 0;
+	while (l < info->b_line)
+	{
+		while (c < info->b_column)
+		{
+			if (info->map[l][c] == 0)
+				info->map[l][c] = value;
+			c++;
+		}
+		l++;
+	}
+}
+
 void			fill_heatmap(t_filler *info)
 {
 	short	new_value;
@@ -103,5 +122,7 @@ void			fill_heatmap(t_filler *info)
 		to_find = new_value;
 		new_value++;
 	}
+	if (has_zero(info) == TRUE)
+		fill_zeros(info, (to_find + 1) * (to_find + 1));
 	get_piece_offset(info);
 }
