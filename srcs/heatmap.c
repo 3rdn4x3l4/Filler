@@ -96,7 +96,7 @@ void			fill_heatmap(t_filler *info)
 
 	new_value = 1;
 	to_find = OP_VALUE;
-	while (has_zero(info) == TRUE)
+	while (has_zero(info) == TRUE && to_find < 142)
 	{
 		one_pass_arr(info, to_find, new_value);
 		to_find = new_value;
