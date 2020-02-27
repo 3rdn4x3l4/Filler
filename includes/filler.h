@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:11:28 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 17:47:45 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/27 14:29:51 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_filler
 	int		p_column;
 	int		lne_offset;
 	int		col_offset;
-	int		heatscore;
+	int		play;
 	int		best_lne;
 	int		best_col;
 	int		fd;
@@ -73,5 +73,7 @@ int					fill_shape_arr(t_filler *info);
 void				fill_heatmap(t_filler *info);
 void				get_piece_offset(t_filler *info);
 void				effective_piece_size(t_filler *info);
+void				free_allocs(t_filler *info);
+void				clean_struct(t_filler *info);
 
 #endif

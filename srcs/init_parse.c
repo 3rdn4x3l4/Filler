@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:03:17 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 17:34:35 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/27 14:17:09 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		init_arrs(t_filler *info, int turn)
 {
 	int	i;
 
+	if (ft_strstr(info->stock, "Plateau ") == NULL)
+		return (ERROR);
 	info->arr = ft_strsplit(info->stock, '\n');
 	if (info->arr == NULL)
 		return (ARR_MALLOC);
@@ -98,7 +100,10 @@ int		get_arrs(t_filler *info, int turn)
 	if (ret == STR_ERROR || ret == READ_ERROR)
 		return (ERROR);
 	ret = init_arrs(info, turn);
-	if (ret == ARR_ERROR)
+	if (ret == ARR_MALLOC || ret == ERROR)
+	{
+		free(info->stock);
 		return (ERROR);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:13:40 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 17:32:11 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/27 14:26:32 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,30 @@ void	free_arr(void **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void	clean_struct(t_filler *info)
+{
+	info->map = NULL;
+	info->shape = NULL;
+	info->board = NULL;
+	info->piece = NULL;
+	info->arr = NULL;
+	info->stock = NULL;
+	info->b_line = 0;
+	info->b_column = 0;
+	info->p_line = 0;
+	info->p_column = 0;
+	info->lne_offset = 0;
+	info->col_offset = 0;
+	info->play = 0;
+	info->best_lne = 0;
+	info->best_col = 0;
+}
+
+void	free_allocs(t_filler *info)
+{
+	free_arr((void**)info->map);
+	free_arr((void**)info->shape);
+	free_arr((void**)info->arr);
 }

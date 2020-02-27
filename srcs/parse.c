@@ -6,7 +6,7 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:00:24 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/24 17:58:53 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/27 14:28:54 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void			get_best_move(t_filler *info)
 
 	heatscore = INT_MAX;
 	lne = 0 - info->lne_offset;
-	//piece placable in HEIGHT lne
 	while (lne + info->p_line <= info->b_line)
 	{
 		col = 0 - info->col_offset;
-		//piece placable in width col
 		while (col + info->p_column <= info->b_column)
 		{
 			if (is_placable(info, lne, col) == TRUE)
@@ -41,37 +39,8 @@ void			get_best_move(t_filler *info)
 		}
 		lne++;
 	}
-}
-
-void			play_best_move(t_filler *info)
-{
-	ft_printf("%i %i\n", info->best_lne, info->best_col);
-}
-
-void			free_allocs(t_filler *info)
-{
-	free_arr((void**)info->map);
-	free_arr((void**)info->shape);
-	free_arr((void**)info->arr);
-}
-
-void			clean_struct(t_filler *info)
-{
-	info->map = NULL;
-	info->shape = NULL;
-	info->board = NULL;
-	info->piece = NULL;
-	info->arr = NULL;
-	info->stock = NULL;
-	info->b_line = 0;
-	info->b_column = 0;
-	info->p_line = 0;
-	info->p_column = 0;
-	info->lne_offset = 0;
-	info->col_offset = 0;
-	info->heatscore = 0;
-	info->best_lne = 0;
-	info->best_col = 0;
+	if (heatscore == INT_MAX)
+		info->play = -1;
 }
 
 int				parse(t_filler *info, int turn)
@@ -95,16 +64,6 @@ int				parse(t_filler *info, int turn)
 	fill_heatmap(info);
 	get_best_move(info);
 	free_allocs(info);
-	play_best_move(info);
-	clean_struct(info);
+	ft_printf("%i %i\n", info->best_lne, info->best_col);
 	return (SUCCESS);
 }
-	//ft_dprintf(info->fd, "SEGFA?\n");
-	//ft_dprintf(info->fd, "SEGFA?\n");
-	//print
-	//print_map(info);
-	//ft_dprintf(info->fd, "\n");
-	//print_shape(info);
-	//ft_dprintf(info->fd, "\n");
-	//print
-	//rework offset diff

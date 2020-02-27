@@ -6,12 +6,13 @@
 /*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:27:43 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 16:00:04 by alagache         ###   ########.fr       */
+/*   Updated: 2020/02/27 14:18:23 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
+#include "ft_printf.h"
 
 void	get_sizes(t_filler *info)
 {
