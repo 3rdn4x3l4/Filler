@@ -52,6 +52,9 @@ int				parse(t_filler *info, int turn)
 		return (ERROR);
 	get_sizes(info);
 	init_ptrs(info);
+	ret = check_sizes(info);
+	if (ret == ERROR)
+		return (ERROR);
 	ret = create_arrs(info);
 	if (ret == ERR_MAP || ret == ERR_SHAPE)
 		return (ERROR);

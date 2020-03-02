@@ -51,9 +51,10 @@ challenger	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :int
 check_conversion	libft/srcs/ft_dprintf.c	/^int			check_conversion(const char *str)$/;"	f
 check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$/;"	f
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/;"	f
+check_sizes	srcs/init_arrs.c	/^int		check_sizes(t_filler *info)$/;"	f
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
-clean_struct	srcs/parse.c	/^void			clean_struct(t_filler *info)$/;"	f
+clean_struct	srcs/tools.c	/^void	clean_struct(t_filler *info)$/;"	f
 cntent	libft/includes/libft.h	/^	void						*cntent;$/;"	m	struct:s_double_linked_list
 col_offset	includes/filler.h	/^	int		col_offset;$/;"	m	struct:s_filler
 content	libft/includes/libft.h	/^	void			*content;$/;"	m	struct:s_list
@@ -81,12 +82,13 @@ fill_map_arr	srcs/fill_arrs.c	/^int				fill_map_arr(t_filler *info)$/;"	f
 fill_map_line	srcs/fill_arrs.c	/^static	void	fill_map_line(char *str, short *line, const int size,$/;"	f	file:
 fill_shape_arr	srcs/fill_arrs.c	/^int				fill_shape_arr(t_filler *info)$/;"	f
 fill_shape_line	srcs/fill_arrs.c	/^static	void	fill_shape_line(char *str, short *line, const int size)$/;"	f	file:
+fill_zeros	srcs/heatmap.c	/^static	void	fill_zeros(t_filler *info, int value)$/;"	f	file:
 flag	libft/srcs/pflags.c	/^int		flag(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 flags	libft/includes/arg.h	/^	char	flags;$/;"	m	struct:s_conv_info
 flags_in_struct	libft/srcs/pflags.c	/^void	flags_in_struct(char c, t_conv_id *struct_ptr)$/;"	f
 format	libft/tags	/^!_TAG_FILE_FORMAT	2	\/extended format; --format=1 will not append ;" to lines\/$/;"	v
 format	tags	/^!_TAG_FILE_FORMAT	2	\/extended format; --format=1 will not append ;" to lines\/$/;"	v
-free_allocs	srcs/parse.c	/^void			free_allocs(t_filler *info)$/;"	f
+free_allocs	srcs/tools.c	/^void	free_allocs(t_filler *info)$/;"	f
 free_arr	srcs/tools.c	/^void	free_arr(void **arr)$/;"	f
 free_exit	libft/srcs/get_next_line.c	/^void	free_exit(t_list **head, t_data *current)$/;"	f
 ft_2lstadd_first	libft/srcs/ft_2lstadd_first.c	/^void	ft_2lstadd_first(t_2list **alst, t_2list *new)$/;"	f
@@ -191,7 +193,6 @@ get_player_id	srcs/init_parse.c	/^void	get_player_id(t_filler *info)$/;"	f
 get_sizes	srcs/init_arrs.c	/^void	get_sizes(t_filler *info)$/;"	f
 get_unsigned_value	libft/srcs/unsigned_tools.c	/^void	get_unsigned_value(unsigned long long *val_ptr, va_list *arg_ptr,$/;"	f
 has_zero	srcs/heatmap.c	/^static	int		has_zero(t_filler *info)$/;"	f	file:
-heatscore	includes/filler.h	/^	int		heatscore;$/;"	m	struct:s_filler
 id	includes/filler.h	/^	char	id[2];$/;"	m	struct:s_filler
 id_op	includes/filler.h	/^	char	id_op[2];$/;"	m	struct:s_filler
 init	libft/srcs/get_next_line.c	/^t_data	*init(int fd, t_list **alst)$/;"	f
@@ -255,7 +256,7 @@ parse	srcs/parse.c	/^int				parse(t_filler *info, int turn)$/;"	f
 parsing	libft/srcs/ft_dprintf.c	/^int			parsing(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f
 piece	includes/filler.h	/^	char	**piece;$/;"	m	struct:s_filler
 piece_char	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
-play_best_move	srcs/parse.c	/^void			play_best_move(t_filler *info)$/;"	f
+play	includes/filler.h	/^	int		play;$/;"	m	struct:s_filler
 player	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 precision	libft/includes/arg.h	/^	int		precision;$/;"	m	struct:s_conv_info
 precision	libft/srcs/pprecision.c	/^int		precision(char *ptr, int end, t_conv_id *struct_ptr)$/;"	f

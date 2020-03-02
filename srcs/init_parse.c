@@ -79,8 +79,6 @@ int		init_arrs(t_filler *info, int turn)
 {
 	int	i;
 
-	if (ft_strstr(info->stock, "Plateau ") == NULL)
-		return (ERROR);
 	info->arr = ft_strsplit(info->stock, '\n');
 	if (info->arr == NULL)
 		return (ARR_MALLOC);
@@ -100,10 +98,21 @@ int		init_arrs(t_filler *info, int turn)
 int		get_arrs(t_filler *info, int turn)
 {
 	int		ret;
+	char	*ptr;
 
 	ret = read_to_str(info);
 	if (ret == STR_ERROR || ret == READ_ERROR)
 		return (ERROR);
+	if ((ptr = ft_strstr(info->stock, "Plateau ")) == NULL)
+	{
+		free(info->stock);
+		return (ERROR);
+	}
+	if (ft_strstr(ptr, "Piece ") == NULL)
+	{
+		free(info->stock);
+		return (ERROR);
+	}
 	ret = init_arrs(info, turn);
 	if (ret == ARR_MALLOC || ret == ERROR)
 	{

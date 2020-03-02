@@ -66,6 +66,7 @@ void				print_shape(t_filler *info);
 void				print_map(t_filler *info);
 void				print_info(t_filler *info);
 void				get_sizes(t_filler *info);
+int					check_sizes(t_filler *info);
 void				init_ptrs(t_filler *info);
 int					create_arrs(t_filler *info);
 int					fill_map_arr(t_filler *info);

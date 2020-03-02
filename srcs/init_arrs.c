@@ -14,6 +14,57 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+int		check_piece_size(t_filler *info)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	while (info->piece[i] && i < info->p_line)
+	{
+		c = 0;
+		while (info->piece[i][c] && c < info->p_column)
+			c++;
+		if (c != info->p_column)
+		{
+			free_arr((void**)info->arr);
+			return (ERROR);
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
+//check if there enough lines
+int		check_sizes(t_filler *info)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	while (info->board[i] && i < info->b_line
+			&& info->board + i != info->piece - 1)
+	{
+		c = 0;
+		while (info->board[i][c] && c < info->b_column + 4)
+			c++;
+		if (c != info->b_column + 4)
+		{
+			free_arr((void**)info->arr);
+			return (ERROR);
+		}
+		i++;
+	}
+	if (info->board + i == info->piece - 1 && i != info->b_line)
+	{
+		free_arr((void**)info->arr);
+		return (ERROR);
+	}
+	if (check_piece_size(info) == ERROR)
+		return (ERROR);
+	return (SUCCESS);
+}
+
 void	get_sizes(t_filler *info)
 {
 	char	*board;
