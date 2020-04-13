@@ -23,6 +23,7 @@ SRCS=	main.c\
 		heatmap.c\
 		diff.c\
 		offset.c\
+		read.c\
 		#.c\
 
 OBJDIR= obj

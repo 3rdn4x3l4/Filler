@@ -51,6 +51,8 @@ challenger	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :int
 check_conversion	libft/srcs/ft_dprintf.c	/^int			check_conversion(const char *str)$/;"	f
 check_int_struct	libft/srcs/int_tools.c	/^int		check_int_struct(t_conv_id *ptr)$/;"	f
 check_octal_struct	libft/srcs/octal_tools.c	/^int	check_octal_struct(t_conv_id *s_ptr)$/;"	f
+check_piece_size	srcs/init_arrs.c	/^int		check_piece_size(t_filler *info)$/;"	f
+check_read	srcs/read.c	/^int	check_read(char *str, int len)$/;"	f
 check_sizes	srcs/init_arrs.c	/^int		check_sizes(t_filler *info)$/;"	f
 check_special_value	libft/srcs/special.c	/^int		check_special_value(t_s_e_m *dble_ptr)$/;"	f
 check_unsigned_struct	libft/srcs/unsigned_tools.c	/^int		check_unsigned_struct(t_conv_id *ptr)$/;"	f
@@ -67,6 +69,7 @@ double_exponant	libft/srcs/double_tools.c	/^void	double_exponant(t_s_e_m *dble_p
 double_mantissa	libft/srcs/double_tools.c	/^void	double_mantissa(t_s_e_m *dble_ptr, t_d_arrs *a_ptr)$/;"	f
 double_rounding	libft/srcs/double_tools.c	/^void	double_rounding(t_d_arrs *a_ptr, t_conv_id *s_ptr)$/;"	f
 e	libft/includes/arg.h	/^	unsigned short		e;$/;"	m	struct:s_double
+echo	scripts/testing	/^echo "score as P1 is $score_p1\/$GAMES";$/;"	v
 effective_piece_size	srcs/diff.c	/^void			effective_piece_size(t_filler *info)$/;"	f
 end_of_read	srcs/init_parse.c	/^int		end_of_read(char *str)$/;"	f
 fd	includes/filler.h	/^	int		fd;$/;"	m	struct:s_filler
@@ -278,6 +281,8 @@ s_list	libft/includes/libft.h	/^typedef struct	s_list$/;"	s
 s_long_double_arrs	libft/includes/arg.h	/^typedef struct	s_long_double_arrs$/;"	s
 s_point	libft/includes/arg.h	/^typedef struct	s_point$/;"	s
 score	resources/filler_vm	/^	attr_accessor :score, :piece_char, :score, :stdin, :live, :file_name$/;"	v
+score_p1	scripts/testing	/^		score_p1=$((score_p1 + 1));$/;"	v
+score_p2	scripts/testing	/^		score_p2=$((score_p2 + 1));$/;"	v
 shape	includes/filler.h	/^	short	**shape;$/;"	m	struct:s_filler
 sid	resources/filler_vm	/^	attr_accessor :map, :player, :challenger, :interactif, :sid, :verbose, :time, :modif_time$/;"	v
 special_value	libft/srcs/special_tools.c	/^void	special_value(t_s_e_m *dble_ptr, t_conv_id *s_ptr, int len)$/;"	f

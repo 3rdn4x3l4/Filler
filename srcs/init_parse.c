@@ -45,12 +45,12 @@ int		read_to_str(t_filler *info)
 	while (end_of_read(str) == FAILURE)
 	{
 		ret = read(0, buff, BUFF_SIZE);
-		if (ret == -1 || (ft_strlen(str) == 0 && ret == 0))
+		if (ret == -1 || (ft_strlen(str) == 0 && ret == 0)
+			|| check_read(buff, ret) == FAILURE)
 		{
 			free(str);
 			return (READ_ERROR);
 		}
-		buff[ret] = '\0';
 		str = ft_strjoinfree(str, buff, 1);
 	}
 	info->stock = str;

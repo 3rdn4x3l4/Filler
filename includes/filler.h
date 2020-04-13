@@ -58,6 +58,7 @@ typedef struct		s_filler
 }					t_filler;
 
 int					parse(t_filler *info, int turn);
+int					check_read(char *str, int len);
 void				free_arr(void **arr);
 int					get_arrs(t_filler *info, int turn);
 int					is_placable(t_filler *info, int lne, int col);
