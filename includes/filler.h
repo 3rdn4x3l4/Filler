@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:11:28 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:29:51 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:57:49 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 14:02:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <limits.h>
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -27,11 +21,8 @@
 # define PIECE_VALUE -3
 # define READ_ERROR 128
 # define ARR_MALLOC 128
-# define ARR_ERROR 128
 # define STR_ERROR 128
 # define ERROR 128
-# define ARR1 128
-# define ARR2 128
 # define ERR_MAP 128
 # define ERR_SHAPE 128
 
@@ -63,9 +54,6 @@ void				free_arr(void **arr);
 int					get_arrs(t_filler *info, int turn);
 int					is_placable(t_filler *info, int lne, int col);
 int					get_heat_score(t_filler *info, int lne, int col);
-void				print_shape(t_filler *info);
-void				print_map(t_filler *info);
-void				print_info(t_filler *info);
 void				get_sizes(t_filler *info);
 int					check_sizes(t_filler *info);
 void				init_ptrs(t_filler *info);

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill_arrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:31:53 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 17:21:00 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:55:44 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:37:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
+#include <stdlib.h>
 
 static	void	fill_map_line(char *str, short *line, const int size,
 								t_filler *info)

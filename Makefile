@@ -62,4 +62,4 @@ fclean:
 re: fclean all
 
 .PHONY: all clean fclean re .FORCE
-#.SILENT: all clean fclean re .FORCE $(NAME) $(OBJ) $(LIBA)
+.SILENT: all clean fclean re .FORCE $(NAME) $(OBJ) $(LIBA)

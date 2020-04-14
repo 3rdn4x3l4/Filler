@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_arrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:27:43 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:18:23 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:55:56 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:37:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
-#include "ft_printf.h"
+#include <stdlib.h>
 
 int		check_piece_size(t_filler *info)
 {
@@ -35,7 +35,6 @@ int		check_piece_size(t_filler *info)
 	return (SUCCESS);
 }
 
-//check if there enough lines
 int		check_sizes(t_filler *info)
 {
 	int	i;

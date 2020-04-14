@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diff.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:45:44 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 17:14:11 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:55:34 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/13 15:58:13 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,4 @@ void			effective_piece_size(t_filler *info)
 	}
 	info->p_line = l_diff + 1;
 	info->p_column = c_diff + 1;
-	//ft_dprintf(info->fd, "diffL= %i || diffC = %i\n", l_diff, c_diff);
 }

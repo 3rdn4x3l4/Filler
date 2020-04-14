@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:13:03 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:28:59 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:56:19 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:36:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
-#include "ft_printf.h"
-#include <fcntl.h>
+#include <stdlib.h>
 
 int			main(void)
 {
@@ -23,7 +22,6 @@ int			main(void)
 
 	ft_bzero(&info, sizeof(info));
 	turn = 0;
-	info.fd = open("output.txt", O_RDWR | O_TRUNC);
 	while (1 && turn != -1)
 	{
 		ret = parse(&info, turn);
@@ -34,6 +32,5 @@ int			main(void)
 		clean_struct(&info);
 		turn++;
 	}
-	close(info.fd);
 	return (EXIT_SUCCESS);
 }

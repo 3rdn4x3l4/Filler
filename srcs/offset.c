@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   offset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:45:27 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/21 15:47:30 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:56:26 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/13 15:56:27 by alagache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,4 @@ void			get_piece_offset(t_filler *info)
 		c++;
 	}
 	effective_piece_size(info);
-	//ft_dprintf(info->fd, "offsetL= %i || offsetC = %i\n", info->lne_offset, info->col_offset);
 }

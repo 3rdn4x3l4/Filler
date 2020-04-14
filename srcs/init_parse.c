@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 16:03:17 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:17:09 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:56:10 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:36:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
-#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 int		end_of_read(char *str)
 {

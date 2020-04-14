@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 15:13:40 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:26:32 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:57:27 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:36:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "filler.h"
 #include "libft.h"
-#include "ft_printf.h"
+#include <stdlib.h>
 
 /*
 ** take a pointer to the main struct and a pair of coord

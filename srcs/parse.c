@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alagache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 16:00:24 by alagache          #+#    #+#             */
-/*   Updated: 2020/02/27 14:28:54 by alagache         ###   ########.fr       */
+/*   Created: 2020/04/13 15:56:32 by alagache          #+#    #+#             */
+/*   Updated: 2020/04/14 13:38:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 #include "ft_printf.h"
+#include <limits.h>
 
 void			get_best_move(t_filler *info)
 {
