@@ -41,7 +41,7 @@ obj/%.o : srcs/%.c
 	$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBHEADER) -o $@ -c $<
 
 $(LIBA): .FORCE
-	$(MAKE) -C libft
+	$(MAKE) -s -C libft
 
 .FORCE:
 
@@ -51,7 +51,7 @@ $(LIBA): .FORCE
 clean:
 		$(RM) -rf $(OBJDIR)
 		echo "filler objects cleaned"
-		$(MAKE) clean -C $(LIBDIR)
+		$(MAKE) clean -s -C $(LIBDIR)
 
 fclean:
 		$(MAKE) fclean -s -C $(LIBDIR)

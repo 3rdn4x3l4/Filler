@@ -6,7 +6,7 @@
 /*   By: alagache <alagache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 15:55:56 by alagache          #+#    #+#             */
-/*   Updated: 2020/04/14 13:37:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/16 15:25:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int		check_piece_size(t_filler *info)
 	int	c;
 
 	i = 0;
-	while (info->piece[i] && i < info->p_line)
+	while (info->piece[i])
 	{
 		c = 0;
-		while (info->piece[i][c] && c < info->p_column)
+		while (info->piece[i][c] && c < info->p_column + 1)
 			c++;
 		if (c != info->p_column)
 		{
@@ -41,11 +41,11 @@ int		check_sizes(t_filler *info)
 	int	c;
 
 	i = 0;
-	while (info->board[i] && i < info->b_line
+	while (info->board[i] && i < info->b_line + 1
 			&& info->board + i != info->piece - 1)
 	{
 		c = 0;
-		while (info->board[i][c] && c < info->b_column + 4)
+		while (info->board[i][c] && c < info->b_column + 5)
 			c++;
 		if (c != info->b_column + 4)
 		{
@@ -54,7 +54,7 @@ int		check_sizes(t_filler *info)
 		}
 		i++;
 	}
-	if (info->board + i == info->piece - 1 && i != info->b_line)
+	if (i != info->b_line)
 	{
 		free_arr((void**)info->arr);
 		return (ERROR);

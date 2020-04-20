@@ -1,13 +1,5 @@
 #!/bin/bash
 
-PLYR="resources/players/alagache.filler";
-OPPO="resources/players/alagache2.filler";
-MAP="resources/maps/map00";
-GAMES=50;
-
-score_p1=0;
-score_p2=0;
-
 read -e -p "Your player?
 " PLYR;
 read -e -p "The map ?
@@ -20,23 +12,18 @@ read -e -p "Number of games?
 for ((x = 1; x <= $GAMES; x++))
 do
 	echo "GAME No:$x";
-	echo "AS PLAYER 1"
-	./resources/filler_vm -q -p1 $PLYR -p2 $OPPO -f $MAP 2>&1 | tee res;
-	res_p1=$(cat res | grep " fin:" | grep "O" | cut -d" " -f4);
-	res_p2=$(cat res | grep " fin:" | grep "X" | cut -d" " -f4);
-	if [[ $res_p1 < $res_p2 ]];
+	./filler_vm -p1 $PLYR -p2 $OPPO -f $MAP;
+	res=$(cat filler.trace | grep "won" | cut -d" " -f1);
+	if [[ $res == $PLYR ]];
 	then
 		score_p1=$((score_p1 + 1));
 	fi;
-	echo "AS PLAYER 2"
-	./resources/filler_vm -q -p2 $PLYR -p1 $OPPO -f $MAP 2>&1 | tee res;
-	res_p1=$(cat res | grep " fin:" | grep "O" | cut -d" " -f4);
-	res_p2=$(cat res | grep " fin:" | grep "X" | cut -d" " -f4);
-	if [[ $res_p2 < $res_p1 ]];
+	./filler_vm -p2 $PLYR -p1 $OPPO -f $MAP;
+	res=$(cat filler.trace | grep "won" | cut -d" " -f1);
+	if [[ $res == $PLYR ]];
 	then
 		score_p2=$((score_p2 + 1));
 	fi;
+	echo "score as P1 is $score_p1/$x";
+	echo "score as P2 is $score_p2/$x";
 done
-
-echo "score as P1 is $score_p1/$GAMES";
-echo "score as P2 is $score_p2/$GAMES";
